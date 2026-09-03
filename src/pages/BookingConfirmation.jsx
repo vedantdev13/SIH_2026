@@ -10,7 +10,7 @@ import {
   FileText, 
   Phone, 
   Home, 
-  Briefcase,
+  Wrench,
   Printer
 } from 'lucide-react';
 import { INITIAL_BOOKINGS } from '../data/mockData';
@@ -131,10 +131,10 @@ export default function BookingConfirmation() {
             </Link>
 
             <Link
-              to="/cooperative"
-              className="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 flex items-center justify-center gap-2"
+              to="/services"
+              className="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
             >
-              <Briefcase className="w-4 h-4 text-emerald-400" /> View in Cooperative Dashboard
+              <Wrench className="w-4 h-4 text-white" /> Browse More Services
             </Link>
           </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { WORKERS } from '../data/mockData';
 import { 
@@ -14,20 +14,25 @@ import {
   FileText
 } from 'lucide-react';
 
-export default function BookingPage({ onAddBooking }) {
+export default function BookingPage({ onAddBooking, currentUser }) {
   const { workerId } = useParams();
   const navigate = useNavigate();
 
   const worker = WORKERS.find(w => w.id === workerId) || WORKERS[0];
 
-  // Form State
+  // Form State initialized with logged-in user details if available
   const [date, setDate] = useState('2026-09-04');
   const [timeSlot, setTimeSlot] = useState('10:00 AM - 12:00 PM');
-  const [customerName, setCustomerName] = useState('Rajesh Sharma');
-  const [customerPhone, setCustomerPhone] = useState('+91 98230 11223');
-  const [address, setAddress] = useState('Flat 302, Sunrise Heights, Dharampeth, Nagpur');
+  const [customerName, setCustomerName] = useState(currentUser?.name || '');
+  const [customerPhone, setCustomerPhone] = useState(currentUser?.phone || '');
+  const [address, setAddress] = useState('');
   const [problemDescription, setProblemDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (currentUser?.name) setCustomerName(currentUser.name);
+    if (currentUser?.phone) setCustomerPhone(currentUser.phone);
+  }, [currentUser]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

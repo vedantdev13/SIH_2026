@@ -1,21 +1,47 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Users, ShieldCheck, ArrowRight, Building2, UserCheck, CheckCircle2 } from 'lucide-react';
+import { Users, ShieldCheck, ArrowRight, Building2, UserCheck, CheckCircle2, Lock, AlertCircle, Loader2 } from 'lucide-react';
+import { registerUserApi } from '../api/auth';
 
-export default function Register() {
+export default function Register({ setCurrentUser }) {
   const navigate = useNavigate();
   const [accountType, setAccountType] = useState('customer'); // 'customer', 'worker', 'cooperative'
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
   const [coopName, setCoopName] = useState('');
   const [tradeSkill, setTradeSkill] = useState('Plumber');
+  const [registrationNo, setRegistrationNo] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    if (accountType === 'cooperative') {
-      navigate('/cooperative');
+    setErrorMsg('');
+    setLoading(true);
+
+    const result = await registerUserApi({
+      name: fullName,
+      phone: phone,
+      email: `${phone}@sahakaar.org`,
+      password: password,
+      role: accountType,
+      cooperativeName: coopName,
+      tradeSkill: tradeSkill,
+      registrationNo: registrationNo
+    });
+
+    setLoading(false);
+
+    if (result.success) {
+      if (setCurrentUser) setCurrentUser(result.data.user);
+      if (accountType === 'cooperative') {
+        navigate('/cooperative');
+      } else {
+        navigate('/services');
+      }
     } else {
-      navigate('/services');
+      setErrorMsg(result.message || 'Registration failed. Please try again.');
     }
   };
 
@@ -28,7 +54,7 @@ export default function Register() {
             <UserCheck className="w-6 h-6" />
           </div>
           <h1 className="text-2xl font-extrabold text-slate-900">Join Sahakaar Network</h1>
-          <p className="text-xs text-slate-500">Register as a customer, worker, or Labour Cooperative Society</p>
+          <p className="text-xs text-slate-500">Register with secure JWT & MongoDB credentials</p>
         </div>
 
         {/* Account Type Selection Tabs */}
@@ -62,6 +88,13 @@ export default function Register() {
           </button>
         </div>
 
+        {errorMsg && (
+          <div className="bg-red-50 border border-red-200 p-3 rounded-xl text-xs text-red-700 flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+            <span>{errorMsg}</span>
+          </div>
+        )}
+
         <form onSubmit={handleRegister} className="space-y-4">
           
           <div className="space-y-1">
@@ -85,9 +118,24 @@ export default function Register() {
               required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="+91 98765 43210"
+              placeholder="10-digit mobile number e.g. 9823011223"
               className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
             />
+          </div>
+
+          <div className="space-y-1">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Password</label>
+            <div className="relative">
+              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Set account password (min 6 chars)..."
+                className="w-full pl-10 pr-3 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              />
+            </div>
           </div>
 
           {accountType === 'worker' && (
@@ -116,7 +164,7 @@ export default function Register() {
                   type="text"
                   value={coopName}
                   onChange={(e) => setCoopName(e.target.value)}
-                  placeholder="e.g. Nagpur Plumbing Labour Co-op (or leave empty for assignment)"
+                  placeholder="e.g. Nagpur Plumbing Labour Co-op"
                   className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold"
                 />
               </div>
@@ -129,6 +177,8 @@ export default function Register() {
               <input
                 type="text"
                 required
+                value={registrationNo}
+                onChange={(e) => setRegistrationNo(e.target.value)}
                 placeholder="e.g. NGP/COP/2022/104"
                 className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold"
               />
@@ -142,9 +192,18 @@ export default function Register() {
 
           <button
             type="submit"
-            className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2"
+            disabled={loading}
+            className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2"
           >
-            Create Account <ArrowRight className="w-4 h-4" />
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" /> Creating Account...
+              </>
+            ) : (
+              <>
+                Create Account <ArrowRight className="w-4 h-4" />
+              </>
+            )}
           </button>
         </form>
 

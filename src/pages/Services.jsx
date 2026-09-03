@@ -44,16 +44,16 @@ export default function Services() {
   const filteredWorkers = useMemo(() => {
     return WORKERS.filter(worker => {
       // Category match
-      if (selectedCategory !== 'All' && worker.skill.toLowerCase() !== selectedCategory.toLowerCase()) {
+      if (selectedCategory !== 'All' && (worker.skill || '').toLowerCase() !== selectedCategory.toLowerCase()) {
         return false;
       }
       // Search query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        const matchesName = worker.name.toLowerCase().includes(q);
-        const matchesSkill = worker.skill.toLowerCase().includes(q);
-        const matchesCoop = worker.cooperativeName.toLowerCase().includes(q);
-        const matchesLocality = worker.locality.toLowerCase().includes(q);
+        const matchesName = (worker.name || '').toLowerCase().includes(q);
+        const matchesSkill = (worker.skill || '').toLowerCase().includes(q);
+        const matchesCoop = (worker.cooperativeName || '').toLowerCase().includes(q);
+        const matchesLocality = (worker.locality || '').toLowerCase().includes(q);
         if (!matchesName && !matchesSkill && !matchesCoop && !matchesLocality) return false;
       }
       // Distance filter

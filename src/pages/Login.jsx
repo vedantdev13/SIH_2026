@@ -1,21 +1,70 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Users, ShieldCheck, ArrowRight, Building2, Lock, Phone } from 'lucide-react';
+import { Users, ShieldCheck, ArrowRight, Building2, Lock, Phone, AlertCircle, Loader2 } from 'lucide-react';
+import { loginUserApi } from '../api/auth';
 
-export default function Login() {
+export default function Login({ setCurrentUser }) {
   const navigate = useNavigate();
   const [role, setRole] = useState('customer');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (role === 'cooperative') {
-      navigate('/cooperative');
-    } else if (role === 'worker') {
-      navigate('/services');
+    setErrorMsg('');
+    setLoading(true);
+
+    const result = await loginUserApi({
+      identifier: phone,
+      phone: phone,
+      password: password,
+      role: role
+    });
+
+    setLoading(false);
+
+    if (result.success) {
+      if (setCurrentUser) {
+        setCurrentUser(result.data.user);
+      }
+      const userRole = result.data.user?.role || role;
+      if (userRole === 'cooperative') {
+        navigate('/cooperative');
+      } else if (userRole === 'worker') {
+        navigate('/worker-dashboard');
+      } else {
+        navigate('/services');
+      }
     } else {
-      navigate('/services');
+      setErrorMsg(result.message || 'Login failed. Please check your credentials.');
+    }
+  };
+
+  const handleQuickDemo = async (demoPhone, demoPass, demoRole) => {
+    setPhone(demoPhone);
+    setPassword(demoPass);
+    setRole(demoRole);
+    setLoading(true);
+    
+    const result = await loginUserApi({
+      identifier: demoPhone,
+      password: demoPass,
+      role: demoRole
+    });
+
+    setLoading(false);
+
+    if (result.success) {
+      if (setCurrentUser) setCurrentUser(result.data.user);
+      if (demoRole === 'cooperative') {
+        navigate('/cooperative');
+      } else if (demoRole === 'worker') {
+        navigate('/worker-dashboard');
+      } else {
+        navigate('/services');
+      }
     }
   };
 
@@ -29,7 +78,7 @@ export default function Login() {
             <Users className="w-6 h-6" />
           </div>
           <h1 className="text-2xl font-extrabold text-slate-900">Log in to Sahakaar</h1>
-          <p className="text-xs text-slate-500">Access your cooperative account or book verified workers</p>
+          <p className="text-xs text-slate-500">Access your cooperative account with JWT & MongoDB</p>
         </div>
 
         {/* Role Selector */}
@@ -63,6 +112,13 @@ export default function Login() {
           </button>
         </div>
 
+        {errorMsg && (
+          <div className="bg-red-50 border border-red-200 p-3 rounded-xl text-xs text-red-700 flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+            <span>{errorMsg}</span>
+          </div>
+        )}
+
         {/* Login Form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="space-y-1">
@@ -74,7 +130,7 @@ export default function Login() {
                 required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="Enter 10-digit mobile number..."
+                placeholder="Enter mobile number or email..."
                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
               />
             </div>
@@ -97,26 +153,35 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2"
+            disabled={loading}
+            className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2"
           >
-            Log in as {role.toUpperCase()} <ArrowRight className="w-4 h-4" />
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" /> Authenticating...
+              </>
+            ) : (
+              <>
+                Log in as {role.toUpperCase()} <ArrowRight className="w-4 h-4" />
+              </>
+            )}
           </button>
         </form>
 
         {/* Quick Demo Login Preset Buttons */}
         <div className="pt-4 border-t border-slate-100 space-y-2">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block text-center">
-            Quick Demo Auto-Login
+            Quick Demo Auto-Login (JWT)
           </span>
           <div className="grid grid-cols-2 gap-2">
             <button
-              onClick={() => { setPhone('9823011223'); setPassword('demo123'); navigate('/services'); }}
+              onClick={() => handleQuickDemo('9823011223', 'demo123', 'customer')}
               className="px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 text-center"
             >
               Demo Customer
             </button>
             <button
-              onClick={() => { setPhone('9422100998'); setPassword('coop123'); navigate('/cooperative'); }}
+              onClick={() => handleQuickDemo('9422100998', 'coop123', 'cooperative')}
               className="px-3 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl text-xs font-bold text-emerald-800 text-center"
             >
               Demo Co-op Admin
