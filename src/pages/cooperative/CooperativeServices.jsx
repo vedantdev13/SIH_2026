@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Wrench, Users, CheckCircle2, XCircle, Power, Eye, Search } from 'lucide-react';
+import { Wrench, Users, CheckCircle2, XCircle, Power, Eye, Search, Plus } from 'lucide-react';
 import { toggleServiceApi } from '../../api/apiClient';
 
 export default function CooperativeServices({ services = [], setServices, workers = [] }) {
   const [selectedServiceForWorkers, setSelectedServiceForWorkers] = useState(null);
+  const [showAddServiceModal, setShowAddServiceModal] = useState(false);
+  const [newServiceName, setNewServiceName] = useState('');
+  const [newServicePrice, setNewServicePrice] = useState('399');
+  const [newServiceDesc, setNewServiceDesc] = useState('');
 
   const handleToggleActive = async (serviceId, currentActive) => {
     const nextState = !currentActive;
@@ -13,6 +17,28 @@ export default function CooperativeServices({ services = [], setServices, worker
     } else {
       setServices(prev => prev.map(s => s.id === serviceId ? { ...s, active: nextState } : s));
     }
+  };
+
+  const handleAddService = (e) => {
+    e.preventDefault();
+    const newServiceObj = {
+      id: `service-${Date.now()}`,
+      name: newServiceName,
+      iconName: 'Wrench',
+      description: newServiceDesc || `${newServiceName} inspection, diagnostics, and repairs.`,
+      startingPrice: parseInt(newServicePrice) || 399,
+      basePrice: parseInt(newServicePrice) || 399,
+      workerCount: 15,
+      active: true,
+      image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80'
+    };
+
+    if (setServices) {
+      setServices(prev => [...prev, newServiceObj]);
+    }
+    setShowAddServiceModal(false);
+    setNewServiceName('');
+    setNewServiceDesc('');
   };
 
   return (
@@ -31,12 +57,19 @@ export default function CooperativeServices({ services = [], setServices, worker
             Manage base pricing, active availability, and allocated cooperative member workforce per service trade.
           </p>
         </div>
+
+        <button
+          onClick={() => setShowAddServiceModal(true)}
+          className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-sm transition-all shrink-0"
+        >
+          <Plus className="w-4 h-4" /> Add New Service Category
+        </button>
       </div>
 
       {/* SERVICES GRID */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map(srv => {
-          const serviceWorkers = workers.filter(w => w.skill.toLowerCase() === srv.name.toLowerCase() || srv.id.includes(w.skill.toLowerCase()));
+          const serviceWorkers = workers.filter(w => (w.skill || '').toLowerCase() === srv.name.toLowerCase() || srv.id.includes((w.skill || '').toLowerCase()));
           const isActive = srv.active !== false;
 
           return (
@@ -114,7 +147,7 @@ export default function CooperativeServices({ services = [], setServices, worker
 
             <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
               {workers
-                .filter(w => w.skill.toLowerCase() === selectedServiceForWorkers.name.toLowerCase() || selectedServiceForWorkers.id.includes(w.skill.toLowerCase()))
+                .filter(w => (w.skill || '').toLowerCase() === selectedServiceForWorkers.name.toLowerCase() || selectedServiceForWorkers.id.includes((w.skill || '').toLowerCase()))
                 .map(w => (
                   <div key={w.id} className="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -137,6 +170,71 @@ export default function CooperativeServices({ services = [], setServices, worker
                 Close
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ADD NEW SERVICE MODAL */}
+      {showAddServiceModal && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-5 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="font-extrabold text-slate-900 text-lg">Add New Service Offering</h3>
+              <button onClick={() => setShowAddServiceModal(false)} className="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+            </div>
+
+            <form onSubmit={handleAddService} className="space-y-4">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Service Category Name</label>
+                <input
+                  type="text"
+                  required
+                  value={newServiceName}
+                  onChange={(e) => setNewServiceName(e.target.value)}
+                  placeholder="e.g. Solar Panel Maintenance"
+                  className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Starting Base Visit Price (₹)</label>
+                <input
+                  type="number"
+                  required
+                  value={newServicePrice}
+                  onChange={(e) => setNewServicePrice(e.target.value)}
+                  placeholder="e.g. 399"
+                  className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Description</label>
+                <textarea
+                  rows={3}
+                  value={newServiceDesc}
+                  onChange={(e) => setNewServiceDesc(e.target.value)}
+                  placeholder="Describe service scope and inclusions..."
+                  className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowAddServiceModal(false)}
+                  className="text-xs font-bold text-slate-500 hover:text-slate-800 px-4 py-2"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
+                >
+                  Add Service Category
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

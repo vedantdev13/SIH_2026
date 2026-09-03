@@ -22,13 +22,53 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSkillFilter, setSelectedSkillFilter] = useState('All');
   const [selectedWorkerProfile, setSelectedWorkerProfile] = useState(null);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [newWorkerName, setNewWorkerName] = useState('');
+  const [newWorkerPhone, setNewWorkerPhone] = useState('');
+  const [newWorkerSkill, setNewWorkerSkill] = useState('Plumber');
+  const [newWorkerExperience, setNewWorkerExperience] = useState('4 years');
+  const [newWorkerPrice, setNewWorkerPrice] = useState('349');
+  const [newWorkerLocality, setNewWorkerLocality] = useState('Sitabuldi, Nagpur');
+
+  const handleRegisterWorker = (e) => {
+    e.preventDefault();
+    const newWorkerObj = {
+      id: `w-${Date.now()}`,
+      name: newWorkerName,
+      phone: newWorkerPhone,
+      photo: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=400&q=80',
+      skill: newWorkerSkill,
+      experience: newWorkerExperience,
+      rating: 4.9,
+      reviewsCount: 1,
+      completedJobs: 0,
+      distance: 1.5,
+      approxPrice: `₹${newWorkerPrice} / visit`,
+      hourlyRate: parseInt(newWorkerPrice) || 349,
+      verified: true,
+      cooperativeName: activeCoop?.name || 'Nagpur Labour Cooperative',
+      cooperativeId: activeCoop?.id || 'ngp-plumb-coop',
+      badge: 'Verified Cooperative Member',
+      availability: 'Available Now',
+      locality: newWorkerLocality,
+      about: `${newWorkerSkill} specialist member registered with ${activeCoop?.name || 'Nagpur Labour Cooperative'}.`,
+      welfareStatus: 'Covered under State Cooperative Medical & Life Insurance Policy'
+    };
+
+    if (setWorkers) {
+      setWorkers(prev => [newWorkerObj, ...prev]);
+    }
+    setShowRegisterModal(false);
+    setNewWorkerName('');
+    setNewWorkerPhone('');
+  };
 
   const skillsList = ['All', 'Plumber', 'Electrician', 'Carpenter', 'Painter', 'Cleaner', 'Driver', 'Gardener', 'Technician'];
 
   const filteredWorkers = workers.filter(w => {
-    const matchesSearch = w.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          w.skill.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          w.locality?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (w.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          (w.skill || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          (w.locality || '').toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSkill = selectedSkillFilter === 'All' || w.skill === selectedSkillFilter;
     return matchesSearch && matchesSkill;
   });
@@ -60,8 +100,8 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
           </p>
         </div>
 
-        {/* Filter controls */}
-        <div className="flex items-center gap-3">
+        {/* Filter & Add controls */}
+        <div className="flex flex-wrap items-center gap-3">
           <div className="relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
             <input
@@ -82,6 +122,13 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
               <option key={skill} value={skill}>{skill}</option>
             ))}
           </select>
+
+          <button
+            onClick={() => setShowRegisterModal(true)}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm transition-all"
+          >
+            <UserPlus className="w-4 h-4" /> Register New Worker Member
+          </button>
         </div>
       </div>
 
@@ -278,6 +325,115 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
               </button>
             </div>
 
+          </div>
+        </div>
+      )}
+
+      {/* REGISTER NEW WORKER MEMBER MODAL */}
+      {showRegisterModal && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-5 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="font-extrabold text-slate-900 text-lg">Register New Worker Member</h3>
+              <button onClick={() => setShowRegisterModal(false)} className="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+            </div>
+
+            <form onSubmit={handleRegisterWorker} className="space-y-4">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Worker Full Name</label>
+                <input
+                  type="text"
+                  required
+                  value={newWorkerName}
+                  onChange={(e) => setNewWorkerName(e.target.value)}
+                  placeholder="e.g. Ramesh Kumar"
+                  className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Phone Number</label>
+                <input
+                  type="tel"
+                  required
+                  value={newWorkerPhone}
+                  onChange={(e) => setNewWorkerPhone(e.target.value)}
+                  placeholder="e.g. 9823011223"
+                  className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Skill Trade</label>
+                  <select
+                    value={newWorkerSkill}
+                    onChange={(e) => setNewWorkerSkill(e.target.value)}
+                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold"
+                  >
+                    <option value="Plumber">Plumber</option>
+                    <option value="Electrician">Electrician</option>
+                    <option value="Carpenter">Carpenter</option>
+                    <option value="Painter">Painter</option>
+                    <option value="Cleaner">Cleaner</option>
+                    <option value="Driver">Driver</option>
+                    <option value="Gardener">Gardener</option>
+                    <option value="Technician">Technician</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Experience</label>
+                  <input
+                    type="text"
+                    value={newWorkerExperience}
+                    onChange={(e) => setNewWorkerExperience(e.target.value)}
+                    placeholder="e.g. 5 years"
+                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Visit Fee (₹)</label>
+                  <input
+                    type="number"
+                    value={newWorkerPrice}
+                    onChange={(e) => setNewWorkerPrice(e.target.value)}
+                    placeholder="349"
+                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Locality</label>
+                  <input
+                    type="text"
+                    value={newWorkerLocality}
+                    onChange={(e) => setNewWorkerLocality(e.target.value)}
+                    placeholder="Sitabuldi, Nagpur"
+                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowRegisterModal(false)}
+                  className="text-xs font-bold text-slate-500 hover:text-slate-800 px-4 py-2"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
+                >
+                  Confirm Registration
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

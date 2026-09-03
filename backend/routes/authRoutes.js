@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../models/User.js';
+import Worker from '../models/Worker.js';
 import { verifyToken } from '../middleware/authMiddleware.js';
 
 dotenv.config();
@@ -62,6 +63,20 @@ router.post('/register', async (req, res) => {
     });
 
     const savedUser = await newUser.save();
+
+    // If role is worker, create a separate Worker profile document in the workers collection
+    if (role === 'worker') {
+      const newWorker = new Worker({
+        userId: savedUser._id,
+        name: savedUser.name,
+        phone: savedUser.phone,
+        skill: tradeSkill || 'Plumber',
+        cooperativeName: cooperativeName || 'Nagpur Labour Cooperative Society',
+        verified: true
+      });
+      await newWorker.save();
+    }
+
     const token = generateToken(savedUser);
 
     const userProfile = {

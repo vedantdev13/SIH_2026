@@ -40,7 +40,7 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
     
     // Available workers for this trade
     const availableCount = workers.filter(w => 
-      w.skill.toLowerCase().includes(trade.toLowerCase()) && w.availability === 'Available Now'
+      (w.skill || w.tradeSkill || '').toLowerCase().includes(trade.toLowerCase()) && w.availability === 'Available Now'
     ).length || Math.floor(Math.random() * 3 + 2);
 
     const recommended = Math.ceil(availableCount * multiplier + (level === 'HIGH' ? 3 : level === 'MEDIUM' ? 1 : 0));

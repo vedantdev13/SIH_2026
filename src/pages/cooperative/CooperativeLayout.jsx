@@ -17,7 +17,8 @@ import {
   RefreshCw,
   Server,
   Home,
-  ArrowLeft
+  ArrowLeft,
+  Settings
 } from 'lucide-react';
 import { LABOUR_COOPERATIVES } from '../../data/mockData';
 import { checkBackendHealth } from '../../api/apiClient';
@@ -36,6 +37,9 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedCoopId, setSelectedCoopId] = useState('ngp-plumb-coop');
   const [isBackendLive, setIsBackendLive] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [societyPresident, setSocietyPresident] = useState('Shri Rajesh Sharma');
+  const [welfareReserve, setWelfareReserve] = useState('₹14,50,000');
 
   const activeCoop = LABOUR_COOPERATIVES.find(c => c.id === selectedCoopId) || LABOUR_COOPERATIVES[0];
 
@@ -250,6 +254,15 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
               <span className="font-mono text-emerald-700 font-bold">{activeCoop.regNo}</span>
             </div>
 
+            <button
+              onClick={() => setShowSettingsModal(true)}
+              className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-3 py-2 rounded-xl flex items-center gap-1.5 border border-slate-200 transition-all shadow-sm"
+              title="Cooperative Society Settings"
+            >
+              <Settings className="w-4 h-4 text-emerald-600" />
+              <span className="hidden sm:inline">Society Profile</span>
+            </button>
+
             <button 
               onClick={() => checkBackendHealth().then(res => setIsBackendLive(!!res))}
               className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 hover:text-emerald-700 hover:bg-slate-200 transition-colors shadow-sm"
@@ -339,6 +352,78 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
         </div>
 
       </main>
+
+      {/* SOCIETY PROFILE & SETTINGS MODAL */}
+      {showSettingsModal && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2">
+                <Building2 className="w-5 h-5 text-emerald-600" />
+                <h3 className="font-extrabold text-slate-900 text-lg">Cooperative Society Profile & Settings</h3>
+              </div>
+              <button onClick={() => setShowSettingsModal(false)} className="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+            </div>
+
+            <div className="space-y-4 text-xs">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Registered Society Name</span>
+                <p className="text-base font-extrabold text-slate-900">{activeCoop.name}</p>
+                <span className="text-emerald-700 font-bold">State Registration Code: {activeCoop.regNo}</span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="font-bold text-slate-700 uppercase tracking-wider block">Elected President</label>
+                  <input
+                    type="text"
+                    value={societyPresident}
+                    onChange={(e) => setSocietyPresident(e.target.value)}
+                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-bold text-slate-700 uppercase tracking-wider block">Welfare Reserve Pool</label>
+                  <input
+                    type="text"
+                    value={welfareReserve}
+                    onChange={(e) => setWelfareReserve(e.target.value)}
+                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-emerald-800"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 font-medium block">Headquarters Zone</span>
+                  <span className="font-extrabold text-slate-900">{activeCoop.district || 'Nagpur Central'}</span>
+                </div>
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 font-medium block">Active Members</span>
+                  <span className="font-extrabold text-emerald-700">{workers.length} Verified Tradespeople</span>
+                </div>
+              </div>
+
+              <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-3.5 rounded-2xl space-y-1">
+                <span className="font-bold block">✓ Government Cooperative Registrar Audit Status</span>
+                <p className="text-[11px] text-emerald-800">
+                  Fully compliant under Maharashtra Cooperative Societies Act 1960. Next statutory AGM audit scheduled Q4 2026.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+              <button
+                onClick={() => setShowSettingsModal(false)}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-sm"
+              >
+                Save Settings & Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

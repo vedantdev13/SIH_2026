@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndianRupee, TrendingUp, Calendar, CheckCircle2, ShieldCheck, HeartHandshake, CreditCard, Lock } from 'lucide-react';
+import { IndianRupee, TrendingUp, Calendar, CheckCircle2, ShieldCheck, HeartHandshake, CreditCard, Lock, Printer, Download } from 'lucide-react';
 
 export default function CooperativeEarnings({ bookings = [], activeCoop }) {
   const completedBookings = bookings.filter(b => b.status === 'Completed');
@@ -20,6 +20,10 @@ export default function CooperativeEarnings({ bookings = [], activeCoop }) {
     { service: 'Cleaning & Others', amount: 10050, percentage: 19 }
   ];
 
+  const handlePrintAuditReport = () => {
+    window.print();
+  };
+
   return (
     <div className="space-y-8">
       
@@ -37,11 +41,21 @@ export default function CooperativeEarnings({ bookings = [], activeCoop }) {
             </p>
           </div>
 
-          <div className="bg-amber-500/20 border border-amber-400/40 p-3 rounded-2xl text-right shrink-0">
-            <span className="text-[10px] text-amber-300 font-bold uppercase tracking-wider block flex items-center gap-1 justify-end">
-              <Lock className="w-3 h-3" /> Secure Payment Gateway
-            </span>
-            <span className="text-xs font-extrabold text-white">Payment integration coming soon</span>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={handlePrintAuditReport}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2"
+            >
+              <Printer className="w-4 h-4" />
+              <span>Export Audit Statement</span>
+            </button>
+
+            <div className="bg-amber-500/20 border border-amber-400/40 p-2.5 rounded-2xl text-right shrink-0">
+              <span className="text-[10px] text-amber-300 font-bold uppercase tracking-wider block flex items-center gap-1 justify-end">
+                <Lock className="w-3 h-3" /> Secure Gateway
+              </span>
+              <span className="text-xs font-extrabold text-white">Payment gateway coming soon</span>
+            </div>
           </div>
         </div>
       </div>

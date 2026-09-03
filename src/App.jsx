@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -9,6 +9,7 @@ import BookingPage from './pages/BookingPage';
 import BookingConfirmation from './pages/BookingConfirmation';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import WorkerDashboard from './pages/WorkerDashboard';
 import CooperativeLayout from './pages/cooperative/CooperativeLayout';
 
 import { WORKERS as INITIAL_WORKERS, SERVICES as INITIAL_SERVICES, INITIAL_BOOKINGS } from './data/mockData';
@@ -27,7 +28,14 @@ function ScrollToTop() {
 // Layout wrapper to conditionally show customer Navbar/Footer or render Admin full screen
 function MainLayout({ children, currentUser, setCurrentUser }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const isCooperativeRoute = location.pathname.startsWith('/cooperative');
+
+  useEffect(() => {
+    if (currentUser?.role === 'worker' && location.pathname !== '/worker-dashboard' && location.pathname !== '/login') {
+      navigate('/worker-dashboard', { replace: true });
+    }
+  }, [currentUser, location.pathname, navigate]);
 
   if (isCooperativeRoute) {
     return <div className="min-h-screen font-sans">{children}</div>;
@@ -76,10 +84,22 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/worker/:id" element={<WorkerDetail />} />
-          <Route path="/book/:workerId" element={<BookingPage onAddBooking={handleAddBooking} />} />
+          <Route path="/book/:workerId" element={<BookingPage onAddBooking={handleAddBooking} currentUser={currentUser} />} />
           <Route path="/confirmation/:bookingId" element={<BookingConfirmation />} />
           <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
           <Route path="/register" element={<Register setCurrentUser={setCurrentUser} />} />
+          <Route 
+            path="/worker-dashboard" 
+            element={
+              <WorkerDashboard 
+                currentUser={currentUser}
+                bookings={bookings}
+                setBookings={setBookings}
+                workers={workers}
+                setWorkers={setWorkers}
+              />
+            } 
+          />
           
           {/* COOPERATIVE ADMIN ROUTE GROUP */}
           <Route 

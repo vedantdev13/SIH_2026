@@ -29,8 +29,11 @@ export default function Login({ setCurrentUser }) {
       if (setCurrentUser) {
         setCurrentUser(result.data.user);
       }
-      if (role === 'cooperative' || result.data.user?.role === 'cooperative') {
+      const userRole = result.data.user?.role || role;
+      if (userRole === 'cooperative') {
         navigate('/cooperative');
+      } else if (userRole === 'worker') {
+        navigate('/worker-dashboard');
       } else {
         navigate('/services');
       }
@@ -57,6 +60,8 @@ export default function Login({ setCurrentUser }) {
       if (setCurrentUser) setCurrentUser(result.data.user);
       if (demoRole === 'cooperative') {
         navigate('/cooperative');
+      } else if (demoRole === 'worker') {
+        navigate('/worker-dashboard');
       } else {
         navigate('/services');
       }
