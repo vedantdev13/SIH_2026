@@ -254,7 +254,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
           <div>
             <h3 className="text-xl font-bold text-slate-900">Cooperative Social Security & Dividend Fund</h3>
             <p className="text-sm text-slate-600 mt-1">
-              Unlike private aggregators, KaamSetu allocates platform surplus to worker health policies and annual member dividends.
+              Unlike private aggregators, Sahakaar allocates platform surplus to worker health policies and annual member dividends.
             </p>
           </div>
 

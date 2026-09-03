@@ -44,7 +44,7 @@ export default function Navbar() {
           <div>
             <div className="flex items-center gap-1.5">
               <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-800 via-teal-700 to-slate-900 bg-clip-text text-transparent">
-                KaamSetu
+                SAHAKAAR
               </span>
               <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded border border-emerald-200">
                 CO-OP

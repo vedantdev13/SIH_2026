@@ -28,7 +28,7 @@ export default function Login() {
           <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center mx-auto shadow-md">
             <Users className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900">Log in to KaamSetu</h1>
+          <h1 className="text-2xl font-extrabold text-slate-900">Log in to Sahakaar</h1>
           <p className="text-xs text-slate-500">Access your cooperative account or book verified workers</p>
         </div>
 

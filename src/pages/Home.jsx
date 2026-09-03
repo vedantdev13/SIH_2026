@@ -216,13 +216,13 @@ export default function Home() {
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="bg-emerald-800 text-emerald-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-              Why KaamSetu is Different
+              Why Sahakaar is Different
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold">
               Not Just Another Gig App — A Worker-Owned Platform
             </h2>
             <p className="text-slate-300 text-base">
-              Private aggregator apps take up to 30% commission while treating skilled tradespeople as disposable workers. KaamSetu connects you directly to democratically managed <strong className="text-white">Labour Cooperatives</strong>.
+              Private aggregator apps take up to 30% commission while treating skilled tradespeople as disposable workers. Sahakaar connects you directly to democratically managed <strong className="text-white">Labour Cooperatives</strong>.
             </p>
           </div>
 
@@ -262,13 +262,13 @@ export default function Home() {
 
           {/* Comparison Table */}
           <div className="bg-slate-900 rounded-2xl p-6 border border-emerald-700/50 overflow-x-auto">
-            <h4 className="text-lg font-bold text-white mb-4 text-center">Urban Company vs. KaamSetu Cooperative Model</h4>
+            <h4 className="text-lg font-bold text-white mb-4 text-center">Urban Company vs. Sahakaar Cooperative Model</h4>
             <table className="w-full text-sm text-left">
               <thead className="text-xs uppercase bg-slate-800 text-slate-400">
                 <tr>
                   <th className="p-3">Feature</th>
                   <th className="p-3 text-red-400">Private Tech Platforms</th>
-                  <th className="p-3 text-emerald-400">KaamSetu Cooperative Platform</th>
+                  <th className="p-3 text-emerald-400">Sahakaar Cooperative Platform</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800 text-slate-300">
@@ -348,7 +348,7 @@ export default function Home() {
           <div className="space-y-3 max-w-xl">
             <h3 className="text-3xl font-extrabold">Are you a Labour Cooperative Officer?</h3>
             <p className="text-emerald-100 text-sm leading-relaxed">
-              Register your Labour Cooperative Society or Federation on KaamSetu. Access our free digital workforce allocation dashboard, get instant customer bookings for your workers, and automate welfare contributions.
+              Register your Labour Cooperative Society or Federation on Sahakaar. Access our free digital workforce allocation dashboard, get instant customer bookings for your workers, and automate welfare contributions.
             </p>
           </div>
 

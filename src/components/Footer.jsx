@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white">
                 <Users className="w-5 h-5" />
               </div>
-              <span className="text-xl font-bold text-white tracking-tight">KaamSetu</span>
+              <span className="text-xl font-bold text-white tracking-tight">SAHAKAAR</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
               Empowering Labour Cooperative Societies by connecting verified local skilled workers with households and businesses directly.
@@ -60,11 +60,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Toll-Free: 1800-425-KAAM (5226)</span>
+                <span>Toll-Free: 1800-425-SAHAKAAR (7242)</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>support@kaamsetu.coop</span>
+                <span>support@sahakaar.coop</span>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function Footer() {
 
         {/* Bottom copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} KaamSetu Platform. Smart India Hackathon Prototype.</p>
+          <p>© {new Date().getFullYear()} Sahakaar Platform. Smart India Hackathon Prototype.</p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1 text-slate-400">
               Built with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> for Indian Labour Cooperatives
