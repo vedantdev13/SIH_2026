@@ -66,7 +66,7 @@ export default function Navbar({ currentUser, setCurrentUser }) {
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-1">
-          {currentUser?.role === 'worker' ? (
+          {currentUser?.role === 'worker' && (
             <Link
               to="/worker-dashboard"
               className={`px-4 py-2 rounded-xl text-sm font-extrabold transition-colors flex items-center gap-1.5 ${
@@ -78,76 +78,6 @@ export default function Navbar({ currentUser, setCurrentUser }) {
               <Briefcase className="w-4 h-4 text-emerald-600" />
               My Worker Dashboard
             </Link>
-          ) : currentUser?.role === 'cooperative' ? (
-            <>
-              <Link
-                to="/"
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  isActive('/') 
-                    ? 'text-emerald-700 bg-emerald-50 font-semibold' 
-                    : 'text-slate-600 hover:text-emerald-600 hover:bg-slate-50'
-                }`}
-              >
-                Home
-              </Link>
-              <Link
-                to="/services"
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  isActive('/services') 
-                    ? 'text-emerald-700 bg-emerald-50 font-semibold' 
-                    : 'text-slate-600 hover:text-emerald-600 hover:bg-slate-50'
-                }`}
-              >
-                Find Workers & Services
-              </Link>
-              <Link
-                to="/cooperative"
-                className={`px-4 py-2 rounded-xl text-sm font-extrabold transition-colors flex items-center gap-1.5 ${
-                  isActive('/cooperative') 
-                    ? 'text-emerald-800 bg-emerald-50 border border-emerald-200' 
-                    : 'text-slate-700 hover:text-emerald-700 hover:bg-slate-50'
-                }`}
-              >
-                <Briefcase className="w-4 h-4 text-emerald-600" />
-                Co-op Admin Dashboard
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/"
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  isActive('/') 
-                    ? 'text-emerald-700 bg-emerald-50 font-semibold' 
-                    : 'text-slate-600 hover:text-emerald-600 hover:bg-slate-50'
-                }`}
-              >
-                Home
-              </Link>
-              
-              <Link
-                to="/services"
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  isActive('/services') 
-                    ? 'text-emerald-700 bg-emerald-50 font-semibold' 
-                    : 'text-slate-600 hover:text-emerald-600 hover:bg-slate-50'
-                }`}
-              >
-                Find Workers & Services
-              </Link>
-
-              <Link
-                to="/cooperative"
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                  isActive('/cooperative') 
-                    ? 'text-emerald-700 bg-emerald-50 font-semibold' 
-                    : 'text-slate-600 hover:text-emerald-600 hover:bg-slate-50'
-                }`}
-              >
-                <Briefcase className="w-4 h-4 text-emerald-600" />
-                Cooperative Admin
-              </Link>
-            </>
           )}
         </div>
 
@@ -209,7 +139,7 @@ export default function Navbar({ currentUser, setCurrentUser }) {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-2 shadow-lg animate-in slide-in-from-top-2">
-          {currentUser?.role === 'worker' ? (
+          {currentUser?.role === 'worker' && (
             <Link
               to="/worker-dashboard"
               onClick={() => setMobileMenuOpen(false)}
@@ -217,30 +147,6 @@ export default function Navbar({ currentUser, setCurrentUser }) {
             >
               My Worker Dashboard
             </Link>
-          ) : (
-            <>
-              <Link
-                to="/"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50"
-              >
-                Home
-              </Link>
-              <Link
-                to="/services"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50"
-              >
-                Find Workers & Services
-              </Link>
-              <Link
-                to="/cooperative"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50"
-              >
-                Cooperative Admin Dashboard
-              </Link>
-            </>
           )}
 
           <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
