@@ -11,10 +11,13 @@ import {
   Building2, 
   ShieldCheck, 
   ChevronRight, 
+  ChevronDown,
   Menu, 
   X, 
   RefreshCw,
-  Server
+  Server,
+  Home,
+  ArrowLeft
 } from 'lucide-react';
 import { LABOUR_COOPERATIVES } from '../../data/mockData';
 import { checkBackendHealth } from '../../api/apiClient';
@@ -59,67 +62,91 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
       
       {/* MOBILE SIDEBAR TOGGLE HEADER */}
       <div className="md:hidden bg-white border-b border-slate-200 p-4 flex items-center justify-between sticky top-16 z-30 shadow-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold shadow-sm">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
+          <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold shadow-sm shrink-0">
             <Building2 className="w-5 h-5" />
           </div>
-          <div>
+          <div className="min-w-0 flex-1">
             <h2 className="font-extrabold text-sm text-slate-900 leading-tight">Cooperative Admin</h2>
-            <p className="text-[10px] text-emerald-700 font-semibold">{activeCoop.name}</p>
+            <p className="text-[10px] text-emerald-700 font-semibold truncate">{activeCoop.name}</p>
           </div>
         </div>
 
-        <button 
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200"
-        >
-          {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            to="/"
+            className="p-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold flex items-center gap-1"
+            title="Back to Customer Site"
+          >
+            <Home className="w-4 h-4" />
+          </Link>
+
+          <button 
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200"
+          >
+            {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
-      {/* SIDEBAR NAVIGATION (Light KaamSetu Theme) */}
+      {/* SIDEBAR NAVIGATION */}
       <aside className={`
         fixed inset-y-0 left-0 z-40 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out md:static md:translate-x-0 shadow-sm
         ${sidebarOpen ? 'translate-x-0 top-16' : '-translate-x-full md:translate-x-0'}
       `}>
-        <div className="p-4 space-y-6">
+        <div className="p-4 space-y-5">
           
-          {/* Header Brand Badge */}
-          <div className="hidden md:flex items-center gap-3 px-2 pt-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/20">
+          {/* Header Brand Badge (with proper flex bounds to prevent overflow) */}
+          <div className="hidden md:flex items-center gap-3 px-2 pt-2 min-w-0">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 shrink-0">
               <Building2 className="w-6 h-6" />
             </div>
-            <div>
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-emerald-800 via-teal-700 to-slate-900 bg-clip-text text-transparent">
+                <span className="font-extrabold text-base tracking-tight bg-gradient-to-r from-emerald-800 via-teal-700 to-slate-900 bg-clip-text text-transparent truncate">
                   Co-op Portal
                 </span>
-                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded border border-emerald-200">
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded border border-emerald-200 shrink-0">
                   ADMIN
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 font-medium truncate">
+              <p className="text-[11px] text-slate-500 font-medium truncate" title={activeCoop.name}>
                 {activeCoop.name}
               </p>
             </div>
           </div>
 
-          {/* Cooperative Switcher */}
-          <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-1.5">
+          {/* Back to Homepage Button in Sidebar */}
+          <div className="px-1">
+            <Link
+              to="/"
+              className="w-full bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 border border-slate-200 hover:border-emerald-300 text-xs font-bold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm group"
+            >
+              <ArrowLeft className="w-4 h-4 text-slate-500 group-hover:text-emerald-700 transition-transform group-hover:-translate-x-0.5" />
+              <span>Back to Main Homepage</span>
+            </Link>
+          </div>
+
+          {/* Premium Dropdown Menu for Switching Cooperative */}
+          <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-1.5 shadow-sm">
             <label className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 block">
               Active Cooperative
             </label>
-            <select
-              value={selectedCoopId}
-              onChange={(e) => setSelectedCoopId(e.target.value)}
-              className="w-full bg-white border border-slate-300 text-emerald-800 font-bold text-xs rounded-xl py-2 px-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
-            >
-              {LABOUR_COOPERATIVES.map(coop => (
-                <option key={coop.id} value={coop.id}>
-                  {coop.name}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                value={selectedCoopId}
+                onChange={(e) => setSelectedCoopId(e.target.value)}
+                className="w-full bg-white border border-slate-300 text-emerald-950 font-bold text-xs rounded-xl py-2 px-3 pr-8 appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-sm cursor-pointer hover:border-emerald-400 transition-colors truncate"
+              >
+                {LABOUR_COOPERATIVES.map(coop => (
+                  <option key={coop.id} value={coop.id}>
+                    {coop.name}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="w-4 h-4 text-emerald-700 absolute right-2.5 top-2.5 pointer-events-none" />
+            </div>
           </div>
 
           {/* Navigation Links */}
@@ -196,27 +223,31 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
         
         {/* TOP BAR */}
         <header className="bg-white border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sticky top-0 z-20 shadow-sm backdrop-blur-md">
-          <div>
+          <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-extrabold text-slate-900">{currentTabName}</h1>
-              <span className="bg-emerald-100 border border-emerald-200 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
+              <span className="bg-emerald-100 border border-emerald-200 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 shrink-0">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> Verified Co-op Admin
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5 truncate">
               Managing <strong className="text-slate-800">{activeCoop.name}</strong> • Zone: {activeCoop.zone}
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
+            {/* PROMINENT BACK TO HOMEPAGE BUTTON IN TOP HEADER */}
+            <Link
+              to="/"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2"
+            >
+              <Home className="w-4 h-4 text-emerald-100" />
+              <span>Back to Customer Homepage</span>
+            </Link>
+
             <div className="hidden lg:flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200 text-xs">
               <span className="text-slate-500">Reg No:</span>
               <span className="font-mono text-emerald-700 font-bold">{activeCoop.regNo}</span>
-            </div>
-
-            <div className="hidden lg:flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200 text-xs">
-              <span className="text-slate-500">President:</span>
-              <span className="text-slate-900 font-bold">{activeCoop.president}</span>
             </div>
 
             <button 
