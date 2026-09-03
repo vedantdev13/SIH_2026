@@ -61,11 +61,11 @@ export default function BookingPage({ onAddBooking, currentUser }) {
     };
 
     const savedBooking = await createBookingApi(newBooking);
-    const finalBooking = savedBooking || newBooking;
+    const finalBooking = { ...newBooking, ...(savedBooking || {}) };
 
     if (onAddBooking) onAddBooking(finalBooking);
     setIsSubmitting(false);
-    navigate(`/confirmation/${bookingId}`, { state: { booking: finalBooking } });
+    navigate(`/confirmation/${finalBooking.id}`, { state: { booking: finalBooking } });
   };
 
   return (

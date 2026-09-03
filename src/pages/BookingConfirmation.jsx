@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useParams, Link } from 'react-router-dom';
 import { 
   CheckCircle2, 
@@ -13,13 +13,50 @@ import {
   Wrench,
   Printer
 } from 'lucide-react';
-import { INITIAL_BOOKINGS } from '../data/mockData';
+import { INITIAL_BOOKINGS, WORKERS } from '../data/mockData';
+import { fetchBookings } from '../api/apiClient';
 
 export default function BookingConfirmation() {
   const { bookingId } = useParams();
   const location = useLocation();
 
-  const booking = location.state?.booking || INITIAL_BOOKINGS[0];
+  const [booking, setBooking] = useState(location.state?.booking || null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const resolveBooking = async () => {
+      // Try to find booking in existing list or fetch from API
+      const allBookings = await fetchBookings();
+      const match = allBookings.find(b => b.id === bookingId || b._id === bookingId);
+      
+      if (isMounted) {
+        if (match) {
+          setBooking(prev => ({ ...(prev || {}), ...match }));
+        } else if (!location.state?.booking) {
+          setBooking(INITIAL_BOOKINGS[0]);
+        }
+      }
+    };
+
+    resolveBooking();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [bookingId, location.state]);
+
+  const activeBooking = booking || location.state?.booking || INITIAL_BOOKINGS[0];
+
+  // Resolve worker fallback details if workerId is present
+  const assignedWorker = WORKERS.find(w => w.id === activeBooking.workerId) || WORKERS[0];
+
+  const workerPhoto = activeBooking.workerPhoto || assignedWorker.photo;
+  const workerName = activeBooking.workerName || assignedWorker.name;
+  const workerSkill = activeBooking.serviceName || activeBooking.workerSkill || `${assignedWorker.skill} Service`;
+  const cooperativeName = activeBooking.cooperativeName || assignedWorker.cooperativeName;
+  const scheduledDate = activeBooking.date || activeBooking.bookingDate || 'Today';
+  const scheduledTime = activeBooking.time || '10:00 AM - 12:00 PM';
+  const serviceAddress = activeBooking.address || activeBooking.location || 'Nagpur Locality';
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
@@ -48,32 +85,32 @@ export default function BookingConfirmation() {
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
             <div>
               <span className="text-slate-400 font-medium block">Booking Reference ID</span>
-              <span className="text-lg font-mono font-extrabold text-slate-900">{booking.id || bookingId}</span>
+              <span className="text-lg font-mono font-extrabold text-slate-900">{activeBooking.id || bookingId}</span>
             </div>
             <div className="inline-flex items-center gap-1.5 bg-emerald-100 border border-emerald-300 text-emerald-900 font-bold px-3 py-1.5 rounded-xl">
               <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-              {booking.status || 'Confirmed & Worker Dispatched'}
+              {activeBooking.status || 'Confirmed & Worker Dispatched'}
             </div>
           </div>
 
           {/* Assigned Worker Banner */}
           <div className="border border-slate-200 rounded-2xl p-4 flex items-center gap-4">
             <img 
-              src={booking.workerPhoto} 
-              alt={booking.workerName} 
+              src={workerPhoto} 
+              alt={workerName} 
               className="w-16 h-16 rounded-xl object-cover border-2 border-emerald-600 shadow-sm" 
             />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <h3 className="font-extrabold text-slate-900 text-lg truncate">{booking.workerName}</h3>
+                <h3 className="font-extrabold text-slate-900 text-lg truncate">{workerName}</h3>
                 <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">
                   Co-op Member
                 </span>
               </div>
-              <p className="text-xs font-semibold text-emerald-700">{booking.serviceName || booking.workerSkill}</p>
+              <p className="text-xs font-semibold text-emerald-700">{workerSkill}</p>
               <p className="text-xs text-slate-500 flex items-center gap-1 mt-1 truncate">
                 <Building2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                {booking.cooperativeName}
+                {cooperativeName}
               </p>
             </div>
           </div>
@@ -84,29 +121,29 @@ export default function BookingConfirmation() {
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5 text-emerald-600" /> Scheduled Date
               </span>
-              <p className="font-bold text-slate-800">{booking.date}</p>
+              <p className="font-bold text-slate-800">{scheduledDate}</p>
             </div>
 
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5 text-emerald-600" /> Scheduled Time Slot
               </span>
-              <p className="font-bold text-slate-800">{booking.time}</p>
+              <p className="font-bold text-slate-800">{scheduledTime}</p>
             </div>
 
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1 sm:col-span-2">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5 text-emerald-600" /> Service Location
               </span>
-              <p className="font-semibold text-slate-800">{booking.address}</p>
+              <p className="font-semibold text-slate-800">{serviceAddress}</p>
             </div>
 
-            {booking.problem && (
+            {activeBooking.problem && (
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1 sm:col-span-2">
                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
                   <FileText className="w-3.5 h-3.5 text-emerald-600" /> Customer Problem Note
                 </span>
-                <p className="text-slate-700 italic">"{booking.problem}"</p>
+                <p className="text-slate-700 italic">"{activeBooking.problem}"</p>
               </div>
             )}
           </div>

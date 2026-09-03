@@ -16,7 +16,10 @@ router.get('/bookings', async (req, res) => {
 // GET booking by ID
 router.get('/bookings/:id', async (req, res) => {
   try {
-    const booking = await Booking.findById(req.params.id);
+    let booking = await Booking.findOne({ id: req.params.id });
+    if (!booking && req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      booking = await Booking.findById(req.params.id);
+    }
     if (!booking) return res.status(404).json({ message: 'Booking not found' });
     res.json(booking);
   } catch (err) {
@@ -27,7 +30,11 @@ router.get('/bookings/:id', async (req, res) => {
 // POST new booking
 router.post('/bookings', async (req, res) => {
   try {
-    const newBooking = new Booking(req.body);
+    const bookingData = { ...req.body };
+    if (!bookingData.id) {
+      bookingData.id = `SK-${Math.floor(10000 + Math.random() * 90000)}`;
+    }
+    const newBooking = new Booking(bookingData);
     const saved = await newBooking.save();
     res.status(201).json(saved);
   } catch (err) {
