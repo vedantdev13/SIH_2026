@@ -260,41 +260,6 @@ export default function Home() {
 
           </div>
 
-          {/* Comparison Table */}
-          <div className="bg-slate-900 rounded-2xl p-6 border border-emerald-700/50 overflow-x-auto">
-            <h4 className="text-lg font-bold text-white mb-4 text-center">Urban Company vs. Sahakaar Cooperative Model</h4>
-            <table className="w-full text-sm text-left">
-              <thead className="text-xs uppercase bg-slate-800 text-slate-400">
-                <tr>
-                  <th className="p-3">Feature</th>
-                  <th className="p-3 text-red-400">Private Tech Platforms</th>
-                  <th className="p-3 text-emerald-400">Sahakaar Cooperative Platform</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800 text-slate-300">
-                <tr>
-                  <td className="p-3 font-semibold text-white">Worker Status</td>
-                  <td className="p-3 text-slate-400">Contractor without benefits</td>
-                  <td className="p-3 font-bold text-emerald-300">Cooperative Member Owner</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Commission Cut</td>
-                  <td className="p-3 text-slate-400">20% - 35% extracted by platform</td>
-                  <td className="p-3 font-bold text-emerald-300">0% profit extraction (Low co-op fee)</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Social Security & Insurance</td>
-                  <td className="p-3 text-slate-400">None / Minimal</td>
-                  <td className="p-3 font-bold text-emerald-300">Full Health Cover & Pension Pool</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Governance & Dispatches</td>
-                  <td className="p-3 text-slate-400">Opaque AI algorithm penalizing workers</td>
-                  <td className="p-3 font-bold text-emerald-300">Cooperative Managed Dashboard</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
         </div>
       </section>
