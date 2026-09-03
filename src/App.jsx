@@ -13,6 +13,7 @@ import CooperativeLayout from './pages/cooperative/CooperativeLayout';
 
 import { WORKERS as INITIAL_WORKERS, SERVICES as INITIAL_SERVICES, INITIAL_BOOKINGS } from './data/mockData';
 import { fetchBookings, fetchWorkers, fetchServices } from './api/apiClient';
+import { getStoredAuth, fetchCurrentUserApi } from './api/auth';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -24,7 +25,7 @@ function ScrollToTop() {
 }
 
 // Layout wrapper to conditionally show customer Navbar/Footer or render Admin full screen
-function MainLayout({ children }) {
+function MainLayout({ children, currentUser, setCurrentUser }) {
   const location = useLocation();
   const isCooperativeRoute = location.pathname.startsWith('/cooperative');
 
@@ -34,7 +35,7 @@ function MainLayout({ children }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans">
-      <Navbar />
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <main className="flex-grow">{children}</main>
       <Footer />
     </div>
@@ -45,12 +46,22 @@ export default function App() {
   const [bookings, setBookings] = useState(INITIAL_BOOKINGS);
   const [workers, setWorkers] = useState(INITIAL_WORKERS);
   const [services, setServices] = useState(INITIAL_SERVICES);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     // Load initial state from API / Local Storage fallback
     fetchBookings().then(data => data && setBookings(data));
     fetchWorkers().then(data => data && setWorkers(data));
     fetchServices().then(data => data && setServices(data));
+
+    // Restore user session
+    const { user } = getStoredAuth();
+    if (user) {
+      setCurrentUser(user);
+    }
+    fetchCurrentUserApi().then(userProfile => {
+      if (userProfile) setCurrentUser(userProfile);
+    });
   }, []);
 
   const handleAddBooking = (newBooking) => {
@@ -60,15 +71,15 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <MainLayout>
+      <MainLayout currentUser={currentUser} setCurrentUser={setCurrentUser}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/worker/:id" element={<WorkerDetail />} />
           <Route path="/book/:workerId" element={<BookingPage onAddBooking={handleAddBooking} />} />
           <Route path="/confirmation/:bookingId" element={<BookingConfirmation />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
+          <Route path="/register" element={<Register setCurrentUser={setCurrentUser} />} />
           
           {/* COOPERATIVE ADMIN ROUTE GROUP */}
           <Route 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   Users, 
   MapPin, 
@@ -8,19 +8,27 @@ import {
   X, 
   Briefcase, 
   UserCheck, 
-  PhoneCall, 
-  ChevronRight,
+  LogOut,
+  User,
   Sparkles
 } from 'lucide-react';
+import { clearAuthSession } from '../api/auth';
 
-export default function Navbar() {
+export default function Navbar({ currentUser, setCurrentUser }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
+  };
+
+  const handleLogout = () => {
+    clearAuthSession();
+    if (setCurrentUser) setCurrentUser(null);
+    navigate('/login');
   };
 
   return (
@@ -93,22 +101,50 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons / User Session Profile */}
         <div className="hidden md:flex items-center gap-3">
-          <Link
-            to="/login"
-            className="text-sm font-semibold text-slate-700 hover:text-emerald-700 px-3 py-2 transition-colors"
-          >
-            Log in
-          </Link>
+          {currentUser ? (
+            <div className="flex items-center gap-3 bg-slate-50 px-3 py-1.5 rounded-2xl border border-slate-200 shadow-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                  {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-900 block leading-tight truncate max-w-[120px]">
+                    {currentUser.name}
+                  </span>
+                  <span className="text-[9px] font-bold text-emerald-700 uppercase tracking-wider block">
+                    {currentUser.role || 'Member'}
+                  </span>
+                </div>
+              </div>
 
-          <Link
-            to="/register"
-            className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-sm hover:shadow transition-all flex items-center gap-1.5"
-          >
-            <UserCheck className="w-4 h-4" />
-            Register / Join
-          </Link>
+              <button
+                onClick={handleLogout}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                title="Log Out"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="text-sm font-semibold text-slate-700 hover:text-emerald-700 px-3 py-2 transition-colors"
+              >
+                Log in
+              </Link>
+
+              <Link
+                to="/register"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-sm hover:shadow transition-all flex items-center gap-1.5"
+              >
+                <UserCheck className="w-4 h-4" />
+                Register / Join
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -144,21 +180,42 @@ export default function Navbar() {
           >
             Cooperative Admin Dashboard
           </Link>
+
           <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
-            <Link
-              to="/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center px-4 py-2 border border-slate-300 rounded-lg font-semibold text-slate-700"
-            >
-              Log in
-            </Link>
-            <Link
-              to="/register"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center px-4 py-2 bg-emerald-600 text-white rounded-lg font-semibold"
-            >
-              Register / Join Cooperative
-            </Link>
+            {currentUser ? (
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <div className="flex items-center gap-2">
+                  <User className="w-5 h-5 text-emerald-600" />
+                  <div>
+                    <span className="text-sm font-bold text-slate-900 block">{currentUser.name}</span>
+                    <span className="text-xs text-emerald-700 uppercase font-bold">{currentUser.role}</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); handleLogout(); }}
+                  className="text-xs font-bold text-red-600 hover:underline"
+                >
+                  Log out
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center px-4 py-2 border border-slate-300 rounded-lg font-semibold text-slate-700"
+                >
+                  Log in
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center px-4 py-2 bg-emerald-600 text-white rounded-lg font-semibold"
+                >
+                  Register / Join Cooperative
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}
