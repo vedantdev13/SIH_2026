@@ -19,15 +19,15 @@ export default function CooperativeServices({ services = [], setServices, worker
     <div className="space-y-6">
       
       {/* HEADER */}
-      <div className="bg-slate-950 p-6 rounded-3xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-black text-white">Cooperative Service Offerings</h2>
-            <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+            <h2 className="text-xl font-extrabold text-slate-900">Cooperative Service Offerings</h2>
+            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
               {services.length} Services Cataloged
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Manage base pricing, active availability, and allocated cooperative member workforce per service trade.
           </p>
         </div>
@@ -42,19 +42,19 @@ export default function CooperativeServices({ services = [], setServices, worker
           return (
             <div 
               key={srv.id} 
-              className={`bg-slate-950 border rounded-3xl p-6 transition-all space-y-4 flex flex-col justify-between ${
-                isActive ? 'border-slate-800 hover:border-slate-700' : 'border-red-900/40 opacity-75'
+              className={`bg-white border rounded-3xl p-6 transition-all space-y-4 flex flex-col justify-between shadow-sm ${
+                isActive ? 'border-slate-200 hover:shadow-md' : 'border-red-200 bg-red-50/20 opacity-75'
               }`}
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     {srv.image && (
-                      <img src={srv.image} alt={srv.name} className="w-12 h-12 rounded-2xl object-cover border border-slate-700" />
+                      <img src={srv.image} alt={srv.name} className="w-12 h-12 rounded-2xl object-cover border border-slate-200 shadow-sm" />
                     )}
                     <div>
-                      <h3 className="font-extrabold text-white text-lg">{srv.name}</h3>
-                      <span className="text-xs font-bold text-emerald-400">
+                      <h3 className="font-extrabold text-slate-900 text-lg">{srv.name}</h3>
+                      <span className="text-xs font-bold text-emerald-700">
                         Base Price: ₹{srv.startingPrice || srv.basePrice || 299}
                       </span>
                     </div>
@@ -64,8 +64,8 @@ export default function CooperativeServices({ services = [], setServices, worker
                     onClick={() => handleToggleActive(srv.id, isActive)}
                     className={`p-2 rounded-xl border text-xs font-bold flex items-center gap-1 transition-all ${
                       isActive 
-                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/30' 
-                        : 'bg-red-500/20 text-red-400 border-red-500/40 hover:bg-red-500/30'
+                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100' 
+                        : 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100'
                     }`}
                     title="Click to toggle active status"
                   >
@@ -74,24 +74,24 @@ export default function CooperativeServices({ services = [], setServices, worker
                   </button>
                 </div>
 
-                <p className="text-xs text-slate-400 line-clamp-2">
+                <p className="text-xs text-slate-600 line-clamp-2">
                   {srv.description}
                 </p>
 
-                <div className="bg-slate-900 p-3 rounded-2xl border border-slate-800 flex items-center justify-between text-xs">
-                  <span className="text-slate-400">Available Co-op Workers:</span>
-                  <span className="font-extrabold text-white bg-slate-800 px-2.5 py-0.5 rounded-full border border-slate-700">
+                <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between text-xs">
+                  <span className="text-slate-500">Available Co-op Workers:</span>
+                  <span className="font-extrabold text-slate-900 bg-white px-2.5 py-0.5 rounded-full border border-slate-200 shadow-sm">
                     {serviceWorkers.length || srv.workerCount || 25} Workers
                   </span>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-slate-800">
+              <div className="pt-2 border-t border-slate-100">
                 <button
                   onClick={() => setSelectedServiceForWorkers(srv)}
-                  className="w-full bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-bold py-2.5 rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition-all"
+                  className="w-full bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs font-bold py-2.5 rounded-xl border border-slate-200 flex items-center justify-center gap-2 transition-all shadow-sm"
                 >
-                  <Eye className="w-4 h-4 text-emerald-400" /> View Workers for {srv.name}
+                  <Eye className="w-4 h-4 text-emerald-600" /> View Workers for {srv.name}
                 </button>
               </div>
 
@@ -102,29 +102,29 @@ export default function CooperativeServices({ services = [], setServices, worker
 
       {/* WORKERS FOR SERVICE MODAL */}
       {selectedServiceForWorkers && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-950 border border-slate-800 rounded-3xl p-6 max-w-lg w-full space-y-5 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full space-y-5 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <h3 className="font-extrabold text-white text-lg">Workers for {selectedServiceForWorkers.name}</h3>
-                <p className="text-xs text-slate-400">Registered member workers in this trade category</p>
+                <h3 className="font-extrabold text-slate-900 text-lg">Workers for {selectedServiceForWorkers.name}</h3>
+                <p className="text-xs text-slate-500">Registered member workers in this trade category</p>
               </div>
-              <button onClick={() => setSelectedServiceForWorkers(null)} className="text-slate-400 hover:text-white font-bold">✕</button>
+              <button onClick={() => setSelectedServiceForWorkers(null)} className="text-slate-400 hover:text-slate-700 font-bold">✕</button>
             </div>
 
             <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
               {workers
                 .filter(w => w.skill.toLowerCase() === selectedServiceForWorkers.name.toLowerCase() || selectedServiceForWorkers.id.includes(w.skill.toLowerCase()))
                 .map(w => (
-                  <div key={w.id} className="bg-slate-900 p-3 rounded-2xl border border-slate-800 flex items-center justify-between">
+                  <div key={w.id} className="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <img src={w.photo} className="w-10 h-10 rounded-xl object-cover border" />
                       <div>
-                        <h4 className="font-bold text-xs text-white">{w.name}</h4>
-                        <p className="text-[11px] text-emerald-400">{w.experience} • ★ {w.rating}</p>
+                        <h4 className="font-bold text-xs text-slate-900">{w.name}</h4>
+                        <p className="text-[11px] text-emerald-700">{w.experience} • ★ {w.rating}</p>
                       </div>
                     </div>
-                    <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
                       {w.availability}
                     </span>
                   </div>
@@ -132,8 +132,8 @@ export default function CooperativeServices({ services = [], setServices, worker
               }
             </div>
 
-            <div className="flex items-center justify-end pt-3 border-t border-slate-800">
-              <button onClick={() => setSelectedServiceForWorkers(null)} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl">
+            <div className="flex items-center justify-end pt-3 border-t border-slate-100">
+              <button onClick={() => setSelectedServiceForWorkers(null)} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm">
                 Close
               </button>
             </div>

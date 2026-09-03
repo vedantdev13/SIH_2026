@@ -29,9 +29,9 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
   });
 
   const getDemandLevel = (count) => {
-    if (count >= 6) return { level: 'HIGH', color: 'bg-red-500/20 text-red-400 border-red-500/40', multiplier: 1.6 };
-    if (count >= 3) return { level: 'MEDIUM', color: 'bg-amber-500/20 text-amber-300 border-amber-500/40', multiplier: 1.2 };
-    return { level: 'LOW', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40', multiplier: 1.0 };
+    if (count >= 6) return { level: 'HIGH', color: 'bg-red-50 text-red-800 border-red-200', multiplier: 1.6 };
+    if (count >= 3) return { level: 'MEDIUM', color: 'bg-amber-50 text-amber-800 border-amber-200', multiplier: 1.2 };
+    return { level: 'LOW', color: 'bg-emerald-50 text-emerald-800 border-emerald-200', multiplier: 1.0 };
   };
 
   const tradeData = Object.keys(tradeBookingCounts).map(trade => {
@@ -71,10 +71,10 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
     <div className="space-y-8">
       
       {/* BANNER HEADER */}
-      <div className="bg-gradient-to-r from-purple-950 via-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl border border-purple-800/80 shadow-xl space-y-4">
+      <div className="bg-gradient-to-r from-purple-950 via-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl text-white shadow-xl space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 bg-purple-500/20 border border-purple-500/30 px-3.5 py-1 rounded-full text-purple-300 text-xs font-bold">
+            <div className="inline-flex items-center gap-2 bg-purple-500/20 border border-purple-400/30 px-3.5 py-1 rounded-full text-purple-300 text-xs font-bold">
               <BrainCircuit className="w-4 h-4 text-purple-400" />
               PROTOTYPE DEMO — RULE-BASED ENGINE
             </div>
@@ -96,41 +96,41 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
       {/* 4 SUMMARY METRIC CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <div className="bg-slate-950 p-5 rounded-3xl border border-slate-800 space-y-2">
-          <span className="text-xs font-bold text-slate-400">High-Demand Services</span>
-          <p className="text-2xl font-black text-red-400">{highDemandServices.length} Trades</p>
-          <p className="text-[11px] text-slate-400 font-medium">Plumbing & Cleaning surge</p>
+        <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
+          <span className="text-xs font-bold text-slate-500">High-Demand Services</span>
+          <p className="text-2xl font-black text-red-600">{highDemandServices.length} Trades</p>
+          <p className="text-[11px] text-slate-500 font-medium">Plumbing & Cleaning surge</p>
         </div>
 
-        <div className="bg-slate-950 p-5 rounded-3xl border border-slate-800 space-y-2">
-          <span className="text-xs font-bold text-slate-400">High-Demand Areas</span>
-          <p className="text-2xl font-black text-amber-400">3 Major Zones</p>
-          <p className="text-[11px] text-slate-400 font-medium">Sitabuldi, Dharampeth, Sadar</p>
+        <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
+          <span className="text-xs font-bold text-slate-500">High-Demand Areas</span>
+          <p className="text-2xl font-black text-amber-600">3 Major Zones</p>
+          <p className="text-[11px] text-slate-500 font-medium">Sitabuldi, Dharampeth, Sadar</p>
         </div>
 
-        <div className="bg-slate-950 p-5 rounded-3xl border border-slate-800 space-y-2">
-          <span className="text-xs font-bold text-slate-400">Available Workers</span>
-          <p className="text-2xl font-black text-teal-400">{totalAvailable} Workers</p>
-          <p className="text-[11px] text-teal-400/80 font-medium">Active in Nagpur roster</p>
+        <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
+          <span className="text-xs font-bold text-slate-500">Available Workers</span>
+          <p className="text-2xl font-black text-teal-600">{totalAvailable} Workers</p>
+          <p className="text-[11px] text-teal-700 font-medium">Active in Nagpur roster</p>
         </div>
 
-        <div className="bg-slate-950 p-5 rounded-3xl border border-slate-800 space-y-2">
-          <span className="text-xs font-bold text-slate-400">Additional Workers Needed</span>
-          <p className="text-2xl font-black text-purple-400">+{totalNeeded} Workers</p>
-          <p className="text-[11px] text-purple-400/80 font-medium">Recommended for recruitment</p>
+        <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
+          <span className="text-xs font-bold text-slate-500">Additional Workers Needed</span>
+          <p className="text-2xl font-black text-purple-600">+{totalNeeded} Workers</p>
+          <p className="text-[11px] text-purple-700 font-medium">Recommended for recruitment</p>
         </div>
 
       </div>
 
       {/* FORECAST MATRIX TABLE */}
-      <div className="bg-slate-950 rounded-3xl border border-slate-800 p-6 space-y-6">
+      <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-lg font-extrabold text-white flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-purple-400" />
+            <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-purple-600" />
               Service Demand & Recommended Workforce
             </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               Logic: 0–2 bookings = LOW • 3–5 bookings = MEDIUM • 6+ bookings = HIGH
             </p>
           </div>
@@ -141,11 +141,11 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
           {tradeData.map(item => (
             <div 
               key={item.trade} 
-              className="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-all space-y-3"
+              className="bg-slate-50/80 border border-slate-200 rounded-2xl p-5 hover:bg-slate-100/80 transition-all space-y-3 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <h4 className="font-extrabold text-white text-base">{item.trade}</h4>
+                  <h4 className="font-extrabold text-slate-900 text-base">{item.trade}</h4>
                   <span className="text-[10px] text-slate-500 font-medium">({item.count} Bookings)</span>
                 </div>
                 
@@ -154,25 +154,25 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
                 </span>
               </div>
 
-              <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs space-y-1.5">
-                <div className="flex justify-between text-slate-400">
+              <div className="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-1.5 shadow-sm">
+                <div className="flex justify-between text-slate-600">
                   <span>Recommended Workers:</span>
-                  <strong className="text-white">{item.recommended} workers</strong>
+                  <strong className="text-slate-900">{item.recommended} workers</strong>
                 </div>
-                <div className="flex justify-between text-slate-400">
+                <div className="flex justify-between text-slate-600">
                   <span>Currently Available:</span>
-                  <strong className="text-emerald-400">{item.availableCount} workers</strong>
+                  <strong className="text-emerald-700">{item.availableCount} workers</strong>
                 </div>
-                <div className="flex justify-between text-slate-400 pt-1 border-t border-slate-800">
+                <div className="flex justify-between text-slate-600 pt-1 border-t border-slate-200">
                   <span>Additional Needed:</span>
-                  <strong className={item.needed > 0 ? 'text-amber-400' : 'text-slate-400'}>
+                  <strong className={item.needed > 0 ? 'text-amber-700' : 'text-slate-500'}>
                     {item.needed > 0 ? `+${item.needed} workers required` : 'Optimal staffing'}
                   </strong>
                 </div>
               </div>
 
-              <p className="text-[11px] text-slate-400 italic">
-                "{item.trade} demand is <strong className="text-slate-200">{item.level}</strong> in Nagpur zone. Recommend allocating {item.recommended} workers."
+              <p className="text-[11px] text-slate-600 italic">
+                "{item.trade} demand is <strong className="text-slate-900">{item.level}</strong> in Nagpur zone. Recommend allocating {item.recommended} workers."
               </p>
             </div>
           ))}
@@ -180,17 +180,17 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
       </div>
 
       {/* HIGH DEMAND REGIONAL HOTSPOTS */}
-      <div className="bg-slate-950 rounded-3xl border border-slate-800 p-6 space-y-4">
-        <h3 className="text-lg font-extrabold text-white flex items-center gap-2">
-          <MapPin className="w-5 h-5 text-emerald-400" />
+      <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+        <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
+          <MapPin className="w-5 h-5 text-emerald-600" />
           Nagpur Regional Demand Hotspots
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {highDemandAreas.map((area, idx) => (
-            <div key={idx} className="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <span className="text-xs font-extrabold text-white block">{area.area}</span>
-              <p className="text-xs text-emerald-400 font-medium">{area.demand}</p>
+            <div key={idx} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1 shadow-sm">
+              <span className="text-xs font-extrabold text-slate-900 block">{area.area}</span>
+              <p className="text-xs text-emerald-700 font-medium">{area.demand}</p>
             </div>
           ))}
         </div>
