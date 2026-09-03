@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { WORKERS } from '../data/mockData';
+import { createBookingApi } from '../api/apiClient';
 import { 
   Calendar, 
   Clock, 
@@ -34,11 +35,11 @@ export default function BookingPage({ onAddBooking, currentUser }) {
     if (currentUser?.phone) setCustomerPhone(currentUser.phone);
   }, [currentUser]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const bookingId = `KS-${Math.floor(10000 + Math.random() * 90000)}`;
+    const bookingId = `SK-${Math.floor(10000 + Math.random() * 90000)}`;
 
     const newBooking = {
       id: bookingId,
@@ -55,14 +56,16 @@ export default function BookingPage({ onAddBooking, currentUser }) {
       customerPhone,
       problem: problemDescription || 'Standard service inspection & repair.',
       amount: worker.approxPrice,
-      status: 'Confirmed & Sent to Cooperative Dashboard',
+      status: 'New',
       createdAt: new Date().toISOString().slice(0, 16).replace('T', ' ')
     };
 
-    setTimeout(() => {
-      if (onAddBooking) onAddBooking(newBooking);
-      navigate(`/confirmation/${bookingId}`, { state: { booking: newBooking } });
-    }, 600);
+    const savedBooking = await createBookingApi(newBooking);
+    const finalBooking = savedBooking || newBooking;
+
+    if (onAddBooking) onAddBooking(finalBooking);
+    setIsSubmitting(false);
+    navigate(`/confirmation/${bookingId}`, { state: { booking: finalBooking } });
   };
 
   return (

@@ -33,8 +33,10 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
 
   const handleStatusUpdate = async (id, status) => {
     const updated = await updateBookingStatusApi(id, status);
-    if (updated) {
+    if (updated && Array.isArray(updated)) {
       setBookings(updated);
+    } else if (updated && typeof updated === 'object') {
+      setBookings(prev => prev.map(b => b.id === id ? { ...b, ...updated, status } : b));
     } else {
       setBookings(prev => prev.map(b => b.id === id ? { ...b, status } : b));
     }
@@ -46,7 +48,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
     if (!worker) return;
 
     const updated = await updateBookingStatusApi(id, 'Assigned', worker.id, worker.name);
-    if (updated) {
+    if (updated && Array.isArray(updated)) {
       setBookings(updated);
     } else {
       setBookings(prev => prev.map(b => b.id === id ? {
@@ -54,7 +56,8 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
         status: 'Assigned',
         workerId: worker.id,
         workerName: worker.name,
-        workerPhoto: worker.photo
+        workerPhoto: worker.photo,
+        workerSkill: worker.skill
       } : b));
     }
     setAssigningBookingId(null);

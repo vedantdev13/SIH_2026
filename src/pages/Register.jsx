@@ -37,6 +37,8 @@ export default function Register({ setCurrentUser }) {
       if (setCurrentUser) setCurrentUser(result.data.user);
       if (accountType === 'cooperative') {
         navigate('/cooperative');
+      } else if (accountType === 'worker') {
+        navigate('/worker-dashboard');
       } else {
         navigate('/services');
       }
