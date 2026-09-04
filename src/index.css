@@ -43,3 +43,55 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* Technical / Editorial Subtle Grid for Dark Sections */
+.dark-grid-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.dark-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dark-grid-glow {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(16, 185, 129, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.22) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black 0%,
+    transparent 80%
+  );
+  -webkit-mask-image: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black 0%,
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@media (hover: hover) {
+  .dark-grid-bg:hover .dark-grid-glow {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dark-grid-glow {
+    display: none !important;
+  }
+}

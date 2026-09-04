@@ -41,61 +41,70 @@ const ICON_MAP = {
 };
 
 export default function Home() {
+  const handleGridMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
     <div className="space-y-20 pb-20">
       {/* HERO SECTION */}
-      <section className="relative bg-slate-950 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        {/* Subtle background glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-emerald-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <section
+        onMouseMove={handleGridMouseMove}
+        className="dark-grid-bg relative bg-slate-950 text-white pt-14 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-800"
+      >
+        <div className="dark-grid-lines"></div>
+        <div className="dark-grid-glow"></div>
 
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           <div className="lg:col-span-7 space-y-6">
-            {/* Cooperative Trust Badge */}
-            <div className="inline-flex items-center gap-2 bg-emerald-950/80 border border-emerald-500/30 px-4 py-1.5 rounded-full text-emerald-400 text-xs font-semibold tracking-wide">
+            {/* Small eyebrow/context */}
+            <div className="inline-flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-3.5 py-1.5 rounded-full text-emerald-400 text-xs font-semibold tracking-wide">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Cooperative-Owned Digital Service Marketplace</span>
+              <span>Labour Cooperative Service Network</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
-              Local Skilled Workers. <br />
-              <span className="text-emerald-400">
-                Fair Cooperative Wages.
-              </span>{" "}
-              <br />
-              Trusted Household Services.
+            {/* Strong headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] text-white max-w-xl">
+              Local Skilled Artisans. <br />
+              <span className="text-emerald-400">Direct Fair Wages.</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              Book background-verified plumbers, electricians, carpenters, and
-              technicians directly from registered{" "}
+            {/* Short supporting sentence */}
+            <p className="text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed">
+              Book background-verified trade professionals directly from
+              registered{" "}
               <strong className="text-white font-semibold">
                 Labour Cooperatives
               </strong>
-              . 100% fair earnings, member benefits, and verified quality.
+              . 100% fair earnings & member welfare.
             </p>
 
-            {/* Hero CTAs */}
+            {/* Primary & Secondary CTAs */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Link
                 to="/services"
-                className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-7 py-4 rounded-xl shadow-lg shadow-emerald-600/25 transition-all flex items-center justify-center gap-2 text-base"
+                className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-7 py-3.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
               >
                 <Search className="w-5 h-5" />
                 Find Nearby Workers
               </Link>
               <Link
                 to="/cooperative"
-                className="bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold px-6 py-4 rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-2 text-base"
+                className="bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold px-6 py-3.5 rounded-xl border border-slate-800 transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
               >
                 <Building2 className="w-5 h-5 text-emerald-400" />
                 Cooperative Portal
               </Link>
             </div>
 
-            {/* Quick Metrics */}
-            <div className="pt-8 grid grid-cols-3 gap-6 border-t border-slate-800/80 max-w-lg">
+            {/* Supporting metrics */}
+            <div className="pt-6 grid grid-cols-3 gap-6 border-t border-slate-800/80 max-w-md">
               <div>
-                <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 block">
+                <span className="text-2xl font-extrabold text-white block">
                   500+
                 </span>
                 <span className="text-xs text-slate-400 font-medium">
@@ -103,85 +112,21 @@ export default function Home() {
                 </span>
               </div>
               <div>
-                <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 block">
+                <span className="text-2xl font-extrabold text-white block">
                   100%
                 </span>
                 <span className="text-xs text-slate-400 font-medium">
-                  Cooperative Owned
+                  Co-op Owned
                 </span>
               </div>
               <div>
-                <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 block">
+                <span className="text-2xl font-extrabold text-emerald-400 block">
                   4.9★
                 </span>
                 <span className="text-xs text-slate-400 font-medium">
-                  Customer Satisfaction
+                  Rating
                 </span>
               </div>
-            </div>
-          </div>
-
-          {/* Hero Feature Box - Live Worker Card */}
-          <div className="lg:col-span-5">
-            <div className="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-2xl space-y-5">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Featured Cooperative Member
-                </span>
-                <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-800">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>{" "}
-                  Nagpur Central
-                </span>
-              </div>
-
-              {/* Sample Quick Worker Box */}
-              <div className="bg-slate-950 rounded-xl p-4 border border-slate-800 space-y-3">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={getDisplayWorkerPhoto(WORKERS[0], false)}
-                    alt={getDisplayWorkerName(WORKERS[0], false)}
-                    className="w-14 h-14 rounded-xl object-cover border border-emerald-500/30 p-0.5 bg-slate-900"
-                  />
-                  <div>
-                    <h4 className="font-bold text-white text-base">
-                      {WORKERS[0].skill}
-                    </h4>
-                    <p className="text-xs text-emerald-400 font-medium">
-                      {WORKERS[0].experience} experience
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-slate-900 border border-slate-800 p-2.5 rounded-lg text-xs text-slate-300 flex items-center justify-between">
-                  <span className="truncate text-slate-300 font-medium">
-                    {WORKERS[0].cooperativeName}
-                  </span>
-                  <span className="font-bold text-amber-400 shrink-0 ml-2">
-                    ★ 4.9
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2 text-xs text-slate-300">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>
-                    Workers retain 100% earnings + cooperative dividends
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>
-                    Managed & certified by Labour Cooperative Federation
-                  </span>
-                </div>
-              </div>
-
-              <Link
-                to={`/book/${WORKERS[0].id}`}
-                className="block text-center w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all shadow-md"
-              >
-                Book Verified Plumber →
-              </Link>
             </div>
           </div>
         </div>
@@ -268,18 +213,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COOPERATIVE DIFFERENTIATOR SECTION - REWORKED */}
-      <section className="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 border-y border-slate-800">
-        <div className="max-w-7xl mx-auto space-y-12">
+      {/* COOPERATIVE DIFFERENTIATOR SECTION WITH DARK GRID */}
+      <section
+        onMouseMove={handleGridMouseMove}
+        className="dark-grid-bg relative bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 border-y border-slate-800"
+      >
+        <div className="dark-grid-lines"></div>
+        <div className="dark-grid-glow"></div>
+
+        <div className="max-w-7xl mx-auto space-y-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="bg-emerald-950 text-emerald-400 border border-emerald-800 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider">
+            <span className="bg-slate-950 text-emerald-400 border border-slate-800 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider">
               The Sahakaar Advantage
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold">
               Built for Workers, Trusted by Households
             </h2>
             <p className="text-slate-300 text-base leading-relaxed">
-              Traditional aggregator apps charge up to 30% commission while
+              Traditional aggregator apps charge high commissions while
               exploiting tradespeople. Sahakaar connects you directly with
               democratically managed{" "}
               <strong className="text-white">
@@ -404,10 +355,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CALL TO ACTION */}
+      {/* CALL TO ACTION WITH DARK GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-3 max-w-xl">
+        <div
+          onMouseMove={handleGridMouseMove}
+          className="dark-grid-bg bg-slate-900 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8"
+        >
+          <div className="dark-grid-lines"></div>
+          <div className="dark-grid-glow"></div>
+
+          <div className="space-y-3 max-w-xl relative z-10">
             <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">
               For Cooperative Officials
             </span>
@@ -421,7 +378,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0 relative z-10">
             <Link
               to="/cooperative"
               className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3.5 rounded-xl shadow hover:shadow-lg transition-all text-center text-sm"

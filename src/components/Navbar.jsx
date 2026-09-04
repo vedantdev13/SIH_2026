@@ -34,22 +34,17 @@ export default function Navbar({ currentUser, setCurrentUser }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo & Tagline */}
         <Link to={currentUser?.role === 'worker' ? "/worker-dashboard" : "/"} className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center shadow-md shadow-emerald-700/20 group-hover:bg-emerald-600 transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center shadow-md shadow-emerald-700/15 group-hover:bg-emerald-600 transition-colors">
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-extrabold tracking-tight text-slate-900">
-                SAHAKAAR
-              </span>
-              <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-200">
-                {currentUser?.role === 'worker' ? 'WORKER' : 'COOPERATIVE'}
-              </span>
-            </div>
+            <span className="text-xl font-extrabold tracking-tight text-slate-900 block leading-tight">
+              SAHAKAAR
+            </span>
             <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
               {currentUser?.role === 'worker' ? 'Member Worker Portal' : 'Local Skilled Workers. Trusted Services.'}
             </p>
