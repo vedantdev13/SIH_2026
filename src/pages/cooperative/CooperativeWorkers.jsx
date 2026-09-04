@@ -43,7 +43,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
       reviewsCount: 1,
       completedJobs: 0,
       distance: 1.5,
-      approxPrice: `₹${newWorkerPrice} / visit`,
+      approxPrice: `₹${newWorkerPrice} per task`,
       hourlyRate: parseInt(newWorkerPrice) || 349,
       verified: true,
       cooperativeName: activeCoop?.name || 'Nagpur Labour Cooperative',
@@ -300,7 +300,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                   <span className="text-amber-500">★ {selectedWorkerProfile.rating}</span>
                   <span className="text-slate-500 text-xs">({selectedWorkerProfile.completedJobs} Jobs Completed)</span>
                 </p>
-                <p className="text-xs text-slate-600">Visit Fee: <strong className="text-emerald-700">{selectedWorkerProfile.approxPrice}</strong></p>
+                <p className="text-xs text-slate-600">Task Fee: <strong className="text-emerald-700">{selectedWorkerProfile.approxPrice}</strong></p>
               </div>
 
             </div>
@@ -396,7 +396,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Visit Fee (₹)</label>
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Task Fee (₹)</label>
                   <input
                     type="number"
                     value={newWorkerPrice}

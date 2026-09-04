@@ -197,7 +197,7 @@ export default function CooperativeServices({ services = [], setServices, worker
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Starting Base Visit Price (₹)</label>
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Starting Base Task Price (₹)</label>
                 <input
                   type="number"
                   required

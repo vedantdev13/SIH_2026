@@ -307,7 +307,7 @@ export default function WorkerDetail() {
           {/* CTA BOTTOM BAR */}
           <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <span className="text-xs text-slate-500 font-medium">Visiting / Inspection Fee</span>
+              <span className="text-xs text-slate-500 font-medium">Task / Inspection Fee</span>
               <p className="text-xl font-extrabold text-slate-900">{worker.approxPrice}</p>
             </div>
 

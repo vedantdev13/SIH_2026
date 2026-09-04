@@ -14,7 +14,7 @@ const workerSchema = new mongoose.Schema({
   reviewsCount: { type: Number, default: 24 },
   completedJobs: { type: Number, default: 0 },
   distance: { type: Number, default: 1.5 },
-  approxPrice: { type: String, default: '₹349 / visit' },
+  approxPrice: { type: String, default: '₹349 per task' },
   hourlyRate: { type: Number, default: 349 },
   availability: { type: String, default: 'Available Now' },
   verified: { type: Boolean, default: true },

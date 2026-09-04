@@ -65,7 +65,7 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
     rating: rawWorker?.rating || 4.9,
     reviewsCount: rawWorker?.reviewsCount || 38,
     completedJobs: rawWorker?.completedJobs || 0,
-    approxPrice: rawWorker?.approxPrice || '₹349 / visit',
+    approxPrice: rawWorker?.approxPrice || '₹349 per task',
     hourlyRate: rawWorker?.hourlyRate || 349,
     availability: availabilityStatus,
     cooperativeName: currentUser?.cooperativeName || rawWorker?.cooperativeName || 'Nagpur Labour Cooperative Society'
@@ -406,7 +406,7 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-t lg:border-t-0 pt-4 lg:pt-0 border-slate-100">
                       
                       <div className="text-right space-y-1 w-full sm:w-auto">
-                        <span className="text-xs text-slate-400 font-medium block">Visiting Fee Payout</span>
+                        <span className="text-xs text-slate-400 font-medium block">Task Fee Payout</span>
                         <span className="text-xl font-extrabold text-emerald-700 block">
                           {b.amount || currentWorker.approxPrice}
                         </span>
