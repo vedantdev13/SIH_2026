@@ -42,6 +42,7 @@ export default function Footer() {
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-white tracking-wider uppercase">Cooperative Model</h4>
             <ul className="space-y-2 text-sm">
+              <li><Link to="/worker-dashboard" className="hover:text-emerald-400 transition-colors font-bold text-emerald-300">Worker Member Dashboard</Link></li>
               <li><Link to="/cooperative" className="hover:text-emerald-400 transition-colors">Cooperative Admin Portal</Link></li>
               <li><a href="#coop-benefits" className="hover:text-emerald-400 transition-colors">Worker Welfare & Insurance</a></li>
               <li><a href="#verification" className="hover:text-emerald-400 transition-colors">Skill Certification Protocol</a></li>

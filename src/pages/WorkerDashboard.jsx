@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Briefcase, 
@@ -21,9 +21,12 @@ import {
 } from 'lucide-react';
 import { WORKERS } from '../data/mockData';
 import { updateBookingStatusApi, updateWorkerApi } from '../api/apiClient';
+import WorkerJobMapView from '../components/WorkerJobMapView';
 
 export default function WorkerDashboard({ currentUser, bookings = [], setBookings, workers = [], setWorkers }) {
   const [filterStatus, setFilterStatus] = useState('All');
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [showMap, setShowMap] = useState(true);
 
   // Match logged-in worker or construct dynamic worker profile from currentUser session
   const allWorkers = Array.isArray(workers) && workers.length > 0 ? workers : WORKERS;
@@ -33,6 +36,24 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
     const nameMatch = currentUser?.name && String(w.name || '').toLowerCase() === String(currentUser.name || '').toLowerCase();
     return phoneMatch || nameMatch;
   });
+
+  // Local state for duty availability status to guarantee reactive UI toggling
+  const [availabilityStatus, setAvailabilityStatus] = useState(rawWorker?.availability || 'Available Now');
+
+  useEffect(() => {
+    if (rawWorker?.availability) {
+      setAvailabilityStatus(rawWorker.availability);
+    }
+  }, [rawWorker?.availability]);
+
+  // Local state for bookings to ensure immediate UI update when worker changes job status
+  const [localBookings, setLocalBookings] = useState(bookings);
+
+  useEffect(() => {
+    if (Array.isArray(bookings) && bookings.length > 0) {
+      setLocalBookings(bookings);
+    }
+  }, [bookings]);
 
   const currentWorker = {
     id: rawWorker?.id || currentUser?.id || `w-${currentUser?.phone || '101'}`,
@@ -46,12 +67,12 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
     completedJobs: rawWorker?.completedJobs || 0,
     approxPrice: rawWorker?.approxPrice || '₹349 / visit',
     hourlyRate: rawWorker?.hourlyRate || 349,
-    availability: rawWorker?.availability || 'Available Now',
+    availability: availabilityStatus,
     cooperativeName: currentUser?.cooperativeName || rawWorker?.cooperativeName || 'Nagpur Labour Cooperative Society'
   };
 
   // Safe bookings filter for this worker
-  const safeBookings = Array.isArray(bookings) ? bookings : [];
+  const safeBookings = Array.isArray(localBookings) && localBookings.length > 0 ? localBookings : (Array.isArray(bookings) ? bookings : []);
 
   const workerBookings = safeBookings.filter(b => {
     if (!b) return false;
@@ -80,28 +101,50 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
     return true;
   });
 
-  // Toggle Availability
+  // Toggle Availability Handler
   const handleToggleAvailability = async () => {
-    const nextAvailability = currentWorker.availability === 'Available Now' ? 'On Assignment' : 'Available Now';
+    const nextAvailability = availabilityStatus === 'Available Now' ? 'Off Duty' : 'Available Now';
+    setAvailabilityStatus(nextAvailability); // Instant UI toggle!
     await updateWorkerApi(currentWorker.id, { availability: nextAvailability });
     if (setWorkers) {
-      setWorkers(prev => (Array.isArray(prev) ? prev : WORKERS).map(w => w.id === currentWorker.id ? { ...w, availability: nextAvailability } : w));
+      setWorkers(prev => {
+        const list = Array.isArray(prev) ? prev : WORKERS;
+        const exists = list.some(w => w.id === currentWorker.id);
+        if (exists) {
+          return list.map(w => w.id === currentWorker.id ? { ...w, availability: nextAvailability } : w);
+        }
+        return [{ ...currentWorker, availability: nextAvailability }, ...list];
+      });
     }
   };
 
-  // Status transition handlers
+  // Status transition handlers (New / Assigned -> In Progress -> Completed)
   const handleStatusChange = async (bookingId, nextStatus) => {
-    const updated = await updateBookingStatusApi(bookingId, nextStatus, currentWorker.id, currentWorker.name);
-    if (updated && Array.isArray(updated) && setBookings) {
-      setBookings(updated);
-    } else if (setBookings) {
-      setBookings(prev => (Array.isArray(prev) ? prev : []).map(b => b.id === bookingId ? {
+    // 1. Instant local state update for zero lag
+    setLocalBookings(prev => (Array.isArray(prev) ? prev : []).map(b => 
+      (b.id === bookingId || b._id === bookingId) ? {
         ...b,
         status: nextStatus,
         workerId: currentWorker.id,
         workerName: currentWorker.name,
         workerPhoto: currentWorker.photo
-      } : b));
+      } : b
+    ));
+
+    // 2. Persist update through API & sync parent app state
+    const updated = await updateBookingStatusApi(bookingId, nextStatus, currentWorker.id, currentWorker.name);
+    if (updated && Array.isArray(updated) && setBookings) {
+      setBookings(updated);
+    } else if (setBookings) {
+      setBookings(prev => (Array.isArray(prev) ? prev : []).map(b => 
+        (b.id === bookingId || b._id === bookingId) ? {
+          ...b,
+          status: nextStatus,
+          workerId: currentWorker.id,
+          workerName: currentWorker.name,
+          workerPhoto: currentWorker.photo
+        } : b
+      ));
     }
   };
 
@@ -220,9 +263,40 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
 
       </div>
 
-      {/* WORK BOOKINGS SECTION */}
-      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
-        
+      {/* INTERACTIVE WORK LOCATION MAP CARD */}
+      <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-emerald-600" /> Assigned Work Sites Map
+            </h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Live map view of your assigned customer locations across the city
+            </p>
+          </div>
+
+          <button
+            onClick={() => setShowMap(!showMap)}
+            className="text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-xl transition-all"
+          >
+            {showMap ? 'Hide Map' : 'Show Work Location Map'}
+          </button>
+        </div>
+
+        {showMap && (
+          <div className="h-[400px] w-full rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
+            <WorkerJobMapView
+              jobs={displayBookings}
+              selectedJob={selectedJob}
+              onSelectJob={(job) => setSelectedJob(job)}
+              workerLocation={{ lat: 21.1458, lng: 79.0882, name: 'Sitabuldi, Nagpur (Worker Base)' }}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* DISPATCHES & JOBS LIST SECTION */}
+      <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
@@ -347,6 +421,26 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
 
                       {/* Interactive Buttons for Worker */}
                       <div className="w-full sm:w-auto flex flex-col gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedJob(b);
+                            setShowMap(true);
+                          }}
+                          className="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5"
+                        >
+                          <MapPin className="w-3.5 h-3.5 text-emerald-600" /> Focus Map Location
+                        </button>
+
+                        <a
+                          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(b.address || 'Nagpur Central')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
+                        >
+                          🗺️ GPS Navigation →
+                        </a>
+
                         {(currentStatus === 'Assigned' || currentStatus === 'New' || currentStatus === 'Confirmed & Worker Dispatched') && (
                           <button
                             onClick={() => handleStatusChange(b.id, 'In Progress')}

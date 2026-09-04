@@ -15,26 +15,38 @@ export default function MapView({
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
+    if (mapContainerRef.current._leaflet_id && !mapInstanceRef.current) {
+      mapContainerRef.current._leaflet_id = null;
+      mapContainerRef.current.innerHTML = '';
+    }
+
     // Initialize Leaflet map if not already created
     if (!mapInstanceRef.current) {
-      const map = L.map(mapContainerRef.current, {
-        center: [customerLoc.lat, customerLoc.lng],
-        zoom: 13,
-        zoomControl: true
-      });
+      try {
+        const map = L.map(mapContainerRef.current, {
+          center: [customerLoc.lat, customerLoc.lng],
+          zoom: 13,
+          zoomControl: true
+        });
 
-      // OpenStreetMap tiles
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Sahakaar'
-      }).addTo(map);
+        // OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Sahakaar'
+        }).addTo(map);
 
-      mapInstanceRef.current = map;
+        mapInstanceRef.current = map;
+      } catch (err) {
+        console.warn('Leaflet map initialization bypassed:', err);
+      }
     }
 
     const map = mapInstanceRef.current;
+    if (!map) return;
 
     // Clear old markers
-    Object.values(markersRef.current).forEach(m => map.removeLayer(m));
+    Object.values(markersRef.current).forEach(m => {
+      try { map.removeLayer(m); } catch (e) {}
+    });
     markersRef.current = {};
 
     // 1. Add Customer Location Marker (Blue Pulsing Pin)

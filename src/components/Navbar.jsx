@@ -68,29 +68,12 @@ export default function Navbar({ currentUser, setCurrentUser }) {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links - REMOVED CENTER BOOKINGS LINK */}
-        <div className="hidden md:flex items-center gap-2">
-          {currentUser?.role === 'worker' && (
-            <Link
-              to="/worker-dashboard"
-              className={`px-3.5 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-1.5 ${
-                isActive('/worker-dashboard') 
-                  ? 'text-emerald-800 bg-emerald-50 border border-emerald-200' 
-                  : 'text-slate-700 hover:text-emerald-700 hover:bg-slate-50'
-              }`}
-            >
-              <Briefcase className="w-4 h-4 text-emerald-600" />
-              My Worker Dashboard
-            </Link>
-          )}
-        </div>
 
-        {/* Action Buttons / User Session Profile with Dropdown on Account Click */}
+
+        {/* Action Buttons / User Session Profile with Dropdown */}
         <div className="hidden md:flex items-center gap-3 relative">
           {currentUser ? (
             <div className="relative">
-              
-              {/* ACCOUNT BUTTON */}
               <button
                 onClick={() => setAccountMenuOpen(!accountMenuOpen)}
                 className="flex items-center gap-2.5 bg-slate-50 hover:bg-slate-100 px-3.5 py-2 rounded-2xl border border-slate-200 shadow-sm transition-all text-left focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
@@ -103,7 +86,7 @@ export default function Navbar({ currentUser, setCurrentUser }) {
                     {currentUser.name}
                   </span>
                   <span className="text-[9px] font-bold text-emerald-700 uppercase tracking-wider block">
-                    {currentUser.role || 'Member'}
+                    {currentUser.role === 'worker' ? 'Worker Member' : (currentUser.role || 'Member')}
                   </span>
                 </div>
                 <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${accountMenuOpen ? 'rotate-180 text-emerald-600' : ''}`} />
@@ -115,26 +98,20 @@ export default function Navbar({ currentUser, setCurrentUser }) {
                   <div className="px-4 py-2 border-b border-slate-100">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Signed in as</span>
                     <span className="text-xs font-extrabold text-slate-900 truncate block">{currentUser.name}</span>
+                    <span className="text-[10px] font-semibold text-emerald-600 uppercase block mt-0.5">
+                      {currentUser.role === 'worker' ? 'Verified Worker Member' : 'Member'}
+                    </span>
                   </div>
 
                   <div className="py-1">
-                    <Link
-                      to="/my-bookings"
-                      onClick={() => setAccountMenuOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-extrabold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
-                    >
-                      <Receipt className="w-4 h-4 text-emerald-600" />
-                      My Bookings & Receipts
-                    </Link>
-
-                    {currentUser?.role === 'worker' && (
+                    {currentUser.role !== 'worker' && (
                       <Link
-                        to="/worker-dashboard"
+                        to="/my-bookings"
                         onClick={() => setAccountMenuOpen(false)}
                         className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-extrabold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
                       >
-                        <Briefcase className="w-4 h-4 text-emerald-600" />
-                        My Worker Dashboard
+                        <Receipt className="w-4 h-4 text-emerald-600" />
+                        My Bookings & Receipts
                       </Link>
                     )}
                   </div>
@@ -142,15 +119,14 @@ export default function Navbar({ currentUser, setCurrentUser }) {
                   <div className="border-t border-slate-100 pt-1">
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50 transition-colors"
+                      className="w-full text-left flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-red-600 hover:bg-red-50 transition-colors"
                     >
-                      <LogOut className="w-4 h-4" />
+                      <LogOut className="w-4 h-4 text-red-600" />
                       Log out
                     </button>
                   </div>
                 </div>
               )}
-
             </div>
           ) : (
             <>
@@ -184,7 +160,7 @@ export default function Navbar({ currentUser, setCurrentUser }) {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-2 shadow-lg animate-in slide-in-from-top-2">
-          {currentUser && (
+          {currentUser && currentUser.role !== 'worker' && (
             <Link
               to="/my-bookings"
               onClick={() => setMobileMenuOpen(false)}
@@ -211,13 +187,14 @@ export default function Navbar({ currentUser, setCurrentUser }) {
                   <User className="w-5 h-5 text-emerald-600" />
                   <div>
                     <span className="text-sm font-bold text-slate-900 block">{currentUser.name}</span>
-                    <span className="text-xs text-emerald-700 uppercase font-bold">{currentUser.role}</span>
+                    <span className="text-xs text-emerald-700 uppercase font-bold">{currentUser.role || 'Member'}</span>
                   </div>
                 </div>
                 <button
                   onClick={() => { setMobileMenuOpen(false); handleLogout(); }}
-                  className="text-xs font-bold text-red-600 hover:underline"
+                  className="text-xs font-bold text-red-600 hover:underline flex items-center gap-1"
                 >
+                  <LogOut className="w-3.5 h-3.5" />
                   Log out
                 </button>
               </div>
