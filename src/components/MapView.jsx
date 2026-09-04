@@ -114,7 +114,10 @@ export default function MapView({
               ✓ ${worker.cooperativeName}
             </p>
             <div class="mt-2 flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-800">${worker.approxPrice}</span>
+              <div>
+                <span class="text-xs font-bold text-slate-800 block">${worker.approxPrice}</span>
+                <span class="text-[9px] text-slate-400 font-normal block">Price may vary by task</span>
+              </div>
               <button 
                 id="popup-btn-${worker.id}" 
                 class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded shadow-sm"

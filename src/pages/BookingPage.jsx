@@ -250,7 +250,8 @@ export default function BookingPage({ onAddBooking, currentUser }) {
 
           <div className="text-right w-full sm:w-auto border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200">
             <span className="text-xs text-slate-500 font-medium block">Estimated Fee</span>
-            <span className="text-xl font-extrabold text-emerald-700">{worker.approxPrice}</span>
+            <span className="text-xl font-extrabold text-emerald-700 block">{worker.approxPrice}</span>
+            <span className="text-[10px] text-slate-400 font-normal block mt-0.5">Price may vary by task</span>
           </div>
         </div>
 
@@ -418,6 +419,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2 text-center">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Total Amount to Pay</span>
               <span className="text-3xl font-extrabold text-emerald-700 block">{worker.approxPrice}</span>
+              <span className="text-[10px] text-slate-400 font-normal block mt-0.5">Price may vary by task</span>
               <p className="text-xs text-slate-600 font-medium">
                 Beneficiary: <strong className="text-slate-900">{worker.cooperativeName}</strong>
               </p>

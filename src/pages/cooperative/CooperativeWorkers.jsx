@@ -185,7 +185,10 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                 </div>
                 <div className="flex justify-between items-center text-slate-600">
                   <span>Standard Rate:</span>
-                  <span className="font-bold text-emerald-700">{w.approxPrice}</span>
+                  <div className="text-right">
+                    <span className="font-bold text-emerald-700 block">{w.approxPrice}</span>
+                    <span className="text-[10px] text-slate-400 font-normal block">Price may vary by task</span>
+                  </div>
                 </div>
                 <div className="flex justify-between items-center text-slate-600 pt-1 border-t border-slate-200">
                   <span>Locality:</span>
@@ -301,6 +304,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                   <span className="text-slate-500 text-xs">({selectedWorkerProfile.completedJobs} Jobs Completed)</span>
                 </p>
                 <p className="text-xs text-slate-600">Task Fee: <strong className="text-emerald-700">{selectedWorkerProfile.approxPrice}</strong></p>
+                <span className="text-[10px] text-slate-400 font-normal block mt-0.5">Price may vary by task</span>
               </div>
 
             </div>

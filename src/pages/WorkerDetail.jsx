@@ -214,6 +214,7 @@ export default function WorkerDetail() {
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
               <span className="text-xs font-bold text-slate-500 block">Approx Rate</span>
               <p className="text-lg font-extrabold text-slate-900 mt-1">{worker.approxPrice}</p>
+              <span className="text-[10px] text-slate-400 font-normal block mt-0.5">Price may vary by task</span>
             </div>
           </div>
 
@@ -309,6 +310,7 @@ export default function WorkerDetail() {
             <div>
               <span className="text-xs text-slate-500 font-medium">Task / Inspection Fee</span>
               <p className="text-xl font-extrabold text-slate-900">{worker.approxPrice}</p>
+              <span className="text-[10px] text-slate-400 font-normal block mt-0.5">Price may vary by task</span>
             </div>
 
             <Link

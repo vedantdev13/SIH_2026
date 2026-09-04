@@ -240,7 +240,10 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
 
                 <div className="flex items-center justify-between text-xs text-slate-500">
                   <span className="font-semibold text-emerald-800">✓ Verified Co-op ID</span>
-                  <span className="font-bold text-slate-800">{w.approxPrice}</span>
+                  <div className="text-right">
+                    <span className="font-bold text-slate-800 block">{w.approxPrice}</span>
+                    <span className="text-[10px] text-slate-400 font-normal block">Price may vary by task</span>
+                  </div>
                 </div>
               </div>
             ))}
