@@ -74,7 +74,7 @@ export default function Footer() {
 
         {/* Bottom copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} Sahakaar Platform. Smart India Hackathon Prototype.</p>
+          <p>© {new Date().getFullYear()} Sahakaar Platform. Smart India Hackathon Project.</p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1 text-slate-400">
               Built with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> for Indian Labour Cooperatives

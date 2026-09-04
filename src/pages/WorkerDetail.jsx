@@ -107,9 +107,9 @@ export default function WorkerDetail() {
       <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
         
         {/* Top Cover Banner */}
-        <div className="h-32 bg-gradient-to-r from-emerald-800 via-teal-700 to-slate-900 relative">
-          <div className="absolute top-4 right-4 bg-emerald-500/20 backdrop-blur-md border border-emerald-400/40 text-emerald-100 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-300" />
+        <div className="h-32 bg-slate-900 relative border-b border-slate-800">
+          <div className="absolute top-4 right-4 bg-slate-800/90 border border-slate-700 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
             Verified Cooperative Federation Member
           </div>
         </div>

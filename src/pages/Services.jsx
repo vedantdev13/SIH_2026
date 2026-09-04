@@ -144,7 +144,7 @@ export default function Services() {
           onClick={() => handleCategoryChange('All')}
           className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
             selectedCategory === 'All'
-              ? 'bg-emerald-600 text-white shadow-sm'
+              ? 'bg-slate-900 text-white shadow-xs'
               : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
           }`}
         >
@@ -157,7 +157,7 @@ export default function Services() {
             onClick={() => handleCategoryChange(s.name)}
             className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
               selectedCategory.toLowerCase() === s.name.toLowerCase()
-                ? 'bg-emerald-600 text-white shadow-sm'
+                ? 'bg-slate-900 text-white shadow-xs'
                 : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
             }`}
           >

@@ -61,8 +61,8 @@ export default function WorkerCard({ worker, onSelect, isSelected, isBooked = fa
               </p>
             )}
 
-            {/* Cooperative Member Banner - Key Differentiator */}
-            <div className="mt-2 inline-flex items-center gap-1.5 bg-slate-50 border border-emerald-300/80 px-2.5 py-1 rounded-md text-xs font-semibold text-emerald-900 w-full sm:w-auto">
+            {/* Cooperative Member Banner */}
+            <div className="mt-2.5 inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-md text-xs font-semibold text-slate-800 w-full sm:w-auto">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
               <span className="truncate">{worker.cooperativeName}</span>
             </div>
@@ -100,10 +100,10 @@ export default function WorkerCard({ worker, onSelect, isSelected, isBooked = fa
             <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             {worker.locality}
           </span>
-          <span className={`px-2 py-0.5 rounded-full font-medium text-[11px] ${
+          <span className={`px-2.5 py-0.5 rounded-full font-semibold text-[11px] ${
             worker.availability === 'Available Now'
-              ? 'bg-emerald-100 text-emerald-800'
-              : 'bg-amber-100 text-amber-800'
+              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+              : 'bg-amber-50 text-amber-800 border border-amber-200'
           }`}>
             {worker.availability}
           </span>
@@ -120,7 +120,7 @@ export default function WorkerCard({ worker, onSelect, isSelected, isBooked = fa
 
           <Link
             to={`/book/${worker.id}`}
-            className="flex-1 text-center py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm hover:shadow transition-all flex items-center justify-center gap-1.5"
+            className="flex-1 text-center py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-xs transition-all flex items-center justify-center gap-1.5"
           >
             <Calendar className="w-4 h-4" />
             Book Service
