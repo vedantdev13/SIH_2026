@@ -106,7 +106,7 @@ export default function MapView({
             <div class="flex items-center gap-2">
               <img src="${displayPhoto}" class="w-10 h-10 rounded-lg object-cover border p-0.5 bg-emerald-50" />
               <div>
-                <h4 class="font-bold text-sm text-slate-900 leading-tight">${worker.skill} Tradesperson</h4>
+                <h4 class="font-bold text-sm text-slate-900 leading-tight">${worker.skill}</h4>
                 <p class="text-xs text-emerald-700 font-semibold">${worker.experience} • ${worker.distance} km</p>
               </div>
             </div>

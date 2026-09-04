@@ -124,7 +124,7 @@ export default function Home() {
                     className="w-12 h-12 rounded-xl object-cover border border-emerald-400 p-1 bg-slate-800" 
                   />
                   <div>
-                    <h4 className="font-bold text-white text-base">{WORKERS[0].skill} Tradesperson</h4>
+                    <h4 className="font-bold text-white text-base">{WORKERS[0].skill}</h4>
                     <p className="text-xs text-emerald-400 font-medium">{WORKERS[0].experience} exp</p>
                   </div>
                 </div>
@@ -287,7 +287,7 @@ export default function Home() {
                   className="w-14 h-14 rounded-xl object-cover border border-emerald-200 p-1 bg-emerald-50/50" 
                 />
                 <div>
-                  <h4 className="font-bold text-slate-900 text-lg">{worker.skill} Tradesperson</h4>
+                  <h4 className="font-bold text-slate-900 text-lg">{worker.skill}</h4>
                   <p className="text-xs text-emerald-700 font-semibold">{worker.experience} exp</p>
                   <span className="text-[11px] text-amber-500 font-bold">★ {worker.rating} ({worker.reviewsCount} reviews)</span>
                 </div>

@@ -136,7 +136,7 @@ export default function WorkerDetail() {
               />
               <div className="mb-2">
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 flex items-center gap-2">
-                  {displayName ? displayName : `${worker.skill} Tradesperson`}
+                  {displayName ? displayName : worker.skill}
                   <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" title="Verified Member" />
                 </h1>
                 <p className="text-sm font-semibold text-emerald-700">
@@ -219,7 +219,7 @@ export default function WorkerDetail() {
 
           {/* ABOUT WORKER */}
           <div className="space-y-3 pt-4 border-t border-slate-100">
-            <h3 className="text-lg font-bold text-slate-900">About {displayName || `${worker.skill} Tradesperson`}</h3>
+            <h3 className="text-lg font-bold text-slate-900">About {displayName || worker.skill}</h3>
             <p className="text-slate-600 text-sm leading-relaxed">{worker.about}</p>
           </div>
 
