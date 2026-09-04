@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
+import { getDisplayWorkerName, getDisplayWorkerPhoto } from '../utils/privacyUtils';
 
 export default function MapView({ 
   workers = [], 
@@ -65,11 +66,13 @@ export default function MapView({
     // 2. Add Worker Markers (Green Cooperative Pins)
     workers.forEach(worker => {
       const isSelected = selectedWorker?.id === worker.id;
+      const displayName = getDisplayWorkerName(worker, false);
+      const displayPhoto = getDisplayWorkerPhoto(worker, false);
 
       const workerHtml = `
         <div class="relative group cursor-pointer ${isSelected ? 'scale-125 z-50' : 'hover:scale-110'} transition-transform">
-          <div class="w-10 h-10 rounded-full border-2 ${isSelected ? 'border-amber-400 ring-4 ring-emerald-500/30' : 'border-emerald-600'} overflow-hidden bg-white shadow-md">
-            <img src="${worker.photo}" alt="${worker.name}" class="w-full h-full object-cover" />
+          <div class="w-10 h-10 rounded-full border-2 ${isSelected ? 'border-amber-400 ring-4 ring-emerald-500/30' : 'border-emerald-600'} overflow-hidden bg-emerald-50 shadow-md p-0.5">
+            <img src="${displayPhoto}" alt="${displayName}" class="w-full h-full object-cover rounded-full" />
           </div>
           <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-emerald-700 text-white text-[9px] font-bold px-1 rounded shadow-sm whitespace-nowrap">
             ★ ${worker.rating}
@@ -89,10 +92,10 @@ export default function MapView({
         .bindPopup(`
           <div class="p-1 min-w-[200px]">
             <div class="flex items-center gap-2">
-              <img src="${worker.photo}" class="w-10 h-10 rounded-lg object-cover border" />
+              <img src="${displayPhoto}" class="w-10 h-10 rounded-lg object-cover border p-0.5 bg-emerald-50" />
               <div>
-                <h4 class="font-bold text-sm text-slate-900 leading-tight">${worker.name}</h4>
-                <p class="text-xs text-emerald-700 font-semibold">${worker.skill} • ${worker.distance} km</p>
+                <h4 class="font-bold text-sm text-slate-900 leading-tight">${worker.skill} Tradesperson</h4>
+                <p class="text-xs text-emerald-700 font-semibold">${worker.experience} • ${worker.distance} km</p>
               </div>
             </div>
             <p class="text-[11px] text-slate-500 mt-2 bg-emerald-50 border border-emerald-200 p-1.5 rounded font-medium">

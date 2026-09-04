@@ -5,6 +5,7 @@ import {
   WORKERS, 
   LABOUR_COOPERATIVES 
 } from '../data/mockData';
+import { getDisplayWorkerName, getDisplayWorkerPhoto } from '../utils/privacyUtils';
 import { 
   ShieldCheck, 
   Users, 
@@ -118,13 +119,13 @@ export default function Home() {
               <div className="bg-slate-900/80 rounded-xl p-4 border border-slate-700 space-y-3">
                 <div className="flex items-center gap-3">
                   <img 
-                    src={WORKERS[0].photo} 
-                    alt={WORKERS[0].name} 
-                    className="w-12 h-12 rounded-xl object-cover border border-emerald-400" 
+                    src={getDisplayWorkerPhoto(WORKERS[0], false)} 
+                    alt={getDisplayWorkerName(WORKERS[0], false)} 
+                    className="w-12 h-12 rounded-xl object-cover border border-emerald-400 p-1 bg-slate-800" 
                   />
                   <div>
-                    <h4 className="font-bold text-white text-base">{WORKERS[0].name}</h4>
-                    <p className="text-xs text-emerald-400 font-medium">{WORKERS[0].skill} • 6 yrs exp</p>
+                    <h4 className="font-bold text-white text-base">{WORKERS[0].skill} Tradesperson</h4>
+                    <p className="text-xs text-emerald-400 font-medium">{WORKERS[0].experience} exp</p>
                   </div>
                 </div>
                 <div className="bg-emerald-950/60 border border-emerald-800/80 p-2 rounded-lg text-xs text-emerald-200 flex items-center justify-between">
@@ -280,10 +281,14 @@ export default function Home() {
           {WORKERS.slice(0, 3).map(worker => (
             <div key={worker.id} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
               <div className="flex items-center gap-3">
-                <img src={worker.photo} alt={worker.name} className="w-14 h-14 rounded-xl object-cover border" />
+                <img 
+                  src={getDisplayWorkerPhoto(worker, false)} 
+                  alt={getDisplayWorkerName(worker, false)} 
+                  className="w-14 h-14 rounded-xl object-cover border border-emerald-200 p-1 bg-emerald-50/50" 
+                />
                 <div>
-                  <h4 className="font-bold text-slate-900 text-lg">{worker.name}</h4>
-                  <p className="text-xs text-emerald-700 font-semibold">{worker.skill} • {worker.experience}</p>
+                  <h4 className="font-bold text-slate-900 text-lg">{worker.skill} Tradesperson</h4>
+                  <p className="text-xs text-emerald-700 font-semibold">{worker.experience} exp</p>
                   <span className="text-[11px] text-amber-500 font-bold">★ {worker.rating} ({worker.reviewsCount} reviews)</span>
                 </div>
               </div>

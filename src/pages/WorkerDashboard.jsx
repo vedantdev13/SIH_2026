@@ -336,8 +336,12 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
                         <span className="text-xl font-extrabold text-emerald-700 block">
                           {b.amount || currentWorker.approxPrice}
                         </span>
-                        <span className="text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 block text-center font-bold">
-                          100% Direct Payout
+                        <span className={`text-[10px] px-2 py-0.5 rounded border block text-center font-bold ${
+                          b.paymentStatus === 'Paid'
+                            ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                            : 'bg-amber-100 text-amber-900 border-amber-300'
+                        }`}>
+                          {b.paymentStatus === 'Paid' ? 'Paid Online' : 'Collect Cash/UPI on Job'}
                         </span>
                       </div>
 

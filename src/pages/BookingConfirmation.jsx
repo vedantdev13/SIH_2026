@@ -93,25 +93,36 @@ export default function BookingConfirmation() {
             </div>
           </div>
 
-          {/* Assigned Worker Banner */}
-          <div className="border border-slate-200 rounded-2xl p-4 flex items-center gap-4">
-            <img 
-              src={workerPhoto} 
-              alt={workerName} 
-              className="w-16 h-16 rounded-xl object-cover border-2 border-emerald-600 shadow-sm" 
-            />
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <h3 className="font-extrabold text-slate-900 text-lg truncate">{workerName}</h3>
-                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">
-                  Co-op Member
-                </span>
+          {/* Assigned Worker Banner - Unlocked Identity Post Booking */}
+          <div className="border border-emerald-200 bg-emerald-50/40 rounded-2xl p-4 space-y-3">
+            <div className="flex items-center justify-between text-xs font-bold text-emerald-800 border-b border-emerald-200/80 pb-2">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" /> Dispatched Worker Verified Identity (Unlocked Post-Booking)
+              </span>
+              <span className="bg-emerald-600 text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">
+                Confirmed
+              </span>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <img 
+                src={workerPhoto} 
+                alt={workerName} 
+                className="w-16 h-16 rounded-xl object-cover border-2 border-emerald-600 shadow-sm" 
+              />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-extrabold text-slate-900 text-lg truncate">{workerName}</h3>
+                  <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">
+                    Co-op Member
+                  </span>
+                </div>
+                <p className="text-xs font-semibold text-emerald-700">{workerSkill}</p>
+                <p className="text-xs text-slate-500 flex items-center gap-1 mt-1 truncate">
+                  <Building2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  {cooperativeName}
+                </p>
               </div>
-              <p className="text-xs font-semibold text-emerald-700">{workerSkill}</p>
-              <p className="text-xs text-slate-500 flex items-center gap-1 mt-1 truncate">
-                <Building2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                {cooperativeName}
-              </p>
             </div>
           </div>
 
@@ -148,13 +159,49 @@ export default function BookingConfirmation() {
             )}
           </div>
 
+          {/* PAYMENT & RECEIPT SUMMARY */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span className="text-xs font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" /> Payment & Transaction Receipt
+              </span>
+              <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${
+                activeBooking.paymentStatus === 'Paid'
+                  ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                  : 'bg-amber-100 text-amber-900 border-amber-300'
+              }`}>
+                {activeBooking.paymentStatus || 'Pending'}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div>
+                <span className="text-slate-500 block">Payment Method</span>
+                <span className="font-bold text-slate-900">{activeBooking.paymentMethod || 'Cash after Service'}</span>
+              </div>
+
+              <div>
+                <span className="text-slate-500 block">Transaction Reference</span>
+                <span className="font-mono font-bold text-slate-900">{activeBooking.transactionId || 'N/A'}</span>
+              </div>
+
+              <div>
+                <span className="text-slate-500 block">Total Amount</span>
+                <span className="font-extrabold text-emerald-700 text-sm">{activeBooking.amount || assignedWorker.approxPrice}</span>
+              </div>
+            </div>
+          </div>
+
           {/* Cooperative Notice */}
           <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-xs text-emerald-950 space-y-1">
             <p className="font-extrabold flex items-center gap-1.5 text-emerald-900">
               <ShieldCheck className="w-4 h-4 text-emerald-600" /> Labour Cooperative Dispatch Protocol
             </p>
             <p className="text-slate-600">
-              The worker will arrive at your specified time window equipped with cooperative identity badge. Payment will be settled after service completion according to cooperative rate guidelines.
+              {activeBooking.paymentStatus === 'Paid' 
+                ? 'Your payment is safely authorized via the cooperative digital ledger. The worker will arrive at your specified time window.'
+                : 'The worker will arrive at your specified time window equipped with cooperative identity badge. Payment can be settled directly in cash or UPI after service completion.'
+              }
             </p>
           </div>
 
@@ -171,7 +218,7 @@ export default function BookingConfirmation() {
               to="/services"
               className="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
             >
-              <Wrench className="w-4 h-4 text-white" /> Browse More Services
+              <Wrench className="w-4 h-4 text-white" /> Return to Services Page
             </Link>
           </div>
 

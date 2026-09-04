@@ -20,6 +20,9 @@ const bookingSchema = new mongoose.Schema({
   bookingDate: { type: String },
   problem: { type: String },
   amount: { type: String },
+  paymentMethod: { type: String, default: 'Cash after Service' },
+  paymentStatus: { type: String, default: 'Pending' },
+  transactionId: { type: String },
   status: { 
     type: String, 
     enum: ['New', 'Confirmed & Worker Dispatched', 'Assigned', 'In Progress', 'Completed'], 

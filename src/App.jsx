@@ -10,6 +10,7 @@ import BookingConfirmation from './pages/BookingConfirmation';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import WorkerDashboard from './pages/WorkerDashboard';
+import MyBookings from './pages/MyBookings';
 import CooperativeLayout from './pages/cooperative/CooperativeLayout';
 
 import { WORKERS as INITIAL_WORKERS, SERVICES as INITIAL_SERVICES, INITIAL_BOOKINGS } from './data/mockData';
@@ -86,6 +87,7 @@ export default function App() {
           <Route path="/worker/:id" element={<WorkerDetail />} />
           <Route path="/book/:workerId" element={<BookingPage onAddBooking={handleAddBooking} currentUser={currentUser} />} />
           <Route path="/confirmation/:bookingId" element={<BookingConfirmation />} />
+          <Route path="/my-bookings" element={<MyBookings bookings={bookings} currentUser={currentUser} />} />
           <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
           <Route path="/register" element={<Register setCurrentUser={setCurrentUser} />} />
           <Route 

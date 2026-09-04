@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, ShieldCheck, MapPin, Award, CheckCircle2, Clock, Calendar } from 'lucide-react';
+import { getDisplayWorkerName, getDisplayWorkerPhoto } from '../utils/privacyUtils';
 
-export default function WorkerCard({ worker, onSelect, isSelected }) {
+export default function WorkerCard({ worker, onSelect, isSelected, isBooked = false }) {
+  const displayName = getDisplayWorkerName(worker, isBooked);
+  const displayPhoto = getDisplayWorkerPhoto(worker, isBooked);
+
   return (
     <div 
       className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${
@@ -16,9 +20,9 @@ export default function WorkerCard({ worker, onSelect, isSelected }) {
         <div className="flex items-start gap-4">
           <div className="relative shrink-0">
             <img 
-              src={worker.photo} 
-              alt={worker.name} 
-              className="w-16 h-16 rounded-xl object-cover border-2 border-slate-100 shadow-sm" 
+              src={displayPhoto} 
+              alt={displayName} 
+              className="w-16 h-16 rounded-xl object-cover border-2 border-emerald-100 p-1 bg-emerald-50/40 shadow-sm" 
             />
             {worker.verified && (
               <div 
@@ -32,17 +36,27 @@ export default function WorkerCard({ worker, onSelect, isSelected }) {
 
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="text-lg font-bold text-slate-900 truncate">{worker.name}</h3>
+              <h3 className="text-lg font-bold text-slate-900 truncate">
+                {displayName ? (
+                  displayName
+                ) : (
+                  <span>
+                    {worker.skill} <span className="text-xs font-normal text-slate-500">• {worker.experience} exp</span>
+                  </span>
+                )}
+              </h3>
               <span className="shrink-0 font-extrabold text-emerald-700 bg-emerald-50 text-sm px-2.5 py-1 rounded-lg border border-emerald-200">
                 {worker.approxPrice}
               </span>
             </div>
 
-            <p className="text-sm font-semibold text-emerald-800 flex items-center gap-1.5 mt-0.5">
-              <span>{worker.skill}</span>
-              <span className="text-slate-300">•</span>
-              <span className="text-slate-600 font-normal">{worker.experience} exp</span>
-            </p>
+            {displayName && (
+              <p className="text-sm font-semibold text-emerald-800 flex items-center gap-1.5 mt-0.5">
+                <span>{worker.skill}</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-600 font-normal">{worker.experience} exp</span>
+              </p>
+            )}
 
             {/* Cooperative Member Banner - Key Differentiator */}
             <div className="mt-2 inline-flex items-center gap-1.5 bg-slate-50 border border-emerald-300/80 px-2.5 py-1 rounded-md text-xs font-semibold text-emerald-900 w-full sm:w-auto">

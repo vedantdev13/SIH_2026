@@ -99,24 +99,50 @@ const sampleCooperatives = [
 
 const sampleBookings = [
   {
+    id: 'SK-88942',
     customerId: 'cust-101',
+    customerName: 'Aniket Sharma',
+    customerPhone: '+91 9823012345',
     workerId: 'w-101',
+    workerName: 'Ramesh Kumar',
+    workerSkill: 'Plumber',
+    workerPhoto: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=400&q=80',
     cooperativeId: 'ngp-plumb-coop',
+    cooperativeName: 'Nagpur Plumbing Labour Cooperative Society',
     serviceId: 'plumber',
+    serviceName: 'Plumber Leak Repair Service',
+    date: '2026-09-04',
+    time: '10:00 AM - 12:00 PM',
+    address: 'Flat 402, Green Valley Apartments, Sitabuldi, Nagpur',
     location: 'Flat 402, Green Valley Apartments, Sitabuldi, Nagpur',
-    amount: '₹349',
+    bookingDate: '2026-09-04',
+    problem: 'Main bathroom wall pipe leak and flush tank valve replacement needed.',
+    amount: '₹349 / visit',
     status: 'New',
-    bookingDate: '2026-09-04'
+    createdAt: '2026-09-03T14:30:00.000Z'
   },
   {
+    id: 'SK-45129',
     customerId: 'cust-102',
+    customerName: 'Priya Deshmukh',
+    customerPhone: '+91 9876543210',
     workerId: 'w-102',
+    workerName: 'Amit Sharma',
+    workerSkill: 'Electrician',
+    workerPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
     cooperativeId: 'vid-elec-coop',
+    cooperativeName: 'Vidarbha Electrical Workers Sahakari Sanstha',
     serviceId: 'electrician',
-    location: 'Dharampeth Main Road, Nagpur',
-    amount: '₹399',
+    serviceName: 'Electrician Short Circuit Service',
+    date: '2026-09-04',
+    time: '02:00 PM - 04:00 PM',
+    address: 'Plot 18, Dharampeth Main Road, Nagpur',
+    location: 'Plot 18, Dharampeth Main Road, Nagpur',
+    bookingDate: '2026-09-04',
+    problem: 'MCB tripping frequently when running AC unit.',
+    amount: '₹399 / visit',
     status: 'Assigned',
-    bookingDate: '2026-09-04'
+    createdAt: '2026-09-03T14:33:00.000Z'
   }
 ];
 

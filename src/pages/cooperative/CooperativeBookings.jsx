@@ -149,6 +149,13 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
                       <span className={`text-[11px] font-bold px-3 py-1 rounded-full border ${statusColors[currentStatus] || 'bg-slate-100 text-slate-700'}`}>
                         {currentStatus}
                       </span>
+                      <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full border ${
+                        b.paymentStatus === 'Paid'
+                          ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                          : 'bg-amber-100 text-amber-900 border-amber-300'
+                      }`}>
+                        {b.paymentStatus === 'Paid' ? `Paid (${b.paymentMethod || 'Online'})` : 'Payment Pending'}
+                      </span>
                       <span className="text-xs text-slate-500 flex items-center gap-1">
                         <Clock className="w-3.5 h-3.5" /> {b.date || '2026-09-04'} {b.time ? `• ${b.time}` : ''}
                       </span>

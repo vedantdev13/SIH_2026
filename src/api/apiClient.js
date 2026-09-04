@@ -137,3 +137,81 @@ export const updateBookingStatusApi = async (id, status, workerId = null, worker
   setStoredData('bookings', updated);
   return updated;
 };
+
+// REVIEWS API
+export const fetchReviewsApi = async (workerId = null) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/reviews`, { signal: AbortSignal.timeout(2000) });
+    if (res.ok) {
+      const data = await res.json();
+      return workerId ? data.filter(r => r.workerId === workerId) : data;
+    }
+  } catch {}
+
+  const reviews = getStoredData('reviews', [
+    {
+      id: 'rev-1',
+      workerId: 'w-101',
+      customerName: 'Priya Sharma',
+      rating: 5,
+      comment: 'Excellent plumbing work! Came right on time and fixed the pipe leak cleanly.',
+      tags: ['Punctual', 'Expert Work'],
+      date: '2026-09-02'
+    },
+    {
+      id: 'rev-2',
+      workerId: 'w-101',
+      customerName: 'Rajesh Patel',
+      rating: 5,
+      comment: 'Very polite behavior and honest cooperative pricing. Highly recommended!',
+      tags: ['Polite', 'Fair Rate'],
+      date: '2026-08-28'
+    }
+  ]);
+
+  return workerId ? reviews.filter(r => r.workerId === workerId) : reviews;
+};
+
+export const createReviewApi = async (reviewData) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/reviews`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(reviewData)
+    });
+    if (res.ok) return await res.json();
+  } catch {}
+
+  const reviews = getStoredData('reviews', []);
+  const newReview = {
+    id: `rev-${Math.floor(1000 + Math.random() * 9000)}`,
+    date: new Date().toISOString().split('T')[0],
+    ...reviewData
+  };
+  const updatedReviews = [newReview, ...reviews];
+  setStoredData('reviews', updatedReviews);
+
+  // Update worker rating summary
+  if (reviewData.workerId) {
+    const workers = getStoredData('workers', WORKERS);
+    const targetWorker = workers.find(w => w.id === reviewData.workerId);
+    if (targetWorker) {
+      const newReviewsCount = (targetWorker.reviewsCount || 50) + 1;
+      const newRating = parseFloat((((targetWorker.rating || 4.8) * targetWorker.reviewsCount + reviewData.rating) / newReviewsCount).toFixed(1));
+      updateWorkerApi(reviewData.workerId, { rating: newRating, reviewsCount: newReviewsCount });
+    }
+  }
+
+  // Update booking state if bookingId provided
+  if (reviewData.bookingId) {
+    const bookings = getStoredData('bookings', INITIAL_BOOKINGS);
+    const updatedBookings = bookings.map(b => 
+      b.id === reviewData.bookingId 
+        ? { ...b, userRating: reviewData.rating, userReview: reviewData.comment, userTags: reviewData.tags } 
+        : b
+    );
+    setStoredData('bookings', updatedBookings);
+  }
+
+  return newReview;
+};
