@@ -98,7 +98,7 @@ export default function WorkerDetail() {
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center gap-2 text-slate-600 hover:text-emerald-700 font-bold text-sm transition-colors"
+        className="inline-flex items-center gap-2 text-slate-600 hover:text-[#3378BC] font-bold text-sm transition-colors"
       >
         <ArrowLeft className="w-4 h-4" /> Back to Workers & Map
       </button>
@@ -107,9 +107,9 @@ export default function WorkerDetail() {
       <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
         
         {/* Top Cover Banner */}
-        <div className="h-32 bg-slate-900 relative border-b border-slate-800">
-          <div className="absolute top-4 right-4 bg-slate-800/90 border border-slate-700 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+        <div className="h-32 bg-[#111827] relative border-b border-slate-800">
+          <div className="absolute top-4 right-4 bg-slate-800/90 border border-slate-700 text-[#3378BC] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+            <ShieldCheck className="w-4 h-4 text-[#3378BC]" />
             Verified Cooperative Federation Member
           </div>
         </div>
@@ -132,14 +132,14 @@ export default function WorkerDetail() {
               <img 
                 src={displayPhoto} 
                 alt={displayName} 
-                className="w-28 h-28 rounded-2xl object-cover border-4 border-white shadow-md bg-emerald-50 p-1" 
+                className="w-28 h-28 rounded-2xl object-cover border-4 border-white shadow-md bg-slate-50 p-1" 
               />
               <div className="mb-2">
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 flex items-center gap-2">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] flex items-center gap-2">
                   {displayName ? displayName : worker.skill}
-                  <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" title="Verified Member" />
+                  <CheckCircle2 className="w-6 h-6 text-[#3378BC] shrink-0" title="Verified Member" />
                 </h1>
-                <p className="text-sm font-semibold text-emerald-700">
+                <p className="text-sm font-semibold text-[#3378BC]">
                   {worker.experience} Professional Experience
                 </p>
               </div>
@@ -155,7 +155,7 @@ export default function WorkerDetail() {
 
               <Link
                 to={`/book/${worker.id}`}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-6 py-3 rounded-xl shadow-lg shadow-emerald-600/20 hover:shadow transition-all flex items-center gap-2"
+                className="bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-base px-6 py-3 rounded-xl shadow-lg shadow-[#3378BC]/20 hover:shadow transition-all flex items-center gap-2"
               >
                 <Calendar className="w-5 h-5" /> Book Service Now
               </Link>
@@ -164,25 +164,25 @@ export default function WorkerDetail() {
           </div>
 
           {/* KEY COOPERATIVE AFFILIATION BANNER - HIGHLIGHT */}
-          <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="bg-[#3378BC]/10 border border-[#3378BC]/20 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-[#3378BC] text-white flex items-center justify-center font-bold">
                 <Building2 className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Registered Labour Cooperative</span>
-                <p className="font-bold text-slate-900 text-base">{worker.cooperativeName}</p>
+                <span className="text-[11px] font-bold text-[#3378BC] uppercase tracking-wider block">Registered Labour Cooperative</span>
+                <p className="font-bold text-[#111827] text-base">{worker.cooperativeName}</p>
                 <span className="text-xs text-slate-500 font-mono">Member ID: {worker.cooperativeId.toUpperCase()}-{worker.id.replace('w-', '')}</span>
               </div>
             </div>
 
-            <div className="shrink-0 bg-white px-3.5 py-2 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-800 space-y-0.5">
+            <div className="shrink-0 bg-white px-3.5 py-2 rounded-xl border border-[#3378BC]/20 text-xs font-semibold text-[#3378BC] space-y-0.5">
               <div className="flex items-center gap-1.5">
-                <FileCheck className="w-4 h-4 text-emerald-600" />
+                <FileCheck className="w-4 h-4 text-[#3378BC]" />
                 <span>Skill Test Certified</span>
               </div>
               <div className="flex items-center gap-1.5 text-slate-600">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <ShieldCheck className="w-4 h-4 text-[#3378BC]" />
                 <span>Police Verified</span>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function WorkerDetail() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
               <span className="text-xs font-bold text-slate-500 block">Rating</span>
-              <div className="flex items-center gap-1.5 text-lg font-extrabold text-slate-900 mt-1">
+              <div className="flex items-center gap-1.5 text-lg font-extrabold text-[#111827] mt-1">
                 <Star className="w-5 h-5 text-amber-400 fill-amber-400" />
                 {worker.rating}
                 <span className="text-xs font-normal text-slate-400">({worker.reviewsCount} reviews)</span>
@@ -201,45 +201,45 @@ export default function WorkerDetail() {
 
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
               <span className="text-xs font-bold text-slate-500 block">Completed Jobs</span>
-              <p className="text-lg font-extrabold text-slate-900 mt-1">{worker.completedJobs}+ Jobs</p>
+              <p className="text-lg font-extrabold text-[#111827] mt-1">{worker.completedJobs}+ Jobs</p>
             </div>
 
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
               <span className="text-xs font-bold text-slate-500 block">Distance</span>
-              <p className="text-lg font-extrabold text-emerald-700 mt-1 flex items-center gap-1">
-                <MapPin className="w-4 h-4 text-emerald-600" /> {worker.distance} km away
+              <p className="text-lg font-extrabold text-[#3378BC] mt-1 flex items-center gap-1">
+                <MapPin className="w-4 h-4 text-[#3378BC]" /> {worker.distance} km away
               </p>
             </div>
 
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
               <span className="text-xs font-bold text-slate-500 block">Approx Rate</span>
-              <p className="text-lg font-extrabold text-slate-900 mt-1">{worker.approxPrice}</p>
+              <p className="text-lg font-extrabold text-[#111827] mt-1">{worker.approxPrice}</p>
               <span className="text-[10px] text-slate-500 font-medium block mt-0.5">Price may vary by task</span>
             </div>
           </div>
 
           {/* ABOUT WORKER */}
           <div className="space-y-3 pt-4 border-t border-slate-100">
-            <h3 className="text-lg font-bold text-slate-900">About {displayName || worker.skill}</h3>
+            <h3 className="text-lg font-bold text-[#111827]">About {displayName || worker.skill}</h3>
             <p className="text-slate-600 text-sm leading-relaxed">{worker.about}</p>
           </div>
 
           {/* WORKER WELFARE & SOCIAL SECURITY - COOP DIFFERENTIATOR */}
           <div className="space-y-3 pt-4 border-t border-slate-100">
-            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <Award className="w-5 h-5 text-emerald-600" /> Worker Welfare & Cooperative Benefits
+            <h3 className="text-lg font-bold text-[#111827] flex items-center gap-2">
+              <Award className="w-5 h-5 text-[#3378BC]" /> Worker Welfare & Cooperative Benefits
             </h3>
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-sm text-slate-700">
               <p className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#3378BC] shrink-0" />
                 <span>{worker.welfareStatus}</span>
               </p>
               <p className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#3378BC] shrink-0" />
                 <span>Receives 100% direct payment per cooperative wage guidelines</span>
               </p>
               <p className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#3378BC] shrink-0" />
                 <span>Annual cooperative profit share & dividend active</span>
               </p>
             </div>
@@ -249,8 +249,8 @@ export default function WorkerDetail() {
           <div className="space-y-4 pt-6 border-t border-slate-100">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                  <MessageSquare className="w-5 h-5 text-emerald-600" /> Customer Ratings & Reviews
+                <h3 className="text-lg font-extrabold text-[#111827] flex items-center gap-2">
+                  <MessageSquare className="w-5 h-5 text-[#3378BC]" /> Customer Ratings & Reviews
                 </h3>
                 <p className="text-xs text-slate-500">Verified feedback from co-op service bookings</p>
               </div>
@@ -273,7 +273,7 @@ export default function WorkerDetail() {
                   <div key={rev.id || idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2 text-xs">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs shadow-sm">
+                        <div className="w-7 h-7 rounded-lg bg-[#3378BC] text-white font-extrabold flex items-center justify-center text-xs shadow-sm">
                           {rev.customerName ? rev.customerName.charAt(0).toUpperCase() : 'C'}
                         </div>
                         <div>
@@ -293,7 +293,7 @@ export default function WorkerDetail() {
                     {rev.tags && rev.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1 pt-1">
                         {rev.tags.map((t, tIdx) => (
-                          <span key={tIdx} className="bg-emerald-100 text-emerald-900 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-300">
+                          <span key={tIdx} className="bg-[#3378BC]/10 text-[#111827] text-[10px] font-bold px-2 py-0.5 rounded border border-[#3378BC]/30">
                             ✓ {t}
                           </span>
                         ))}
@@ -309,13 +309,13 @@ export default function WorkerDetail() {
           <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <span className="text-xs text-slate-500 font-medium">Task / Inspection Fee</span>
-              <p className="text-xl font-extrabold text-slate-900">{worker.approxPrice}</p>
+              <p className="text-xl font-extrabold text-[#111827]">{worker.approxPrice}</p>
               <span className="text-[10px] text-slate-500 font-medium block mt-0.5">Price may vary by task</span>
             </div>
 
             <Link
               to={`/book/${worker.id}`}
-              className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-600/20 transition-all text-center"
+              className="w-full sm:w-auto bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-base px-8 py-3.5 rounded-xl shadow-lg shadow-[#3378BC]/20 transition-all text-center"
             >
               Proceed to Book Service
             </Link>
@@ -352,7 +352,7 @@ export default function WorkerDetail() {
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
                   placeholder="Enter your name (e.g. Priya Sharma)..."
-                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
                 />
               </div>
 
@@ -401,7 +401,7 @@ export default function WorkerDetail() {
                         onClick={() => handleToggleTag(tag)}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1 ${
                           isSelected
-                            ? 'bg-emerald-600 text-white shadow-sm'
+                            ? 'bg-[#3378BC] text-white shadow-sm'
                             : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
                         }`}
                       >
@@ -422,7 +422,7 @@ export default function WorkerDetail() {
                   value={reviewComment}
                   onChange={(e) => setReviewComment(e.target.value)}
                   placeholder="Share details of work quality, punctuality, and behavior..."
-                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
                 />
               </div>
 
@@ -438,7 +438,7 @@ export default function WorkerDetail() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5"
+                  className="bg-[#3378BC] hover:bg-[#28639d] text-white font-extrabold text-xs px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5"
                 >
                   {isSubmitting ? (
                     <span>Submitting Review...</span>

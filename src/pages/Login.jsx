@@ -74,10 +74,10 @@ export default function Login({ setCurrentUser }) {
         
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center mx-auto shadow-md">
+          <div className="w-12 h-12 rounded-2xl bg-[#3378BC] text-white flex items-center justify-center mx-auto shadow-md">
             <Users className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900">Log in to Sahakaar</h1>
+          <h1 className="text-2xl font-extrabold text-[#111827]">Log in to Sahakaar</h1>
           <p className="text-xs text-slate-500">Access your cooperative account with JWT & MongoDB</p>
         </div>
 
@@ -87,7 +87,7 @@ export default function Login({ setCurrentUser }) {
             type="button"
             onClick={() => setRole('customer')}
             className={`py-2 rounded-lg transition-all ${
-              role === 'customer' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600'
+              role === 'customer' ? 'bg-white text-[#3378BC] shadow-sm' : 'text-slate-600'
             }`}
           >
             Customer
@@ -96,7 +96,7 @@ export default function Login({ setCurrentUser }) {
             type="button"
             onClick={() => setRole('worker')}
             className={`py-2 rounded-lg transition-all ${
-              role === 'worker' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600'
+              role === 'worker' ? 'bg-white text-[#3378BC] shadow-sm' : 'text-slate-600'
             }`}
           >
             Worker
@@ -105,7 +105,7 @@ export default function Login({ setCurrentUser }) {
             type="button"
             onClick={() => setRole('cooperative')}
             className={`py-2 rounded-lg transition-all ${
-              role === 'cooperative' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600'
+              role === 'cooperative' ? 'bg-white text-[#3378BC] shadow-sm' : 'text-slate-600'
             }`}
           >
             Cooperative
@@ -131,7 +131,7 @@ export default function Login({ setCurrentUser }) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Enter mobile number or email..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function Login({ setCurrentUser }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
               />
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function Login({ setCurrentUser }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2"
+            className="w-full py-3 bg-[#3378BC] hover:bg-[#28639d] disabled:opacity-50 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2"
           >
             {loading ? (
               <>
@@ -182,7 +182,7 @@ export default function Login({ setCurrentUser }) {
             </button>
             <button
               onClick={() => handleQuickDemo('9422100998', 'coop123', 'cooperative')}
-              className="px-3 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl text-xs font-bold text-emerald-800 text-center"
+              className="px-3 py-2 bg-[#3378BC]/10 hover:bg-[#3378BC]/20 border border-[#3378BC]/30 rounded-xl text-xs font-bold text-[#3378BC] text-center"
             >
               Demo Co-op Admin
             </button>
@@ -191,7 +191,7 @@ export default function Login({ setCurrentUser }) {
 
         <div className="text-center text-xs text-slate-500">
           Don't have an account?{' '}
-          <Link to="/register" className="font-bold text-emerald-700 hover:underline">
+          <Link to="/register" className="font-bold text-[#3378BC] hover:underline">
             Register / Join Cooperative
           </Link>
         </div>

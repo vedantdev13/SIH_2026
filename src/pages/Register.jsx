@@ -52,10 +52,10 @@ export default function Register({ setCurrentUser }) {
       <div className="bg-white rounded-3xl border border-slate-200 shadow-xl p-8 space-y-6">
         
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center mx-auto shadow-md">
+          <div className="w-12 h-12 rounded-2xl bg-[#3378BC] text-white flex items-center justify-center mx-auto shadow-md">
             <UserCheck className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900">Join Sahakaar Network</h1>
+          <h1 className="text-2xl font-extrabold text-[#111827]">Join Sahakaar Network</h1>
           <p className="text-xs text-slate-500">Register with secure JWT & MongoDB credentials</p>
         </div>
 
@@ -65,7 +65,7 @@ export default function Register({ setCurrentUser }) {
             type="button"
             onClick={() => setAccountType('customer')}
             className={`py-2.5 rounded-xl transition-all ${
-              accountType === 'customer' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600'
+              accountType === 'customer' ? 'bg-white text-[#3378BC] shadow-sm' : 'text-slate-600'
             }`}
           >
             Customer
@@ -74,7 +74,7 @@ export default function Register({ setCurrentUser }) {
             type="button"
             onClick={() => setAccountType('worker')}
             className={`py-2.5 rounded-xl transition-all ${
-              accountType === 'worker' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600'
+              accountType === 'worker' ? 'bg-white text-[#3378BC] shadow-sm' : 'text-slate-600'
             }`}
           >
             Worker Member
@@ -83,7 +83,7 @@ export default function Register({ setCurrentUser }) {
             type="button"
             onClick={() => setAccountType('cooperative')}
             className={`py-2.5 rounded-xl transition-all ${
-              accountType === 'cooperative' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600'
+              accountType === 'cooperative' ? 'bg-white text-[#3378BC] shadow-sm' : 'text-slate-600'
             }`}
           >
             Cooperative Society
@@ -109,7 +109,7 @@ export default function Register({ setCurrentUser }) {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder={accountType === 'cooperative' ? 'e.g. Nagpur Plumbing Labour Cooperative' : 'e.g. Ramesh Kumar'}
-              className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
             />
           </div>
 
@@ -121,7 +121,7 @@ export default function Register({ setCurrentUser }) {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="10-digit mobile number e.g. 9823011223"
-              className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
             />
           </div>
 
@@ -135,7 +135,7 @@ export default function Register({ setCurrentUser }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Set account password (min 6 chars)..."
-                className="w-full pl-10 pr-3 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full pl-10 pr-3 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
               />
             </div>
           </div>
@@ -187,15 +187,15 @@ export default function Register({ setCurrentUser }) {
             </div>
           )}
 
-          <div className="bg-emerald-50 p-3 rounded-xl border border-emerald-200 text-xs text-emerald-900 flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+          <div className="bg-[#3378BC]/10 p-3 rounded-xl border border-[#3378BC]/20 text-xs text-[#111827] flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-[#3378BC] shrink-0" />
             <span>Registration includes skill verification and cooperative membership approval</span>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2"
+            className="w-full py-3.5 bg-[#3378BC] hover:bg-[#28639d] disabled:opacity-50 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center gap-2"
           >
             {loading ? (
               <>
@@ -211,7 +211,7 @@ export default function Register({ setCurrentUser }) {
 
         <div className="text-center text-xs text-slate-500">
           Already registered?{' '}
-          <Link to="/login" className="font-bold text-emerald-700 hover:underline">
+          <Link to="/login" className="font-bold text-[#3378BC] hover:underline">
             Log in here
           </Link>
         </div>

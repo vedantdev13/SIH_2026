@@ -152,8 +152,8 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       
       {/* TOP WORKER BRAND BANNER */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-emerald-500/10 blur-2xl pointer-events-none" />
+      <div className="bg-gradient-to-r from-[#111827] via-[#1f2937] to-[#1e4d7b] text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-6 relative overflow-hidden">
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-[#3378BC]/10 blur-2xl pointer-events-none" />
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           
@@ -161,11 +161,11 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
             <img 
               src={currentWorker.photo} 
               alt={currentWorker.name} 
-              className="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500 shadow-md shrink-0 bg-white"
+              className="w-20 h-20 rounded-2xl object-cover border-2 border-[#3378BC] shadow-md shrink-0 bg-white"
             />
             <div>
               <div className="flex items-center gap-2">
-                <span className="bg-emerald-500/20 border border-emerald-400/30 px-3 py-0.5 rounded-full text-emerald-300 text-[11px] font-extrabold uppercase tracking-wider">
+                <span className="bg-[#3378BC]/20 border border-[#3378BC]/30 px-3 py-0.5 rounded-full text-blue-200 text-[11px] font-extrabold uppercase tracking-wider">
                   VERIFIED WORKER MEMBER
                 </span>
               </div>
@@ -173,7 +173,7 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
                 Welcome back, {currentWorker.name}!
               </h1>
               <p className="text-xs text-slate-300 flex flex-wrap items-center gap-3 mt-1">
-                <span className="font-bold text-emerald-400">{currentWorker.skill} Specialist</span>
+                <span className="font-bold text-[#3378BC]">{currentWorker.skill} Specialist</span>
                 <span>•</span>
                 <span>Experience: <strong className="text-white">{currentWorker.experience}</strong></span>
                 <span>•</span>
@@ -192,14 +192,14 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
             <div className="flex items-center justify-end gap-3">
               <span className={`text-xs font-extrabold px-3 py-1 rounded-full border ${
                 currentWorker.availability === 'Available Now'
-                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                  ? 'bg-[#3378BC]/20 text-blue-200 border-[#3378BC]/40'
                   : 'bg-amber-500/20 text-amber-300 border-amber-500/40'
               }`}>
                 {currentWorker.availability}
               </span>
               <button
                 onClick={handleToggleAvailability}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 transition-all"
+                className="bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-xs px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 transition-all"
               >
                 <Power className="w-3.5 h-3.5" /> Toggle Status
               </button>
@@ -211,11 +211,11 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
         {/* AFFILIATED CO-OP NOTICE */}
         <div className="pt-4 border-t border-slate-700/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-300">
           <div className="flex items-center gap-2">
-            <Building2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <Building2 className="w-4 h-4 text-[#3378BC] shrink-0" />
             <span>Affiliated Cooperative: <strong className="text-white">{currentWorker.cooperativeName}</strong></span>
           </div>
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-[#3378BC] shrink-0" />
             <span>Co-op Medical & Life Policy Active (Cover: ₹3,00,000)</span>
           </div>
         </div>
@@ -228,10 +228,10 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
         <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
           <div className="flex items-center justify-between text-slate-500">
             <span className="text-xs font-bold">Total Earnings</span>
-            <IndianRupee className="w-5 h-5 text-emerald-600" />
+            <IndianRupee className="w-5 h-5 text-[#3378BC]" />
           </div>
           <p className="text-3xl font-extrabold text-slate-900">₹{totalEarnings.toLocaleString('en-IN')}</p>
-          <span className="text-[11px] text-emerald-700 font-semibold block">100% Fair Wage Direct Payout</span>
+          <span className="text-[11px] text-[#3378BC] font-semibold block">100% Fair Wage Direct Payout</span>
         </div>
 
         <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
@@ -246,10 +246,10 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
         <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
           <div className="flex items-center justify-between text-slate-500">
             <span className="text-xs font-bold">Completed Jobs</span>
-            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+            <CheckCircle2 className="w-5 h-5 text-[#3378BC]" />
           </div>
-          <p className="text-3xl font-extrabold text-emerald-600">{completedBookings.length + (currentWorker.completedJobs || 120)}</p>
-          <span className="text-[11px] text-emerald-700 font-medium block">Verified Customer Reviews</span>
+          <p className="text-3xl font-extrabold text-[#3378BC]">{completedBookings.length + (currentWorker.completedJobs || 120)}</p>
+          <span className="text-[11px] text-[#3378BC] font-medium block">Verified Customer Reviews</span>
         </div>
 
         <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
@@ -268,7 +268,7 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-emerald-600" /> Assigned Work Sites Map
+              <MapPin className="w-5 h-5 text-[#3378BC]" /> Assigned Work Sites Map
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
               Live map view of your assigned customer locations across the city
@@ -277,7 +277,7 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
 
           <button
             onClick={() => setShowMap(!showMap)}
-            className="text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-xl transition-all"
+            className="text-xs font-bold text-[#3378BC] bg-[#3378BC]/10 hover:bg-[#3378BC]/20 border border-[#3378BC]/20 px-3 py-1.5 rounded-xl transition-all"
           >
             {showMap ? 'Hide Map' : 'Show Work Location Map'}
           </button>

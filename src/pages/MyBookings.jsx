@@ -156,27 +156,27 @@ export default function MyBookings({ bookings = [], currentUser }) {
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         <Link
           to="/"
-          className="inline-flex items-center justify-center gap-2 text-slate-600 hover:text-emerald-700 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 transition-colors"
+          className="inline-flex items-center justify-center gap-2 text-slate-600 hover:text-[#3378BC] font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 transition-colors"
         >
-          <Home className="w-4 h-4 text-emerald-600" /> Back to Homepage
+          <Home className="w-4 h-4 text-[#3378BC]" /> Back to Homepage
         </Link>
 
         <Link
           to="/services"
-          className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-md transition-all"
+          className="inline-flex items-center justify-center gap-2 bg-[#3378BC] hover:bg-[#28639d] text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-md transition-all"
         >
           <Wrench className="w-4 h-4 text-white" /> Return to Services Page
         </Link>
       </div>
 
       {/* HEADER BANNER */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+      <div className="bg-gradient-to-r from-[#111827] via-[#1f2937] to-[#1e4d7b] text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-6 relative overflow-hidden">
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-[#3378BC]/10 blur-3xl pointer-events-none" />
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 px-3 py-1 rounded-full text-emerald-300 text-xs font-bold uppercase tracking-wider">
-              <Receipt className="w-4 h-4 text-emerald-400" /> Customer Account Ledger
+            <div className="inline-flex items-center gap-2 bg-[#3378BC]/20 border border-[#3378BC]/30 px-3 py-1 rounded-full text-blue-200 text-xs font-bold uppercase tracking-wider">
+              <Receipt className="w-4 h-4 text-[#3378BC]" /> Customer Account Ledger
             </div>
             <h1 className="text-3xl font-extrabold text-white">My Bookings & Transactions</h1>
             <p className="text-xs sm:text-sm text-slate-300">
@@ -186,7 +186,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
 
           <div className="bg-slate-800/80 p-3 rounded-2xl border border-slate-700/80 text-right shrink-0">
             <span className="text-[10px] text-slate-400 uppercase font-bold block">Total Service Expenditure</span>
-            <span className="text-2xl font-black text-emerald-400">₹{totalSpent.toLocaleString()}</span>
+            <span className="text-2xl font-black text-[#3378BC]">₹{totalSpent.toLocaleString()}</span>
           </div>
         </div>
 
@@ -208,7 +208,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
           </div>
 
           <div className="bg-white/10 border border-white/10 rounded-2xl p-3 text-center">
-            <span className="text-xl sm:text-2xl font-black text-teal-300 block">100%</span>
+            <span className="text-xl sm:text-2xl font-black text-[#3378BC] block">100%</span>
             <span className="text-[11px] text-slate-300">Fair Co-op Wage</span>
           </div>
         </div>
@@ -224,7 +224,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
             onClick={() => setActiveTab('all')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
               activeTab === 'all' 
-                ? 'bg-emerald-600 text-white shadow-sm' 
+                ? 'bg-[#3378BC] text-white shadow-sm' 
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
@@ -246,7 +246,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
             onClick={() => setActiveTab('completed')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
               activeTab === 'completed' 
-                ? 'bg-emerald-600 text-white shadow-sm' 
+                ? 'bg-[#3378BC] text-white shadow-sm' 
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
@@ -257,11 +257,11 @@ export default function MyBookings({ bookings = [], currentUser }) {
             onClick={() => setActiveTab('transactions')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
               activeTab === 'transactions' 
-                ? 'bg-slate-900 text-white shadow-sm' 
+                ? 'bg-[#111827] text-white shadow-sm' 
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
-            <CreditCard className="w-4 h-4 text-emerald-400" /> Transactions Ledger
+            <CreditCard className="w-4 h-4 text-[#3378BC]" /> Transactions Ledger
           </button>
         </div>
 
@@ -273,7 +273,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by worker, ID, transaction, or address..."
-            className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+            className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
           />
         </div>
 
@@ -287,11 +287,11 @@ export default function MyBookings({ bookings = [], currentUser }) {
           <div className="p-6 border-b border-slate-100 flex items-center justify-between">
             <div>
               <h2 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                <Receipt className="w-5 h-5 text-emerald-600" /> Financial Transactions Summary
+                <Receipt className="w-5 h-5 text-[#3378BC]" /> Financial Transactions Summary
               </h2>
               <p className="text-xs text-slate-500">Recorded payments and payment receipts for your bookings</p>
             </div>
-            <span className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">
+            <span className="bg-[#3378BC]/10 border border-[#3378BC]/20 text-[#3378BC] text-xs font-bold px-3 py-1 rounded-full">
               {searchedBookings.length} Receipts Listed
             </span>
           </div>
@@ -315,7 +315,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
                     <td className="py-4 px-6 font-mono font-bold text-slate-900">
                       {b.transactionId || 'N/A'}
                     </td>
-                    <td className="py-4 px-6 font-mono font-bold text-emerald-700">
+                    <td className="py-4 px-6 font-mono font-bold text-[#3378BC]">
                       <Link to={`/confirmation/${b.id}`} className="hover:underline flex items-center gap-1">
                         {b.id} <ExternalLink className="w-3 h-3 text-slate-400" />
                       </Link>
@@ -411,9 +411,9 @@ export default function MyBookings({ bookings = [], currentUser }) {
                       <Link
                         to={`/confirmation/${b.id}`}
                         state={{ booking: b }}
-                        className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 hover:text-emerald-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 px-3 py-1.5 rounded-xl transition-colors"
+                        className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#3378BC] bg-slate-100 hover:bg-slate-200 border border-slate-200 px-3 py-1.5 rounded-xl transition-colors"
                       >
-                        <Receipt className="w-4 h-4 text-emerald-600" /> Receipt
+                        <Receipt className="w-4 h-4 text-[#3378BC]" /> Receipt
                       </Link>
 
                       {/* RATING BUTTON OR RATED BADGE */}
@@ -440,13 +440,13 @@ export default function MyBookings({ bookings = [], currentUser }) {
                       <img 
                         src={workerPhoto} 
                         alt={workerName} 
-                        className="w-14 h-14 rounded-xl object-cover border-2 border-emerald-500/40 shadow-sm shrink-0" 
+                        className="w-14 h-14 rounded-xl object-cover border-2 border-[#3378BC]/40 shadow-sm shrink-0" 
                       />
                       <div className="min-w-0 flex-1">
                         <h3 className="font-extrabold text-slate-900 text-base truncate">{workerName}</h3>
-                        <p className="text-xs font-semibold text-emerald-700">{workerSkill}</p>
+                        <p className="text-xs font-semibold text-[#3378BC]">{workerSkill}</p>
                         <p className="text-[11px] text-slate-500 flex items-center gap-1 mt-1 truncate">
-                          <Building2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                          <Building2 className="w-3.5 h-3.5 text-[#3378BC] shrink-0" />
                           {cooperativeName}
                         </p>
                       </div>
@@ -456,7 +456,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
                     <div className="md:col-span-7 space-y-2 text-xs">
                       <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-1">
                         <span className="font-bold text-slate-500 uppercase tracking-wider block flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-emerald-600" /> Service Location
+                          <MapPin className="w-3.5 h-3.5 text-[#3378BC]" /> Service Location
                         </span>
                         <p className="font-semibold text-slate-800">{b.address || 'Nagpur Address'}</p>
                       </div>
@@ -527,7 +527,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
                       }`}>
                         {b.paymentStatus || 'Pending'}
                       </span>
-                      <span className="text-lg font-black text-emerald-700">{b.amount || '₹349'}</span>
+                      <span className="text-lg font-black text-[#3378BC]">{b.amount || '₹349'}</span>
                     </div>
                   </div>
 
@@ -566,7 +566,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
               />
               <div>
                 <h4 className="font-extrabold text-slate-900 text-base">{ratingModalBooking.workerName}</h4>
-                <p className="text-xs font-semibold text-emerald-700">{ratingModalBooking.serviceName || ratingModalBooking.workerSkill}</p>
+                <p className="text-xs font-semibold text-[#3378BC]">{ratingModalBooking.serviceName || ratingModalBooking.workerSkill}</p>
                 <p className="text-[11px] text-slate-500 mt-0.5">{ratingModalBooking.cooperativeName}</p>
               </div>
             </div>
@@ -618,7 +618,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
                         onClick={() => handleToggleTag(tag)}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1 ${
                           isSelected
-                            ? 'bg-emerald-600 text-white shadow-sm'
+                            ? 'bg-[#3378BC] text-white shadow-sm'
                             : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
                         }`}
                       >
@@ -639,7 +639,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
                   value={reviewComment}
                   onChange={(e) => setReviewComment(e.target.value)}
                   placeholder="Share details of your service experience, worker behavior, and work quality..."
-                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
                 />
               </div>
 
@@ -655,7 +655,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
                 <button
                   type="submit"
                   disabled={isSubmittingReview}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5"
+                  className="bg-[#3378BC] hover:bg-[#28639d] text-white font-extrabold text-xs px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5"
                 >
                   {isSubmittingReview ? (
                     <span>Submitting Rating...</span>

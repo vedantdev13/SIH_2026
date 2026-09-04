@@ -99,11 +99,11 @@ export default function Services() {
       {/* PAGE HEADER */}
       <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 mb-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3378BC] bg-[#3378BC]/10 px-2.5 py-1 rounded-md border border-[#3378BC]/20 mb-2">
+            <ShieldCheck className="w-4 h-4 text-[#3378BC]" />
             Verified Labour Cooperative Network
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900">Find Nearby Skilled Workers</h1>
+          <h1 className="text-3xl font-extrabold text-[#111827]">Find Nearby Skilled Workers</h1>
           <p className="text-slate-600 text-sm mt-1">
             Showing verified cooperative trade workers around <strong className="text-slate-800">{customerLoc.name}</strong>
           </p>
@@ -114,7 +114,7 @@ export default function Services() {
           <button
             onClick={() => setViewMode('split')}
             className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
-              viewMode === 'split' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+              viewMode === 'split' ? 'bg-[#3378BC] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5" /> Map + List
@@ -122,7 +122,7 @@ export default function Services() {
           <button
             onClick={() => setViewMode('map')}
             className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
-              viewMode === 'map' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+              viewMode === 'map' ? 'bg-[#3378BC] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <MapIcon className="w-3.5 h-3.5" /> Map Only
@@ -130,7 +130,7 @@ export default function Services() {
           <button
             onClick={() => setViewMode('list')}
             className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
-              viewMode === 'list' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+              viewMode === 'list' ? 'bg-[#3378BC] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <List className="w-3.5 h-3.5" /> List Only
@@ -144,7 +144,7 @@ export default function Services() {
           onClick={() => handleCategoryChange('All')}
           className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
             selectedCategory === 'All'
-              ? 'bg-slate-900 text-white shadow-xs'
+              ? 'bg-[#111827] text-white shadow-xs'
               : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
           }`}
         >
@@ -157,7 +157,7 @@ export default function Services() {
             onClick={() => handleCategoryChange(s.name)}
             className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
               selectedCategory.toLowerCase() === s.name.toLowerCase()
-                ? 'bg-slate-900 text-white shadow-xs'
+                ? 'bg-[#111827] text-white shadow-xs'
                 : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
             }`}
           >
@@ -178,7 +178,7 @@ export default function Services() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name, skill, or cooperative..."
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
             />
           </div>
 
@@ -187,7 +187,7 @@ export default function Services() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-full py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              className="w-full py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20"
             >
               <option value="distance">Sort by: Nearest Distance</option>
               <option value="rating">Sort by: Highest Rating</option>
@@ -205,9 +205,9 @@ export default function Services() {
               step="0.5"
               value={maxDistance}
               onChange={(e) => setMaxDistance(parseFloat(e.target.value))}
-              className="w-full accent-emerald-600 cursor-pointer"
+              className="w-full accent-[#3378BC] cursor-pointer"
             />
-            <span className="text-xs font-extrabold text-emerald-700 shrink-0 min-w-[45px]">
+            <span className="text-xs font-extrabold text-[#3378BC] shrink-0 min-w-[45px]">
               {maxDistance} km
             </span>
           </div>
@@ -222,7 +222,7 @@ export default function Services() {
                 type="checkbox"
                 checked={onlyAvailableNow}
                 onChange={(e) => setOnlyAvailableNow(e.target.checked)}
-                className="accent-emerald-600 rounded"
+                className="accent-[#3378BC] rounded"
               />
               ⚡ Available Now Only
             </label>
@@ -256,11 +256,11 @@ export default function Services() {
       <div className="flex items-center justify-between text-sm text-slate-600">
         <p>
           Found <strong className="text-slate-900 font-bold">{filteredWorkers.length}</strong> verified cooperative workers
-          {selectedCategory !== 'All' && <span> for <strong className="text-emerald-700 font-bold">{selectedCategory}</strong></span>}
+          {selectedCategory !== 'All' && <span> for <strong className="text-[#3378BC] font-bold">{selectedCategory}</strong></span>}
         </p>
 
-        <div className="hidden sm:flex items-center gap-1 text-xs text-emerald-800 font-semibold bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="hidden sm:flex items-center gap-1 text-xs text-[#3378BC] font-semibold bg-[#3378BC]/10 px-2.5 py-1 rounded-md border border-[#3378BC]/20">
+          <CheckCircle2 className="w-3.5 h-3.5 text-[#3378BC]" />
           Sorted by nearest distance from Nagpur Central
         </div>
       </div>
@@ -273,8 +273,8 @@ export default function Services() {
           <div className="lg:col-span-6 sticky top-24">
             <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-3">
               <div className="flex items-center justify-between text-xs font-bold text-slate-700">
-                <span className="flex items-center gap-1.5 text-emerald-800">
-                  <MapPin className="w-4 h-4 text-emerald-600" /> Live Cooperative Worker Map
+                <span className="flex items-center gap-1.5 text-[#3378BC]">
+                  <MapPin className="w-4 h-4 text-[#3378BC]" /> Live Cooperative Worker Map
                 </span>
                 <span className="text-slate-400 font-normal">Click marker to inspect worker</span>
               </div>
@@ -303,7 +303,7 @@ export default function Services() {
                 </p>
                 <button
                   onClick={resetFilters}
-                  className="px-4 py-2 bg-emerald-600 text-white font-bold text-sm rounded-xl"
+                  className="px-4 py-2 bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-sm rounded-xl"
                 >
                   Reset All Filters
                 </button>

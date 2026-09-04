@@ -34,15 +34,15 @@ export default function Navbar({ currentUser, setCurrentUser }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60">
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo & Tagline */}
         <Link to={currentUser?.role === 'worker' ? "/worker-dashboard" : "/"} className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center shadow-md shadow-emerald-700/15 group-hover:bg-emerald-600 transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-[#3378BC] text-white flex items-center justify-center shadow-md shadow-[#3378BC]/20 group-hover:bg-[#28639d] transition-colors">
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-xl font-extrabold tracking-tight text-slate-900 block leading-tight">
+            <span className="text-xl font-extrabold tracking-tight text-[#111827] block leading-tight">
               SAHAKAAR
             </span>
             <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
@@ -51,28 +51,26 @@ export default function Navbar({ currentUser, setCurrentUser }) {
           </div>
         </Link>
 
-
-
         {/* Action Buttons / User Session Profile with Dropdown */}
         <div className="hidden md:flex items-center gap-3 relative">
           {currentUser ? (
             <div className="relative">
               <button
                 onClick={() => setAccountMenuOpen(!accountMenuOpen)}
-                className="flex items-center gap-2.5 bg-slate-50 hover:bg-slate-100 px-3.5 py-2 rounded-2xl border border-slate-200 shadow-sm transition-all text-left focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="flex items-center gap-2.5 bg-slate-50 hover:bg-slate-100 px-3.5 py-2 rounded-2xl border border-slate-200 shadow-xs transition-all text-left focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20"
               >
-                <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                <div className="w-8 h-8 rounded-xl bg-[#3378BC] text-white flex items-center justify-center font-bold text-xs shadow-xs">
                   {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-slate-900 block leading-tight truncate max-w-[130px]">
+                  <span className="text-xs font-bold text-[#111827] block leading-tight truncate max-w-[130px]">
                     {currentUser.name}
                   </span>
-                  <span className="text-[9px] font-bold text-emerald-700 uppercase tracking-wider block">
+                  <span className="text-[9px] font-bold text-[#3378BC] uppercase tracking-wider block">
                     {currentUser.role === 'worker' ? 'Worker Member' : (currentUser.role || 'Member')}
                   </span>
                 </div>
-                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${accountMenuOpen ? 'rotate-180 text-emerald-600' : ''}`} />
+                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${accountMenuOpen ? 'rotate-180 text-[#3378BC]' : ''}`} />
               </button>
 
               {/* ACCOUNT DROPDOWN MENU */}
@@ -80,8 +78,8 @@ export default function Navbar({ currentUser, setCurrentUser }) {
                 <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2">
                   <div className="px-4 py-2 border-b border-slate-100">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Signed in as</span>
-                    <span className="text-xs font-extrabold text-slate-900 truncate block">{currentUser.name}</span>
-                    <span className="text-[10px] font-semibold text-emerald-600 uppercase block mt-0.5">
+                    <span className="text-xs font-extrabold text-[#111827] truncate block">{currentUser.name}</span>
+                    <span className="text-[10px] font-semibold text-[#3378BC] uppercase block mt-0.5">
                       {currentUser.role === 'worker' ? 'Verified Worker Member' : 'Member'}
                     </span>
                   </div>
@@ -91,9 +89,9 @@ export default function Navbar({ currentUser, setCurrentUser }) {
                       <Link
                         to="/my-bookings"
                         onClick={() => setAccountMenuOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-extrabold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-extrabold text-slate-700 hover:bg-[#3378BC]/10 hover:text-[#3378BC] transition-colors"
                       >
-                        <Receipt className="w-4 h-4 text-emerald-600" />
+                        <Receipt className="w-4 h-4 text-[#3378BC]" />
                         My Bookings & Receipts
                       </Link>
                     )}
@@ -112,22 +110,22 @@ export default function Navbar({ currentUser, setCurrentUser }) {
               )}
             </div>
           ) : (
-            <>
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <Link
                 to="/login"
-                className="text-sm font-semibold text-slate-700 hover:text-emerald-700 px-3 py-2 transition-colors"
+                className="text-xs sm:text-sm font-bold text-[#111827] hover:text-[#3378BC] px-2.5 sm:px-3.5 py-2 transition-colors whitespace-nowrap shrink-0"
               >
                 Log in
               </Link>
 
               <Link
                 to="/register"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-sm hover:shadow transition-all flex items-center gap-1.5"
+                className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs sm:text-sm font-bold px-3.5 sm:px-4.5 py-2 rounded-xl shadow-xs transition-all flex items-center gap-1.5 shrink-0 whitespace-nowrap"
               >
-                <UserCheck className="w-4 h-4" />
-                Register / Join
+                <UserCheck className="w-4 h-4 shrink-0" />
+                <span>Register / Join</span>
               </Link>
-            </>
+            </div>
           )}
         </div>
 
@@ -157,7 +155,7 @@ export default function Navbar({ currentUser, setCurrentUser }) {
             <Link
               to="/worker-dashboard"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-base font-bold text-emerald-800 bg-emerald-50 border border-emerald-200"
+              className="block px-3 py-2 rounded-lg text-base font-bold text-[#3378BC] bg-[#3378BC]/10 border border-[#3378BC]/20"
             >
               My Worker Dashboard
             </Link>
@@ -167,10 +165,10 @@ export default function Navbar({ currentUser, setCurrentUser }) {
             {currentUser ? (
               <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
                 <div className="flex items-center gap-2">
-                  <User className="w-5 h-5 text-emerald-600" />
+                  <User className="w-5 h-5 text-[#3378BC]" />
                   <div>
                     <span className="text-sm font-bold text-slate-900 block">{currentUser.name}</span>
-                    <span className="text-xs text-emerald-700 uppercase font-bold">{currentUser.role || 'Member'}</span>
+                    <span className="text-xs text-[#3378BC] uppercase font-bold">{currentUser.role || 'Member'}</span>
                   </div>
                 </div>
                 <button
@@ -186,16 +184,16 @@ export default function Navbar({ currentUser, setCurrentUser }) {
                 <Link
                   to="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center px-4 py-2 border border-slate-300 rounded-lg font-semibold text-slate-700"
+                  className="w-full text-center px-4 py-2 border border-slate-300 rounded-lg font-bold text-slate-700"
                 >
                   Log in
                 </Link>
                 <Link
                   to="/register"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center px-4 py-2 bg-emerald-600 text-white rounded-lg font-semibold"
+                  className="w-full text-center px-4 py-2 bg-[#3378BC] text-white rounded-lg font-bold"
                 >
-                  Register / Join Cooperative
+                  Register / Join Platform
                 </Link>
               </>
             )}
