@@ -410,7 +410,7 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
                         <span className="text-xl font-extrabold text-emerald-700 block">
                           {b.amount || currentWorker.approxPrice}
                         </span>
-                        <span className="text-[10px] text-slate-400 font-normal block">Price may vary by task</span>
+                        <span className="text-[10px] text-slate-500 font-medium block">Price may vary by task</span>
                         <span className={`text-[10px] px-2 py-0.5 rounded border block text-center font-bold ${
                           b.paymentStatus === 'Paid'
                             ? 'bg-emerald-100 text-emerald-900 border-emerald-300'

@@ -116,7 +116,7 @@ export default function MapView({
             <div class="mt-2 flex items-center justify-between">
               <div>
                 <span class="text-xs font-bold text-slate-800 block">${worker.approxPrice}</span>
-                <span class="text-[9px] text-slate-400 font-normal block">Price may vary by task</span>
+                <span class="text-[9px] text-slate-500 font-medium block">Price may vary by task</span>
               </div>
               <button 
                 id="popup-btn-${worker.id}" 

@@ -242,7 +242,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
                   <span className="font-semibold text-emerald-800">✓ Verified Co-op ID</span>
                   <div className="text-right">
                     <span className="font-bold text-slate-800 block">{w.approxPrice}</span>
-                    <span className="text-[10px] text-slate-400 font-normal block">Price may vary by task</span>
+                    <span className="text-[10px] text-slate-500 font-medium block">Price may vary by task</span>
                   </div>
                 </div>
               </div>

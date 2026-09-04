@@ -49,7 +49,7 @@ export default function WorkerCard({ worker, onSelect, isSelected, isBooked = fa
                 <span className="font-extrabold text-emerald-700 bg-emerald-50 text-sm px-2.5 py-1 rounded-lg border border-emerald-200">
                   {worker.approxPrice}
                 </span>
-                <span className="text-[10px] text-slate-400 font-normal mt-0.5">Price may vary by task</span>
+                <span className="text-[10px] text-slate-500 font-medium mt-0.5">Price may vary by task</span>
               </div>
             </div>
 
