@@ -140,7 +140,7 @@ export default function WorkerDetail() {
                   <CheckCircle2 className="w-6 h-6 text-[#3378BC] shrink-0" title="Verified Member" />
                 </h1>
                 {(worker.workerId || worker.id) && (
-                  <p className="text-[11px] text-slate-400 font-mono tracking-wider mt-0.5">
+                  <p className="text-[11px] text-slate-600 font-mono tracking-wider mt-0.5">
                     Worker ID: {worker.workerId || generateWorkerId(worker.id)}
                   </p>
                 )}

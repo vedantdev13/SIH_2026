@@ -219,7 +219,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
                   <div>
                     <h4 className="font-bold text-slate-900 text-base">{w.name}</h4>
                     <p className="text-xs text-[#3378BC] font-semibold">{w.skill} • {w.experience}</p>
-                    <span className="text-[11px] text-slate-400 font-mono">
+                    <span className="text-[11px] text-slate-600 font-mono">
                       Worker ID: {w.workerId || generateWorkerId(w.id) || w.id}
                     </span>
                   </div>

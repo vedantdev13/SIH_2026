@@ -158,7 +158,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                       {w.skill} • {w.experience}
                     </p>
                     {(w.workerId || w.id) && (
-                      <span className="text-[10px] text-slate-400 font-mono tracking-wide">
+                      <span className="text-[10px] text-slate-600 font-mono tracking-wide">
                         Worker ID: {w.workerId || generateWorkerId(w.id) || w.id}
                       </span>
                     )}
@@ -260,7 +260,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                     {selectedWorkerProfile.skill} • {selectedWorkerProfile.experience} Experience
                   </p>
                   {(selectedWorkerProfile.workerId || selectedWorkerProfile.id) && (
-                    <p className="text-[11px] text-slate-500 font-mono mt-0.5">
+                    <p className="text-[11px] text-slate-600 font-mono mt-0.5">
                       Worker ID: {selectedWorkerProfile.workerId || generateWorkerId(selectedWorkerProfile.id) || selectedWorkerProfile.id}
                     </p>
                   )}

@@ -348,7 +348,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
                     <div>
                       <h5 className="font-bold text-xs text-slate-900">{w.name}</h5>
                       <p className="text-[11px] text-[#3378BC] font-medium">{w.skill} • {w.experience}</p>
-                      <span className="text-[10px] text-slate-400 font-mono">
+                      <span className="text-[10px] text-slate-600 font-mono">
                         {w.workerId || generateWorkerId(w.id) || w.id}
                       </span>
                     </div>

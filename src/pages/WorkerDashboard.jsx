@@ -184,7 +184,7 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
                 </span>
               </p>
               {currentWorker.workerId && (
-                <p className="text-[11px] text-slate-400 font-mono tracking-wider mt-1">
+                <p className="text-[11px] text-slate-300 font-mono tracking-wider mt-1">
                   Worker ID: {currentWorker.workerId}
                 </p>
               )}
