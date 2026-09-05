@@ -83,10 +83,10 @@ export default function MapView({
 
       const workerHtml = `
         <div class="relative group cursor-pointer ${isSelected ? 'scale-125 z-50' : 'hover:scale-110'} transition-transform">
-          <div class="w-10 h-10 rounded-full border-2 ${isSelected ? 'border-amber-400 ring-4 ring-emerald-500/30' : 'border-emerald-600'} overflow-hidden bg-emerald-50 shadow-md p-0.5">
+          <div class="w-10 h-10 rounded-full border-2 ${isSelected ? 'border-amber-400 ring-4 ring-sky-500/30' : 'border-[#3378BC]'} overflow-hidden bg-sky-50 shadow-md p-0.5">
             <img src="${displayPhoto}" alt="${displayName}" class="w-full h-full object-cover rounded-full" />
           </div>
-          <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-emerald-700 text-white text-[9px] font-bold px-1 rounded shadow-sm whitespace-nowrap">
+          <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-[#3378BC] text-white text-[9px] font-bold px-1 rounded shadow-sm whitespace-nowrap">
             ★ ${worker.rating}
           </div>
         </div>
@@ -104,13 +104,13 @@ export default function MapView({
         .bindPopup(`
           <div class="p-1 min-w-[200px]">
             <div class="flex items-center gap-2">
-              <img src="${displayPhoto}" class="w-10 h-10 rounded-lg object-cover border p-0.5 bg-emerald-50" />
+              <img src="${displayPhoto}" class="w-10 h-10 rounded-lg object-cover border p-0.5 bg-sky-50" />
               <div>
                 <h4 class="font-bold text-sm text-slate-900 leading-tight">${worker.skill}</h4>
-                <p class="text-xs text-emerald-700 font-semibold">${worker.experience} • ${worker.distance} km</p>
+                <p class="text-xs text-[#3378BC] font-semibold">${worker.experience} • ${worker.distance} km</p>
               </div>
             </div>
-            <p class="text-[11px] text-slate-500 mt-2 bg-emerald-50 border border-emerald-200 p-1.5 rounded font-medium">
+            <p class="text-[11px] text-slate-500 mt-2 bg-sky-50 border border-sky-200 p-1.5 rounded font-medium">
               ✓ ${worker.cooperativeName}
             </p>
             <div class="mt-2 flex items-center justify-between">
@@ -120,7 +120,7 @@ export default function MapView({
               </div>
               <button 
                 id="popup-btn-${worker.id}" 
-                class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded shadow-sm"
+                class="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-2.5 py-1 rounded shadow-sm"
               >
                 Select & Book
               </button>
@@ -153,8 +153,8 @@ export default function MapView({
   }, [workers, selectedWorker, customerLoc]);
 
   return (
-    <div className="relative w-full h-full min-h-[380px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
-      <div ref={mapContainerRef} className="w-full h-full min-h-[380px] z-10" />
+    <div className="relative w-full h-full min-h-[300px] sm:min-h-[380px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner z-0 isolate">
+      <div ref={mapContainerRef} className="w-full h-full min-h-[300px] sm:min-h-[380px] z-10" />
 
       {/* Map Legend Overlay */}
       <div className="absolute bottom-3 left-3 z-[400] bg-white/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-md border border-slate-200 text-xs space-y-1">
@@ -163,7 +163,7 @@ export default function MapView({
           <span className="font-semibold text-slate-700">Your Location (Customer)</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-emerald-600 border border-white"></span>
+          <span className="w-3 h-3 rounded-full bg-[#3378BC] border border-white"></span>
           <span className="font-semibold text-slate-700">Cooperative Worker Pin</span>
         </div>
       </div>

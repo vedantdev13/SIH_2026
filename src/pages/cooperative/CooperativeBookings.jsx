@@ -73,7 +73,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-xl font-extrabold text-slate-900">Booking Dispatch Center</h2>
-              <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+              <span className="bg-sky-50 text-[#3378BC] text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-sky-200">
                 {filteredBookings.length} Bookings
               </span>
             </div>
@@ -89,7 +89,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
               placeholder="Search booking ID, customer or service..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 rounded-xl pl-9 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full sm:w-64 shadow-sm"
+              className="bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 rounded-xl pl-9 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3378BC] w-full sm:w-64 shadow-sm"
             />
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
               onClick={() => setFilterStatus(st)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 filterStatus === st 
-                  ? 'bg-emerald-600 text-white shadow-sm' 
+                  ? 'bg-[#3378BC] text-white shadow-sm' 
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
               }`}
             >
@@ -122,8 +122,8 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
           filteredBookings.map(b => {
             const statusColors = {
               'New': 'bg-amber-50 text-amber-800 border-amber-200',
-              'Confirmed & Worker Dispatched': 'bg-blue-50 text-blue-800 border-blue-200',
-              'Assigned': 'bg-blue-50 text-blue-800 border-blue-200',
+              'Confirmed & Worker Dispatched': 'bg-sky-50 text-[#3378BC] border-sky-200',
+              'Assigned': 'bg-sky-50 text-[#3378BC] border-sky-200',
               'In Progress': 'bg-purple-50 text-purple-800 border-purple-200',
               'Completed': 'bg-emerald-50 text-emerald-800 border-emerald-200'
             };
@@ -143,7 +143,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
                       <span className="font-mono text-xs font-bold bg-slate-100 text-slate-800 px-2.5 py-1 rounded-lg border border-slate-200">
                         {b.id}
                       </span>
-                      <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                      <span className="text-xs font-bold text-[#3378BC] bg-sky-50 px-3 py-1 rounded-full border border-sky-200">
                         {b.serviceName || 'Service'}
                       </span>
                       <span className={`text-[11px] font-bold px-3 py-1 rounded-full border ${statusColors[currentStatus] || 'bg-slate-100 text-slate-700'}`}>
@@ -151,7 +151,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
                       </span>
                       <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full border ${
                         b.paymentStatus === 'Paid'
-                          ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                          ? 'bg-sky-100 text-blue-900 border-sky-300'
                           : 'bg-amber-100 text-amber-900 border-amber-300'
                       }`}>
                         {b.paymentStatus === 'Paid' ? `Paid (${b.paymentMethod || 'Online'})` : 'Payment Pending'}
@@ -166,7 +166,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
                         Customer: {b.customerName || 'Customer'} <span className="text-xs text-slate-500 font-normal">({b.customerPhone || '+91 98230XXXXX'})</span>
                       </h3>
                       <p className="text-xs text-slate-600 flex items-center gap-1.5 mt-1">
-                        <MapPin className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <MapPin className="w-4 h-4 text-[#3378BC] shrink-0" />
                         {b.address || b.location || 'Nagpur Location'}
                       </p>
                       {b.problem && (
@@ -184,17 +184,17 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
                       <img 
                         src={b.workerPhoto || 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=400&q=80'} 
                         alt="Worker" 
-                        className="w-12 h-12 rounded-xl object-cover border-2 border-emerald-500/40" 
+                        className="w-12 h-12 rounded-xl object-cover border-2 border-[#3378BC]/40" 
                       />
                       <div>
                         <span className="text-[10px] text-slate-400 uppercase font-bold block">Assigned Worker</span>
                         <h4 className="text-xs font-extrabold text-slate-900">{b.workerName || 'Unassigned'}</h4>
-                        <span className="text-[10px] text-emerald-700 font-medium block">{b.workerSkill || 'Cooperative Member'}</span>
+                        <span className="text-[10px] text-[#3378BC] font-medium block">{b.workerSkill || 'Cooperative Member'}</span>
                       </div>
                     </div>
 
                     <div className="space-y-2 text-right w-full sm:w-auto">
-                      <span className="text-sm font-black text-emerald-700 block">
+                      <span className="text-sm font-black text-[#3378BC] block">
                         Amount: {b.amount || '₹349'}
                       </span>
 
@@ -222,7 +222,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
                         {currentStatus === 'In Progress' && (
                           <button
                             onClick={() => handleStatusUpdate(b.id, 'Completed')}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm"
+                            className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm"
                           >
                             Mark Completed
                           </button>
@@ -263,17 +263,17 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
                   key={w.id}
                   onClick={() => setSelectedWorkerId(w.id)}
                   className={`p-3 rounded-2xl border cursor-pointer transition-all flex items-center justify-between ${
-                    selectedWorkerId === w.id ? 'bg-emerald-50 border-emerald-500 text-slate-900 shadow-sm' : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-700'
+                    selectedWorkerId === w.id ? 'bg-sky-50 border-[#3378BC] text-slate-900 shadow-sm' : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-700'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <img src={w.photo} className="w-10 h-10 rounded-xl object-cover border" />
                     <div>
                       <h4 className="font-bold text-xs text-slate-900">{w.name}</h4>
-                      <p className="text-[11px] text-emerald-700">{w.skill} • {w.experience}</p>
+                      <p className="text-[11px] text-[#3378BC]">{w.skill} • {w.experience}</p>
                     </div>
                   </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${w.availability === 'Available Now' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}`}>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${w.availability === 'Available Now' ? 'bg-sky-100 text-[#3378BC]' : 'bg-slate-200 text-slate-600'}`}>
                     {w.availability}
                   </span>
                 </div>
@@ -287,7 +287,7 @@ export default function CooperativeBookings({ bookings = [], setBookings, worker
               <button
                 onClick={() => handleAssignWorker(assigningBookingId)}
                 disabled={!selectedWorkerId}
-                className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
+                className="bg-[#3378BC] hover:bg-[#28639d] disabled:opacity-50 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
               >
                 Assign Worker
               </button>

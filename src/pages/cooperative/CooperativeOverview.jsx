@@ -71,13 +71,13 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
     <div className="space-y-8">
       
       {/* BANNER HEADER (Matching Sahakaar Hero Banner) */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white p-6 sm:p-8 rounded-3xl shadow-xl space-y-4 relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-emerald-500/10 blur-2xl pointer-events-none"></div>
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-950 text-white p-6 sm:p-8 rounded-3xl shadow-xl space-y-4 relative overflow-hidden">
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-[#3378BC]/10 blur-2xl pointer-events-none"></div>
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 px-3.5 py-1 rounded-full text-emerald-300 text-xs font-bold">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="inline-flex items-center gap-2 bg-[#3378BC]/20 border border-[#3378BC]/40 px-3.5 py-1 rounded-full text-blue-300 text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
               COOPERATIVE WORKFORCE DASHBOARD
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
@@ -98,7 +98,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
 
             <Link
               to="/cooperative/welfare"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md flex items-center gap-2 transition-all"
+              className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md flex items-center gap-2 transition-all"
             >
               <HeartHandshake className="w-4 h-4" /> Worker Welfare
             </Link>
@@ -112,18 +112,18 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
           <div className="flex items-center justify-between text-slate-500">
             <span className="text-[11px] font-bold">Total Workers</span>
-            <Users className="w-4 h-4 text-emerald-600" />
+            <Users className="w-4 h-4 text-[#3378BC]" />
           </div>
           <p className="text-2xl font-extrabold text-slate-900">{totalWorkers}</p>
-          <span className="text-[10px] text-emerald-700 font-semibold block">Verified Co-op Members</span>
+          <span className="text-[10px] text-[#3378BC] font-semibold block">Verified Co-op Members</span>
         </div>
 
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
           <div className="flex items-center justify-between text-slate-500">
             <span className="text-[11px] font-bold">Active Workers</span>
-            <UserCheck className="w-4 h-4 text-teal-600" />
+            <UserCheck className="w-4 h-4 text-sky-600" />
           </div>
-          <p className="text-2xl font-extrabold text-teal-700">{activeWorkers}</p>
+          <p className="text-2xl font-extrabold text-[#3378BC]">{activeWorkers}</p>
           <span className="text-[10px] text-slate-500 font-medium block">Ready for Dispatch</span>
         </div>
 
@@ -139,16 +139,16 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
           <div className="flex items-center justify-between text-slate-500">
             <span className="text-[11px] font-bold">Completed Jobs</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <CheckCircle2 className="w-4 h-4 text-[#3378BC]" />
           </div>
-          <p className="text-2xl font-extrabold text-emerald-600">{completedJobsCount}</p>
-          <span className="text-[10px] text-emerald-700 font-medium block">Satisfied Customers</span>
+          <p className="text-2xl font-extrabold text-[#3378BC]">{completedJobsCount}</p>
+          <span className="text-[10px] text-[#3378BC] font-medium block">Satisfied Customers</span>
         </div>
 
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
           <div className="flex items-center justify-between text-slate-500">
             <span className="text-[11px] font-bold">Total Earnings</span>
-            <IndianRupee className="w-4 h-4 text-emerald-600" />
+            <IndianRupee className="w-4 h-4 text-[#3378BC]" />
           </div>
           <p className="text-2xl font-extrabold text-slate-900">₹{totalEarnings.toLocaleString('en-IN')}</p>
           <span className="text-[10px] text-slate-500 font-medium block">100% to Co-op Pool</span>
@@ -171,7 +171,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-lg font-extrabold text-slate-900">Recent Customer Bookings</h3>
-              <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+              <span className="bg-sky-50 text-[#3378BC] text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-sky-200">
                 Interactive Status Workflow
               </span>
             </div>
@@ -182,7 +182,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
 
           <Link
             to="/cooperative/bookings"
-            className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 shrink-0"
+            className="text-xs font-bold text-[#3378BC] hover:text-[#28639d] flex items-center gap-1 shrink-0"
           >
             View All Bookings ({bookings.length}) <ChevronRight className="w-4 h-4" />
           </Link>
@@ -198,8 +198,8 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
             bookings.slice(0, 5).map((booking) => {
               const statusColors = {
                 'New': 'bg-amber-50 text-amber-800 border-amber-200',
-                'Confirmed & Worker Dispatched': 'bg-blue-50 text-blue-800 border-blue-200',
-                'Assigned': 'bg-blue-50 text-blue-800 border-blue-200',
+                'Confirmed & Worker Dispatched': 'bg-sky-50 text-[#3378BC] border-sky-200',
+                'Assigned': 'bg-sky-50 text-[#3378BC] border-sky-200',
                 'In Progress': 'bg-purple-50 text-purple-800 border-purple-200',
                 'Completed': 'bg-emerald-50 text-emerald-800 border-emerald-200'
               };
@@ -217,7 +217,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
                       <span className="font-mono text-xs font-bold bg-white text-slate-800 px-2.5 py-0.5 rounded border border-slate-200 shadow-sm">
                         {booking.id}
                       </span>
-                      <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      <span className="text-xs font-bold text-[#3378BC] bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200">
                         {booking.serviceName || 'Service'}
                       </span>
                       <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${statusColors[currentStatus] || 'bg-slate-100 text-slate-700 border-slate-200'}`}>
@@ -233,7 +233,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
                         {booking.customerName || 'Customer'} <span className="text-xs text-slate-500 font-normal">({booking.customerPhone || 'Ph: +91 98230XXXXX'})</span>
                       </h4>
                       <p className="text-xs text-slate-600 flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <MapPin className="w-3.5 h-3.5 text-[#3378BC] shrink-0" />
                         {booking.address || booking.location || 'Nagpur Location'}
                       </p>
                       {booking.problem && (
@@ -252,18 +252,18 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
                       <img 
                         src={booking.workerPhoto || 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=400&q=80'} 
                         alt="Worker" 
-                        className="w-10 h-10 rounded-xl object-cover border border-emerald-500/40" 
+                        className="w-10 h-10 rounded-xl object-cover border border-[#3378BC]/40" 
                       />
                       <div>
                         <span className="text-[10px] text-slate-400 uppercase font-bold block">Assigned Worker</span>
                         <span className="text-xs font-extrabold text-slate-900">{booking.workerName || 'Unassigned'}</span>
-                        <span className="text-[10px] text-emerald-700 block font-medium">{booking.workerSkill || 'Service Expert'}</span>
+                        <span className="text-[10px] text-[#3378BC] block font-medium">{booking.workerSkill || 'Service Expert'}</span>
                       </div>
                     </div>
 
                     {/* Amount & Interactive Workflow Buttons */}
                     <div className="space-y-2 w-full sm:w-auto text-right">
-                      <span className="text-sm font-black text-emerald-700 block">
+                      <span className="text-sm font-black text-[#3378BC] block">
                         Amount: {booking.amount || '₹349'}
                       </span>
 
@@ -290,7 +290,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
                         {currentStatus === 'In Progress' && (
                           <button
                             onClick={() => handleStatusChange(booking.id, 'Completed')}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm transition-all"
+                            className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm transition-all"
                           >
                             Mark Completed
                           </button>
@@ -328,7 +328,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
             </div>
 
             <p className="text-xs text-slate-600">
-              Select an available verified worker for booking <strong className="text-emerald-700">{selectedBookingForAssign}</strong>:
+              Select an available verified worker for booking <strong className="text-[#3378BC]">{selectedBookingForAssign}</strong>:
             </p>
 
             <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
@@ -338,7 +338,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
                   onClick={() => setSelectedWorkerId(w.id)}
                   className={`p-3 rounded-2xl border cursor-pointer transition-all flex items-center justify-between ${
                     selectedWorkerId === w.id 
-                      ? 'bg-emerald-50 border-emerald-500 text-slate-900 shadow-sm' 
+                      ? 'bg-sky-50 border-[#3378BC] text-slate-900 shadow-sm' 
                       : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-700'
                   }`}
                 >
@@ -346,10 +346,10 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
                     <img src={w.photo} className="w-10 h-10 rounded-xl object-cover border" />
                     <div>
                       <h5 className="font-bold text-xs text-slate-900">{w.name}</h5>
-                      <p className="text-[11px] text-emerald-700 font-medium">{w.skill} • {w.experience}</p>
+                      <p className="text-[11px] text-[#3378BC] font-medium">{w.skill} • {w.experience}</p>
                     </div>
                   </div>
-                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${w.availability === 'Available Now' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}`}>
+                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${w.availability === 'Available Now' ? 'bg-sky-100 text-[#3378BC]' : 'bg-slate-200 text-slate-600'}`}>
                     {w.availability}
                   </span>
                 </div>
@@ -366,7 +366,7 @@ export default function CooperativeOverview({ bookings = [], workers = [], setBo
               <button
                 onClick={() => handleAssignWorker(selectedBookingForAssign)}
                 disabled={!selectedWorkerId}
-                className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
+                className="bg-[#3378BC] hover:bg-[#28639d] disabled:opacity-50 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
               >
                 Confirm Assignment
               </button>

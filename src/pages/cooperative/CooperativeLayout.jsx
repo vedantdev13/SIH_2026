@@ -67,19 +67,19 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
       {/* MOBILE SIDEBAR TOGGLE HEADER */}
       <div className="md:hidden bg-white border-b border-slate-200 p-4 flex items-center justify-between sticky top-16 z-30 shadow-sm">
         <div className="flex items-center gap-2 min-w-0 flex-1">
-          <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold shadow-sm shrink-0">
+          <div className="w-8 h-8 rounded-lg bg-[#3378BC] flex items-center justify-center text-white font-bold shadow-sm shrink-0">
             <Building2 className="w-5 h-5" />
           </div>
           <div className="min-w-0 flex-1">
             <h2 className="font-extrabold text-sm text-slate-900 leading-tight">Cooperative Admin</h2>
-            <p className="text-[10px] text-emerald-700 font-semibold truncate">{activeCoop.name}</p>
+            <p className="text-[10px] text-[#3378BC] font-semibold truncate">{activeCoop.name}</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
           <Link
             to="/"
-            className="p-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold flex items-center gap-1"
+            className="p-2 rounded-lg bg-sky-50 text-[#3378BC] hover:bg-sky-100 border border-sky-200 text-xs font-bold flex items-center gap-1"
             title="Back to Customer Site"
           >
             <Home className="w-4 h-4" />
@@ -103,15 +103,15 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
           
           {/* Header Brand Badge (with proper flex bounds to prevent overflow) */}
           <div className="hidden md:flex items-center gap-3 px-2 pt-2 min-w-0">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#3378BC] to-sky-500 flex items-center justify-center text-white shadow-md shadow-[#3378BC]/20 shrink-0">
               <Building2 className="w-6 h-6" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-base tracking-tight bg-gradient-to-r from-emerald-800 via-teal-700 to-slate-900 bg-clip-text text-transparent truncate">
+                <span className="font-extrabold text-base tracking-tight bg-gradient-to-r from-blue-900 via-[#3378BC] to-slate-900 bg-clip-text text-transparent truncate">
                   Co-op Portal
                 </span>
-                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded border border-emerald-200 shrink-0">
+                <span className="bg-sky-100 text-[#3378BC] text-[10px] font-bold px-1.5 py-0.5 rounded border border-sky-200 shrink-0">
                   ADMIN
                 </span>
               </div>
@@ -125,9 +125,9 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
           <div className="px-1">
             <Link
               to="/"
-              className="w-full bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 border border-slate-200 hover:border-emerald-300 text-xs font-bold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm group"
+              className="w-full bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-[#3378BC] border border-slate-200 hover:border-sky-300 text-xs font-bold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm group"
             >
-              <ArrowLeft className="w-4 h-4 text-slate-500 group-hover:text-emerald-700 transition-transform group-hover:-translate-x-0.5" />
+              <ArrowLeft className="w-4 h-4 text-slate-500 group-hover:text-[#3378BC] transition-transform group-hover:-translate-x-0.5" />
               <span>Back to Main Homepage</span>
             </Link>
           </div>
@@ -141,7 +141,7 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
               <select
                 value={selectedCoopId}
                 onChange={(e) => setSelectedCoopId(e.target.value)}
-                className="w-full bg-white border border-slate-300 text-emerald-950 font-bold text-xs rounded-xl py-2 px-3 pr-8 appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-sm cursor-pointer hover:border-emerald-400 transition-colors truncate"
+                className="w-full bg-white border border-slate-300 text-blue-950 font-bold text-xs rounded-xl py-2 px-3 pr-8 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3378BC] focus:border-[#3378BC] shadow-sm cursor-pointer hover:border-sky-400 transition-colors truncate"
               >
                 {LABOUR_COOPERATIVES.map(coop => (
                   <option key={coop.id} value={coop.id}>
@@ -149,7 +149,7 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
                   </option>
                 ))}
               </select>
-              <ChevronDown className="w-4 h-4 text-emerald-700 absolute right-2.5 top-2.5 pointer-events-none" />
+              <ChevronDown className="w-4 h-4 text-[#3378BC] absolute right-2.5 top-2.5 pointer-events-none" />
             </div>
           </div>
 
@@ -170,13 +170,13 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
                   className={`
                     flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all group
                     ${active 
-                      ? 'bg-emerald-600 text-white shadow-sm' 
-                      : 'text-slate-600 hover:text-emerald-700 hover:bg-slate-100/80'
+                      ? 'bg-[#3378BC] text-white shadow-sm' 
+                      : 'text-slate-600 hover:text-[#3378BC] hover:bg-slate-100/80'
                     }
                   `}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Icon className={`w-4 h-4 ${active ? 'text-white' : item.highlight ? 'text-emerald-600' : item.aiBadge ? 'text-purple-600' : 'text-slate-400 group-hover:text-emerald-600'}`} />
+                    <Icon className={`w-4 h-4 ${active ? 'text-white' : item.highlight ? 'text-[#3378BC]' : item.aiBadge ? 'text-purple-600' : 'text-slate-400 group-hover:text-[#3378BC]'}`} />
                     <span>{item.name}</span>
                   </div>
 
@@ -191,7 +191,7 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
                     </span>
                   )}
                   {item.highlight && !active && (
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-[#3378BC] animate-pulse" />
                   )}
                 </Link>
               );
@@ -205,7 +205,7 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
           <div className="bg-white p-3 rounded-xl border border-slate-200 space-y-1 shadow-sm">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold text-slate-700">Backend API</span>
-              <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${isBackendLive ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-amber-100 text-amber-800 border border-amber-300'}`}>
+              <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${isBackendLive ? 'bg-sky-100 text-[#3378BC] border border-sky-300' : 'bg-amber-100 text-amber-800 border border-amber-300'}`}>
                 <Server className="w-3 h-3" />
                 {isBackendLive ? 'MongoDB Live' : 'Mock Fallback'}
               </span>
@@ -230,8 +230,8 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-extrabold text-slate-900">{currentTabName}</h1>
-              <span className="bg-emerald-100 border border-emerald-200 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 shrink-0">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> Verified Co-op Admin
+              <span className="bg-sky-100 border border-sky-200 text-[#3378BC] text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 shrink-0">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#3378BC]" /> Verified Co-op Admin
               </span>
             </div>
             <p className="text-xs text-slate-500 mt-0.5 truncate">
@@ -243,15 +243,15 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
             {/* PROMINENT BACK TO HOMEPAGE BUTTON IN TOP HEADER */}
             <Link
               to="/"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2"
+              className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2"
             >
-              <Home className="w-4 h-4 text-emerald-100" />
+              <Home className="w-4 h-4 text-sky-100" />
               <span>Back to Customer Homepage</span>
             </Link>
 
             <div className="hidden lg:flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200 text-xs">
               <span className="text-slate-500">Reg No:</span>
-              <span className="font-mono text-emerald-700 font-bold">{activeCoop.regNo}</span>
+              <span className="font-mono text-[#3378BC] font-bold">{activeCoop.regNo}</span>
             </div>
 
             <button
@@ -259,16 +259,16 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
               className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-3 py-2 rounded-xl flex items-center gap-1.5 border border-slate-200 transition-all shadow-sm"
               title="Cooperative Society Settings"
             >
-              <Settings className="w-4 h-4 text-emerald-600" />
+              <Settings className="w-4 h-4 text-[#3378BC]" />
               <span className="hidden sm:inline">Society Profile</span>
             </button>
 
             <button 
               onClick={() => checkBackendHealth().then(res => setIsBackendLive(!!res))}
-              className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 hover:text-emerald-700 hover:bg-slate-200 transition-colors shadow-sm"
+              className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 hover:text-[#3378BC] hover:bg-slate-200 transition-colors shadow-sm"
               title="Refresh API Connection"
             >
-              <RefreshCw className="w-4 h-4 text-emerald-600" />
+              <RefreshCw className="w-4 h-4 text-[#3378BC]" />
             </button>
           </div>
         </header>
@@ -359,7 +359,7 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
           <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-emerald-600" />
+                <Building2 className="w-5 h-5 text-[#3378BC]" />
                 <h3 className="font-extrabold text-slate-900 text-lg">Cooperative Society Profile & Settings</h3>
               </div>
               <button onClick={() => setShowSettingsModal(false)} className="text-slate-400 hover:text-slate-700 font-bold">✕</button>
@@ -369,7 +369,7 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Registered Society Name</span>
                 <p className="text-base font-extrabold text-slate-900">{activeCoop.name}</p>
-                <span className="text-emerald-700 font-bold">State Registration Code: {activeCoop.regNo}</span>
+                <span className="text-[#3378BC] font-bold">State Registration Code: {activeCoop.regNo}</span>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -389,7 +389,7 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
                     type="text"
                     value={welfareReserve}
                     onChange={(e) => setWelfareReserve(e.target.value)}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-emerald-800"
+                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-[#3378BC]"
                   />
                 </div>
               </div>
@@ -401,13 +401,13 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
                 </div>
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                   <span className="text-slate-500 font-medium block">Active Members</span>
-                  <span className="font-extrabold text-emerald-700">{workers.length} Verified Tradespeople</span>
+                  <span className="font-extrabold text-[#3378BC]">{workers.length} Verified Tradespeople</span>
                 </div>
               </div>
 
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-3.5 rounded-2xl space-y-1">
+              <div className="bg-sky-50 border border-sky-200 text-blue-900 p-3.5 rounded-2xl space-y-1">
                 <span className="font-bold block">✓ Government Cooperative Registrar Audit Status</span>
-                <p className="text-[11px] text-emerald-800">
+                <p className="text-[11px] text-blue-800">
                   Fully compliant under Maharashtra Cooperative Societies Act 1960. Next statutory AGM audit scheduled Q4 2026.
                 </p>
               </div>
@@ -416,7 +416,7 @@ export default function CooperativeLayout({ bookings = [], workers = [], setWork
             <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
               <button
                 onClick={() => setShowSettingsModal(false)}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-sm"
+                className="bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-sm"
               >
                 Save Settings & Close
               </button>

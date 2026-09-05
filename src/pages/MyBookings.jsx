@@ -203,7 +203,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
           </div>
 
           <div className="bg-white/10 border border-white/10 rounded-2xl p-3 text-center">
-            <span className="text-xl sm:text-2xl font-black text-emerald-400 block">{completedCount}</span>
+            <span className="text-xl sm:text-2xl font-black text-sky-400 block">{completedCount}</span>
             <span className="text-[11px] text-slate-300">Completed Services</span>
           </div>
 
@@ -336,7 +336,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
                     <td className="py-4 px-6 text-center">
                       <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-extrabold border ${
                         b.paymentStatus === 'Paid'
-                          ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                          ? 'bg-sky-100 text-blue-900 border-sky-300'
                           : 'bg-amber-100 text-amber-900 border-amber-300'
                       }`}>
                         {b.paymentStatus || 'Pending'}
@@ -364,7 +364,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
               </p>
               <Link
                 to="/services"
-                className="inline-flex items-center gap-1.5 bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-sm"
+                className="inline-flex items-center gap-1.5 bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-xs px-4 py-2 rounded-xl shadow-sm"
               >
                 Browse & Book Services
               </Link>
@@ -379,10 +379,10 @@ export default function MyBookings({ bookings = [], currentUser }) {
 
               const statusColors = {
                 'New': 'bg-amber-50 text-amber-800 border-amber-200',
-                'Confirmed & Worker Dispatched': 'bg-blue-50 text-blue-800 border-blue-200',
-                'Assigned': 'bg-blue-50 text-blue-800 border-blue-200',
+                'Confirmed & Worker Dispatched': 'bg-sky-50 text-[#3378BC] border-sky-200',
+                'Assigned': 'bg-sky-50 text-[#3378BC] border-sky-200',
                 'In Progress': 'bg-purple-50 text-purple-800 border-purple-200',
-                'Completed': 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                'Completed': 'bg-sky-50 text-[#3378BC] border-sky-200'
               };
 
               const currentStatus = b.status || 'New';
@@ -522,7 +522,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
                     <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200">
                       <span className={`px-2.5 py-1 rounded-full font-bold text-[11px] border ${
                         b.paymentStatus === 'Paid'
-                          ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                          ? 'bg-sky-100 text-blue-900 border-sky-300'
                           : 'bg-amber-100 text-amber-900 border-amber-300'
                       }`}>
                         {b.paymentStatus || 'Pending'}

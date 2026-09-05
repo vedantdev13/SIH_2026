@@ -91,7 +91,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-extrabold text-slate-900">Cooperative Worker Roster</h2>
-            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+            <span className="bg-sky-50 text-[#3378BC] text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-sky-200">
               {filteredWorkers.length} Members Registered
             </span>
           </div>
@@ -109,14 +109,14 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
               placeholder="Search worker by name or locality..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 rounded-xl pl-9 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 w-48 sm:w-64 shadow-sm"
+              className="bg-slate-50 border border-slate-300 text-xs text-slate-900 placeholder-slate-400 rounded-xl pl-9 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3378BC] w-48 sm:w-64 shadow-sm"
             />
           </div>
 
           <select
             value={selectedSkillFilter}
             onChange={(e) => setSelectedSkillFilter(e.target.value)}
-            className="bg-slate-50 border border-slate-300 text-xs text-emerald-800 font-bold rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
+            className="bg-slate-50 border border-slate-300 text-xs text-[#3378BC] font-bold rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3378BC] shadow-sm"
           >
             {skillsList.map(skill => (
               <option key={skill} value={skill}>{skill}</option>
@@ -125,7 +125,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
 
           <button
             onClick={() => setShowRegisterModal(true)}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm transition-all"
+            className="bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm transition-all"
           >
             <UserPlus className="w-4 h-4" /> Register New Worker Member
           </button>
@@ -147,11 +147,11 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                   <img 
                     src={w.photo} 
                     alt={w.name} 
-                    className="w-14 h-14 rounded-2xl object-cover border-2 border-emerald-500/60 shadow-sm"
+                    className="w-14 h-14 rounded-2xl object-cover border-2 border-[#3378BC]/60 shadow-sm"
                   />
                   <div>
                     <h3 className="font-extrabold text-slate-900 text-base leading-snug">{w.name}</h3>
-                    <p className="text-xs text-emerald-700 font-bold flex items-center gap-1">
+                    <p className="text-xs text-[#3378BC] font-bold flex items-center gap-1">
                       {w.skill} • {w.experience}
                     </p>
                     <span className="text-[10px] text-slate-400 font-mono">ID: {w.id}</span>
@@ -162,7 +162,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                   onClick={() => toggleAvailability(w.id, w.availability)}
                   className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full border transition-all ${
                     w.availability === 'Available Now'
-                      ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
+                      ? 'bg-sky-50 text-[#3378BC] border-sky-200 hover:bg-sky-100'
                       : 'bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200'
                   }`}
                   title="Click to toggle availability"
@@ -186,7 +186,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                 <div className="flex justify-between items-center text-slate-600">
                   <span>Standard Rate:</span>
                   <div className="text-right">
-                    <span className="font-bold text-emerald-700 block">{w.approxPrice}</span>
+                    <span className="font-bold text-[#3378BC] block">{w.approxPrice}</span>
                     <span className="text-[10px] text-slate-500 font-medium block">Price may vary by task</span>
                   </div>
                 </div>
@@ -197,12 +197,12 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
               </div>
 
               {/* Cooperative badge tag */}
-              <div className="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-[11px] text-emerald-800 flex items-center justify-between">
+              <div className="bg-sky-50 border border-sky-200 p-2.5 rounded-xl text-[11px] text-[#3378BC] flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-bold">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <ShieldCheck className="w-4 h-4 text-[#3378BC]" />
                   {w.badge || 'Verified Co-op Member'}
                 </span>
-                <span className="text-[10px] text-emerald-600 font-semibold">Cooperative</span>
+                <span className="text-[10px] text-[#3378BC] font-semibold">Cooperative</span>
               </div>
 
             </div>
@@ -213,7 +213,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                 onClick={() => setSelectedWorkerProfile(w)}
                 className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2 rounded-xl border border-slate-200 flex items-center justify-center gap-1.5 transition-all"
               >
-                <Eye className="w-3.5 h-3.5 text-emerald-600" /> View Profile
+                <Eye className="w-3.5 h-3.5 text-[#3378BC]" /> View Profile
               </button>
               
               <button
@@ -240,16 +240,16 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                 <img 
                   src={selectedWorkerProfile.photo} 
                   alt={selectedWorkerProfile.name} 
-                  className="w-16 h-16 rounded-2xl object-cover border-2 border-emerald-500 shadow-md"
+                  className="w-16 h-16 rounded-2xl object-cover border-2 border-[#3378BC] shadow-md"
                 />
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="font-extrabold text-slate-900 text-xl">{selectedWorkerProfile.name}</h3>
-                    <span className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    <span className="bg-sky-50 border border-sky-200 text-[#3378BC] text-[10px] font-bold px-2 py-0.5 rounded-full">
                       VERIFIED CO-OP
                     </span>
                   </div>
-                  <p className="text-xs text-emerald-700 font-bold">
+                  <p className="text-xs text-[#3378BC] font-bold">
                     {selectedWorkerProfile.skill} • {selectedWorkerProfile.experience} Experience
                   </p>
                   <p className="text-xs text-slate-500 mt-0.5">
@@ -272,13 +272,13 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
                 <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Cooperative Membership</span>
                 <p className="text-sm font-extrabold text-slate-900">{selectedWorkerProfile.cooperativeName || activeCoop?.name}</p>
-                <p className="text-xs text-emerald-700 font-medium">Status: Active Equity Shareholder</p>
+                <p className="text-xs text-[#3378BC] font-medium">Status: Active Equity Shareholder</p>
               </div>
 
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
                 <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Current Availability</span>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-extrabold text-emerald-700">{selectedWorkerProfile.availability}</span>
+                  <span className="text-sm font-extrabold text-[#3378BC]">{selectedWorkerProfile.availability}</span>
                   <button
                     onClick={() => {
                       toggleAvailability(selectedWorkerProfile.id, selectedWorkerProfile.availability);
@@ -294,7 +294,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
                 <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Insurance Status</span>
                 <p className="text-xs text-slate-800 font-semibold">{selectedWorkerProfile.welfareStatus || 'Covered under State Cooperative Medical & Life Insurance'}</p>
-                <span className="text-[10px] text-emerald-700 font-bold block">✓ Premium Fully Paid by Co-op</span>
+                <span className="text-[10px] text-[#3378BC] font-bold block">✓ Premium Fully Paid by Co-op</span>
               </div>
 
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
@@ -303,7 +303,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                   <span className="text-amber-500">★ {selectedWorkerProfile.rating}</span>
                   <span className="text-slate-500 text-xs">({selectedWorkerProfile.completedJobs} Jobs Completed)</span>
                 </p>
-                <p className="text-xs text-slate-600">Task Fee: <strong className="text-emerald-700">{selectedWorkerProfile.approxPrice}</strong></p>
+                <p className="text-xs text-slate-600">Task Fee: <strong className="text-[#3378BC]">{selectedWorkerProfile.approxPrice}</strong></p>
                 <span className="text-[10px] text-slate-500 font-medium block mt-0.5">Price may vary by task</span>
               </div>
 
@@ -323,7 +323,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
             <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
               <button
                 onClick={() => setSelectedWorkerProfile(null)}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-sm"
+                className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-sm"
               >
                 Close Profile
               </button>
@@ -432,7 +432,7 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                 </button>
                 <button
                   type="submit"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
+                  className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
                 >
                   Confirm Registration
                 </button>

@@ -158,8 +158,8 @@ export default function WorkerJobMapView({
   }, [jobs, selectedJob, workerLocation]);
 
   return (
-    <div className="relative w-full h-full min-h-[380px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
-      <div ref={mapContainerRef} className="w-full h-full min-h-[380px] z-10" />
+    <div className="relative w-full h-full min-h-[300px] sm:min-h-[380px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner z-0 isolate">
+      <div ref={mapContainerRef} className="w-full h-full min-h-[300px] sm:min-h-[380px] z-10" />
 
       {/* Map Legend Overlay */}
       <div className="absolute bottom-3 left-3 z-[400] bg-white/95 backdrop-blur-md px-3 py-2.5 rounded-xl shadow-md border border-slate-200 text-xs space-y-1.5">

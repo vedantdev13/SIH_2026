@@ -28,16 +28,16 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       
       {/* COOPERATIVE SELECTOR HEADER */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 px-3 py-1 rounded-full text-emerald-300 text-xs font-bold">
-              <Building2 className="w-4 h-4 text-emerald-400" />
+            <div className="inline-flex items-center gap-2 bg-[#3378BC]/20 border border-[#3378BC]/40 px-3 py-1 rounded-full text-blue-300 text-xs font-bold">
+              <Building2 className="w-4 h-4 text-blue-400" />
               LABOUR COOPERATIVE MANAGEMENT PORTAL
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold">{activeCoop.name}</h1>
             <p className="text-sm text-slate-300 flex flex-wrap items-center gap-4">
-              <span>Registration No: <strong className="text-emerald-400 font-mono">{activeCoop.regNo}</strong></span>
+              <span>Registration No: <strong className="text-blue-300 font-mono">{activeCoop.regNo}</strong></span>
               <span>•</span>
               <span>Zone: <strong className="text-white">{activeCoop.zone}</strong></span>
               <span>•</span>
@@ -53,7 +53,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
             <select
               value={selectedCoopId}
               onChange={(e) => setSelectedCoopId(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 text-emerald-300 font-bold text-sm rounded-xl py-2 px-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-slate-900 border border-slate-700 text-blue-300 font-bold text-sm rounded-xl py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#3378BC]"
             >
               {LABOUR_COOPERATIVES.map(coop => (
                 <option key={coop.id} value={coop.id}>
@@ -71,15 +71,15 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
             <span className="text-xs text-slate-400 block font-medium">Registered Member Workers</span>
             <div className="flex items-center justify-between mt-1">
               <span className="text-2xl font-extrabold text-white">{activeCoop.memberCount}</span>
-              <Users className="w-5 h-5 text-emerald-400" />
+              <Users className="w-5 h-5 text-blue-400" />
             </div>
           </div>
 
           <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60">
             <span className="text-xs text-slate-400 block font-medium">Active Bookings Queue</span>
             <div className="flex items-center justify-between mt-1">
-              <span className="text-2xl font-extrabold text-emerald-400">{bookings.length}</span>
-              <Clock className="w-5 h-5 text-emerald-400" />
+              <span className="text-2xl font-extrabold text-blue-400">{bookings.length}</span>
+              <Clock className="w-5 h-5 text-blue-400" />
             </div>
           </div>
 
@@ -94,8 +94,8 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
           <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60">
             <span className="text-xs text-slate-400 block font-medium">Fair Wage Payout Rate</span>
             <div className="flex items-center justify-between mt-1">
-              <span className="text-2xl font-extrabold text-emerald-400">100%</span>
-              <ShieldCheck className="w-5 h-5 text-emerald-400" />
+              <span className="text-2xl font-extrabold text-blue-400">100%</span>
+              <ShieldCheck className="w-5 h-5 text-blue-400" />
             </div>
           </div>
 
@@ -108,7 +108,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
           onClick={() => setActiveTab('bookings')}
           className={`pb-3 text-sm font-bold border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'bookings'
-              ? 'border-emerald-600 text-emerald-700'
+              ? 'border-[#3378BC] text-[#3378BC]'
               : 'border-transparent text-slate-500 hover:text-slate-900'
           }`}
         >
@@ -119,7 +119,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
           onClick={() => setActiveTab('workers')}
           className={`pb-3 text-sm font-bold border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'workers'
-              ? 'border-emerald-600 text-emerald-700'
+              ? 'border-[#3378BC] text-[#3378BC]'
               : 'border-transparent text-slate-500 hover:text-slate-900'
           }`}
         >
@@ -130,7 +130,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
           onClick={() => setActiveTab('welfare')}
           className={`pb-3 text-sm font-bold border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'welfare'
-              ? 'border-emerald-600 text-emerald-700'
+              ? 'border-[#3378BC] text-[#3378BC]'
               : 'border-transparent text-slate-500 hover:text-slate-900'
           }`}
         >
@@ -158,7 +158,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
                       <span className="font-mono font-bold text-xs bg-slate-100 text-slate-800 px-2 py-0.5 rounded">
                         {booking.id}
                       </span>
-                      <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                      <span className="text-xs font-bold text-[#3378BC] bg-sky-50 px-2 py-0.5 rounded border border-sky-200">
                         {booking.serviceName}
                       </span>
                       <span className="text-[11px] text-slate-400">{booking.createdAt}</span>
@@ -185,7 +185,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 block text-center">
+                      <span className="text-xs font-extrabold text-[#3378BC] bg-sky-50 px-2.5 py-1 rounded-lg border border-sky-200 block text-center">
                         {booking.status}
                       </span>
                       <span className="text-xs font-bold text-slate-800 block text-right">
@@ -206,7 +206,7 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-slate-900">Cooperative Member Roster</h3>
-            <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm">
+            <button className="bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm">
               <UserPlus className="w-4 h-4" /> Register New Worker Member
             </button>
           </div>
@@ -215,10 +215,10 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
             {coopWorkers.map(w => (
               <div key={w.id} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
                 <div className="flex items-center gap-3">
-                  <img src={w.photo} alt={w.name} className="w-12 h-12 rounded-xl object-cover border-2 border-emerald-500" />
+                  <img src={w.photo} alt={w.name} className="w-12 h-12 rounded-xl object-cover border-2 border-[#3378BC]" />
                   <div>
                     <h4 className="font-bold text-slate-900 text-base">{w.name}</h4>
-                    <p className="text-xs text-emerald-700 font-semibold">{w.skill} • {w.experience}</p>
+                    <p className="text-xs text-[#3378BC] font-semibold">{w.skill} • {w.experience}</p>
                     <span className="text-[11px] text-slate-500">ID: {w.id}</span>
                   </div>
                 </div>
@@ -234,12 +234,12 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
                   </div>
                   <div className="flex justify-between text-slate-600">
                     <span>Status:</span>
-                    <strong className="text-emerald-700">{w.availability}</strong>
+                    <strong className="text-[#3378BC]">{w.availability}</strong>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-slate-500">
-                  <span className="font-semibold text-emerald-800">✓ Verified Co-op ID</span>
+                  <span className="font-semibold text-[#3378BC]">✓ Verified Co-op ID</span>
                   <div className="text-right">
                     <span className="font-bold text-slate-800 block">{w.approxPrice}</span>
                     <span className="text-[10px] text-slate-500 font-medium block">Price may vary by task</span>
@@ -262,10 +262,10 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
-              <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block">Health & Accident Policy</span>
-              <p className="text-2xl font-extrabold text-emerald-900">₹3,00,000</p>
-              <p className="text-xs text-emerald-700">Cover per cooperative worker member</p>
+            <div className="bg-sky-50 border border-sky-200 p-5 rounded-2xl space-y-2">
+              <span className="text-xs font-bold text-[#3378BC] uppercase tracking-wider block">Health & Accident Policy</span>
+              <p className="text-2xl font-extrabold text-blue-950">₹3,00,000</p>
+              <p className="text-xs text-blue-700">Cover per cooperative worker member</p>
             </div>
 
             <div className="bg-amber-50 border border-amber-200 p-5 rounded-2xl space-y-2">

@@ -110,8 +110,8 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
 
         <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
           <span className="text-xs font-bold text-slate-500">Available Workers</span>
-          <p className="text-2xl font-black text-teal-600">{totalAvailable} Workers</p>
-          <p className="text-[11px] text-teal-700 font-medium">Active in Nagpur roster</p>
+          <p className="text-2xl font-black text-[#3378BC]">{totalAvailable} Workers</p>
+          <p className="text-[11px] text-[#3378BC] font-medium">Active in Nagpur roster</p>
         </div>
 
         <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-2">
@@ -161,7 +161,7 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
                 </div>
                 <div className="flex justify-between text-slate-600">
                   <span>Currently Available:</span>
-                  <strong className="text-emerald-700">{item.availableCount} workers</strong>
+                  <strong className="text-[#3378BC]">{item.availableCount} workers</strong>
                 </div>
                 <div className="flex justify-between text-slate-600 pt-1 border-t border-slate-200">
                   <span>Additional Needed:</span>
@@ -182,7 +182,7 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
       {/* HIGH DEMAND REGIONAL HOTSPOTS */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
         <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-          <MapPin className="w-5 h-5 text-emerald-600" />
+          <MapPin className="w-5 h-5 text-[#3378BC]" />
           Nagpur Regional Demand Hotspots
         </h3>
 
@@ -190,7 +190,7 @@ export default function AIDemandForecast({ bookings = [], workers = [], services
           {highDemandAreas.map((area, idx) => (
             <div key={idx} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1 shadow-sm">
               <span className="text-xs font-extrabold text-slate-900 block">{area.area}</span>
-              <p className="text-xs text-emerald-700 font-medium">{area.demand}</p>
+              <p className="text-xs text-[#3378BC] font-medium">{area.demand}</p>
             </div>
           ))}
         </div>

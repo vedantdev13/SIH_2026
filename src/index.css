@@ -28,6 +28,10 @@
   z-index: 1000 !important;
 }
 
+.leaflet-container {
+  z-index: 0 !important;
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;

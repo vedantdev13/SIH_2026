@@ -188,7 +188,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
       
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center gap-2 text-slate-600 hover:text-emerald-700 font-bold text-sm transition-colors"
+        className="inline-flex items-center gap-2 text-slate-600 hover:text-[#3378BC] font-bold text-sm transition-colors"
       >
         <ArrowLeft className="w-4 h-4" /> Back
       </button>
@@ -197,8 +197,8 @@ export default function BookingPage({ onAddBooking, currentUser }) {
         
         {/* Header */}
         <div className="border-b border-slate-100 pb-6">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 mb-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3378BC] bg-sky-50 px-2.5 py-1 rounded-md border border-sky-200 mb-2">
+            <ShieldCheck className="w-4 h-4 text-[#3378BC]" />
             Verified Labour Cooperative Booking
           </div>
           <h1 className="text-3xl font-extrabold text-slate-900">Book Cooperative Service</h1>
@@ -233,13 +233,13 @@ export default function BookingPage({ onAddBooking, currentUser }) {
             <img 
               src={getDisplayWorkerPhoto(worker, false)} 
               alt={getDisplayWorkerName(worker, false)} 
-              className="w-16 h-16 rounded-xl object-cover border-2 border-emerald-100 p-1 bg-emerald-50 shadow-sm" 
+              className="w-16 h-16 rounded-xl object-cover border-2 border-sky-100 p-1 bg-sky-50 shadow-sm" 
             />
             <div>
               <h3 className="font-extrabold text-slate-900 text-lg">{worker.skill}</h3>
-              <p className="text-xs font-semibold text-emerald-700">{worker.experience} exp</p>
+              <p className="text-xs font-semibold text-[#3378BC]">{worker.experience} exp</p>
               <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
-                <Building2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <Building2 className="w-3.5 h-3.5 text-[#3378BC] shrink-0" />
                 <span className="truncate max-w-xs">{worker.cooperativeName}</span>
               </div>
               <p className="text-[11px] text-amber-700 font-medium mt-1 flex items-center gap-1">
@@ -250,7 +250,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
 
           <div className="text-right w-full sm:w-auto border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200">
             <span className="text-xs text-slate-500 font-medium block">Estimated Fee</span>
-            <span className="text-xl font-extrabold text-emerald-700 block">{worker.approxPrice}</span>
+            <span className="text-xl font-extrabold text-[#3378BC] block">{worker.approxPrice}</span>
             <span className="text-[10px] text-slate-500 font-medium block mt-0.5">Price may vary by task</span>
           </div>
         </div>
@@ -270,7 +270,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
             {/* Date Selection */}
             <div className="space-y-2">
               <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                <Calendar className="w-4 h-4 text-emerald-600" /> Preferred Service Date
+                <Calendar className="w-4 h-4 text-[#3378BC]" /> Preferred Service Date
               </label>
               <input
                 type="date"
@@ -278,19 +278,19 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 min={new Date().toISOString().split('T')[0]}
-                className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
               />
             </div>
 
             {/* Time Slot Selection */}
             <div className="space-y-2">
               <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                <Clock className="w-4 h-4 text-emerald-600" /> Preferred Time Slot
+                <Clock className="w-4 h-4 text-[#3378BC]" /> Preferred Time Slot
               </label>
               <select
                 value={timeSlot}
                 onChange={(e) => setTimeSlot(e.target.value)}
-                className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 focus:border-[#3378BC]"
               >
                 <option value="09:00 AM - 11:00 AM">Morning: 09:00 AM - 11:00 AM</option>
                 <option value="11:00 AM - 01:00 PM">Morning: 11:00 AM - 01:00 PM</option>
@@ -310,7 +310,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                 required
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20"
               />
             </div>
 
@@ -321,7 +321,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                 required
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
-                className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20"
               />
             </div>
           </div>
@@ -329,7 +329,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
           {/* Service Address */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-emerald-600" /> Full Service Address
+              <MapPin className="w-4 h-4 text-[#3378BC]" /> Full Service Address
             </label>
             <input
               type="text"
@@ -337,21 +337,21 @@ export default function BookingPage({ onAddBooking, currentUser }) {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="House/Flat No., Building, Street Name, Area, City"
-              className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20"
             />
           </div>
 
           {/* Problem Description */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-              <FileText className="w-4 h-4 text-emerald-600" /> Describe Your Requirement / Work Needed
+              <FileText className="w-4 h-4 text-[#3378BC]" /> Describe Your Requirement / Work Needed
             </label>
             <textarea
               rows={3}
               value={problemDescription}
               onChange={(e) => setProblemDescription(e.target.value)}
               placeholder="Describe the issue (e.g. Tap leaking in kitchen, need 3-phase wiring inspection, door lock replacement...)"
-              className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"
+              className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20 resize-none"
             />
           </div>
 
@@ -363,24 +363,24 @@ export default function BookingPage({ onAddBooking, currentUser }) {
             </div>
             <div className="flex items-center justify-between text-slate-600">
               <span className="flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> Cooperative Welfare Reserve (5% included)
+                <ShieldCheck className="w-3.5 h-3.5 text-[#3378BC]" /> Cooperative Welfare Reserve (5% included)
               </span>
-              <span className="font-bold text-emerald-700">₹{welfareContribution}</span>
+              <span className="font-bold text-[#3378BC]">₹{welfareContribution}</span>
             </div>
             <div className="flex items-center justify-between text-slate-600">
               <span>Platform Convenience Fee</span>
-              <span className="font-bold text-emerald-700">₹0 (Co-op Subsidy)</span>
+              <span className="font-bold text-[#3378BC]">₹0 (Co-op Subsidy)</span>
             </div>
             <div className="border-t border-slate-200 pt-2 flex items-center justify-between font-extrabold text-sm text-slate-900">
               <span>Total Amount Payable</span>
-              <span className="text-emerald-700 text-base">{worker.approxPrice}</span>
+              <span className="text-[#3378BC] text-base">{worker.approxPrice}</span>
             </div>
           </div>
 
           {/* PROCEED TO PAYMENT GATEWAY BUTTON */}
           <button
             type="submit"
-            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base py-4 rounded-2xl shadow-lg shadow-emerald-600/25 transition-all flex items-center justify-center gap-2"
+            className="w-full bg-[#3378BC] hover:bg-[#28639d] text-white font-extrabold text-base py-4 rounded-2xl shadow-lg shadow-[#3378BC]/25 transition-all flex items-center justify-center gap-2"
           >
             <CreditCard className="w-5 h-5" /> 
             Proceed to Payment Gateway ({worker.approxPrice})
@@ -398,7 +398,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
             {/* Gateway Header */}
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold">
+                <div className="w-8 h-8 rounded-xl bg-[#3378BC] text-white flex items-center justify-center font-bold">
                   <Lock className="w-4 h-4" />
                 </div>
                 <div>
@@ -418,7 +418,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
             {/* Merchant & Amount Box */}
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2 text-center">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Total Amount to Pay</span>
-              <span className="text-3xl font-extrabold text-emerald-700 block">{worker.approxPrice}</span>
+              <span className="text-3xl font-extrabold text-[#3378BC] block">{worker.approxPrice}</span>
               <span className="text-[10px] text-slate-500 font-medium block mt-0.5">Price may vary by task</span>
               <p className="text-xs text-slate-600 font-medium">
                 Beneficiary: <strong className="text-slate-900">{worker.cooperativeName}</strong>
@@ -449,11 +449,11 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                       onClick={() => setPaymentMethod('upi')}
                       className={`p-3 rounded-xl border text-center transition-all ${
                         paymentMethod === 'upi'
-                          ? 'border-emerald-600 bg-emerald-50 text-emerald-900 font-bold ring-2 ring-emerald-500/20'
+                          ? 'border-[#3378BC] bg-sky-50 text-blue-900 font-bold ring-2 ring-[#3378BC]/20'
                           : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
                       }`}
                     >
-                      <Smartphone className="w-5 h-5 mx-auto mb-1 text-emerald-600" />
+                      <Smartphone className="w-5 h-5 mx-auto mb-1 text-[#3378BC]" />
                       <span className="text-xs block">UPI</span>
                     </button>
 
@@ -463,11 +463,11 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                       onClick={() => setPaymentMethod('card')}
                       className={`p-3 rounded-xl border text-center transition-all ${
                         paymentMethod === 'card'
-                          ? 'border-emerald-600 bg-emerald-50 text-emerald-900 font-bold ring-2 ring-emerald-500/20'
+                          ? 'border-[#3378BC] bg-sky-50 text-blue-900 font-bold ring-2 ring-[#3378BC]/20'
                           : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
                       }`}
                     >
-                      <CreditCard className="w-5 h-5 mx-auto mb-1 text-emerald-600" />
+                      <CreditCard className="w-5 h-5 mx-auto mb-1 text-[#3378BC]" />
                       <span className="text-xs block">Card</span>
                     </button>
 
@@ -477,11 +477,11 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                       onClick={() => setPaymentMethod('cash')}
                       className={`p-3 rounded-xl border text-center transition-all ${
                         paymentMethod === 'cash'
-                          ? 'border-emerald-600 bg-emerald-50 text-emerald-900 font-bold ring-2 ring-emerald-500/20'
+                          ? 'border-[#3378BC] bg-sky-50 text-blue-900 font-bold ring-2 ring-[#3378BC]/20'
                           : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
                       }`}
                     >
-                      <Banknote className="w-5 h-5 mx-auto mb-1 text-emerald-600" />
+                      <Banknote className="w-5 h-5 mx-auto mb-1 text-[#3378BC]" />
                       <span className="text-xs block">Cash</span>
                     </button>
                   </div>
@@ -497,7 +497,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                       <button
                         type="button"
                         onClick={() => setShowQr(!showQr)}
-                        className="text-[11px] font-bold text-emerald-700 hover:underline flex items-center gap-1"
+                        className="text-[11px] font-bold text-[#3378BC] hover:underline flex items-center gap-1"
                       >
                         <QrCode className="w-3.5 h-3.5" /> {showQr ? 'Hide QR' : 'Show Co-op QR'}
                       </button>
@@ -508,13 +508,13 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                       value={upiId}
                       onChange={(e) => setUpiId(e.target.value)}
                       placeholder="e.g. 9876543210@upi or name@okicici"
-                      className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                      className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20"
                     />
 
                     {showQr && (
                       <div className="bg-white p-3 rounded-xl border border-slate-200 text-center space-y-1">
                         <div className="w-28 h-28 bg-slate-900 text-white rounded-lg mx-auto flex items-center justify-center p-1">
-                          <QrCode className="w-16 h-16 text-emerald-400" />
+                          <QrCode className="w-16 h-16 text-sky-400" />
                         </div>
                         <span className="text-[9px] font-mono text-slate-500 block">{worker.cooperativeId}@upi</span>
                       </div>
@@ -533,7 +533,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                         value={cardNumber}
                         onChange={(e) => setCardNumber(e.target.value)}
                         placeholder="4532 •••• •••• 8892"
-                        className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                        className="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-[#3378BC]/20"
                       />
                     </div>
 
@@ -566,15 +566,15 @@ export default function BookingPage({ onAddBooking, currentUser }) {
 
                 {/* 3. CASH AGREEMENT INSIDE GATEWAY */}
                 {paymentMethod === 'cash' && (
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2 text-xs text-emerald-950">
-                    <p className="font-bold text-emerald-900">Cash Payment on Completion</p>
+                  <div className="bg-sky-50 border border-sky-200 rounded-2xl p-4 space-y-2 text-xs text-blue-950">
+                    <p className="font-bold text-blue-900">Cash Payment on Completion</p>
                     <p className="text-slate-600">Settle {worker.approxPrice} directly with tradesperson upon service delivery.</p>
-                    <label className="flex items-center gap-2 pt-2 border-t border-emerald-200 font-bold text-emerald-900 cursor-pointer">
+                    <label className="flex items-center gap-2 pt-2 border-t border-sky-200 font-bold text-blue-900 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={cashAgreed}
                         onChange={(e) => setCashAgreed(e.target.checked)}
-                        className="w-4 h-4 text-emerald-600 rounded cursor-pointer"
+                        className="w-4 h-4 text-[#3378BC] rounded cursor-pointer"
                       />
                       <span>I confirm cash payment upon service inspection</span>
                     </label>
@@ -593,7 +593,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
                   <button
                     type="button"
                     onClick={handleAuthorizeTransaction}
-                    className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
+                    className="flex-1 py-3 bg-[#3378BC] hover:bg-[#28639d] text-white font-extrabold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
                   >
                     <CheckCircle2 className="w-4 h-4" /> Pay & Authorize Booking
                   </button>
@@ -604,7 +604,7 @@ export default function BookingPage({ onAddBooking, currentUser }) {
             {/* PROCESSING STEP */}
             {transactionState === 'processing' && (
               <div className="py-8 text-center space-y-4">
-                <div className="w-14 h-14 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <div className="w-14 h-14 border-4 border-[#3378BC] border-t-transparent rounded-full animate-spin mx-auto"></div>
                 <div>
                   <h4 className="font-extrabold text-slate-900 text-base">Verifying Transaction with Bank...</h4>
                   <p className="text-xs text-slate-500 mt-1">Securing funds and dispatching booking order</p>
@@ -615,16 +615,16 @@ export default function BookingPage({ onAddBooking, currentUser }) {
             {/* SUCCESS STEP */}
             {transactionState === 'success' && (
               <div className="py-6 text-center space-y-3">
-                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-md">
+                <div className="w-16 h-16 bg-sky-100 text-[#3378BC] rounded-full flex items-center justify-center mx-auto shadow-md">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h4 className="font-extrabold text-slate-900 text-lg">Transaction Approved & Paid!</h4>
-                <p className="text-xs text-emerald-800 font-medium">Redirecting to verified booking receipt...</p>
+                <p className="text-xs text-[#3378BC] font-medium">Redirecting to verified booking receipt...</p>
               </div>
             )}
 
             <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-[10px] text-slate-400 text-center flex items-center justify-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#3378BC]" />
               <span>Strict Security: Booking is locked and dispatched only upon verified payment authorization.</span>
             </div>
 

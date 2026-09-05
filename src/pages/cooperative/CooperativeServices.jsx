@@ -49,7 +49,7 @@ export default function CooperativeServices({ services = [], setServices, worker
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-extrabold text-slate-900">Cooperative Service Offerings</h2>
-            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+            <span className="bg-sky-50 text-[#3378BC] text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-sky-200">
               {services.length} Services Cataloged
             </span>
           </div>
@@ -60,7 +60,7 @@ export default function CooperativeServices({ services = [], setServices, worker
 
         <button
           onClick={() => setShowAddServiceModal(true)}
-          className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-sm transition-all shrink-0"
+          className="bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-sm transition-all shrink-0"
         >
           <Plus className="w-4 h-4" /> Add New Service Category
         </button>
@@ -87,7 +87,7 @@ export default function CooperativeServices({ services = [], setServices, worker
                     )}
                     <div>
                       <h3 className="font-extrabold text-slate-900 text-lg">{srv.name}</h3>
-                      <span className="text-xs font-bold text-emerald-700">
+                      <span className="text-xs font-bold text-[#3378BC]">
                         Base Price: ₹{srv.startingPrice || srv.basePrice || 299}
                       </span>
                     </div>
@@ -97,7 +97,7 @@ export default function CooperativeServices({ services = [], setServices, worker
                     onClick={() => handleToggleActive(srv.id, isActive)}
                     className={`p-2 rounded-xl border text-xs font-bold flex items-center gap-1 transition-all ${
                       isActive 
-                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100' 
+                        ? 'bg-sky-50 text-[#3378BC] border-sky-200 hover:bg-sky-100' 
                         : 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100'
                     }`}
                     title="Click to toggle active status"
@@ -124,7 +124,7 @@ export default function CooperativeServices({ services = [], setServices, worker
                   onClick={() => setSelectedServiceForWorkers(srv)}
                   className="w-full bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs font-bold py-2.5 rounded-xl border border-slate-200 flex items-center justify-center gap-2 transition-all shadow-sm"
                 >
-                  <Eye className="w-4 h-4 text-emerald-600" /> View Workers for {srv.name}
+                  <Eye className="w-4 h-4 text-[#3378BC]" /> View Workers for {srv.name}
                 </button>
               </div>
 
@@ -154,10 +154,10 @@ export default function CooperativeServices({ services = [], setServices, worker
                       <img src={w.photo} className="w-10 h-10 rounded-xl object-cover border" />
                       <div>
                         <h4 className="font-bold text-xs text-slate-900">{w.name}</h4>
-                        <p className="text-[11px] text-emerald-700">{w.experience} • ★ {w.rating}</p>
+                        <p className="text-[11px] text-[#3378BC]">{w.experience} • ★ {w.rating}</p>
                       </div>
                     </div>
-                    <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-bold bg-sky-100 text-[#3378BC] px-2 py-0.5 rounded-full">
                       {w.availability}
                     </span>
                   </div>
@@ -166,7 +166,7 @@ export default function CooperativeServices({ services = [], setServices, worker
             </div>
 
             <div className="flex items-center justify-end pt-3 border-t border-slate-100">
-              <button onClick={() => setSelectedServiceForWorkers(null)} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm">
+              <button onClick={() => setSelectedServiceForWorkers(null)} className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm">
                 Close
               </button>
             </div>
@@ -229,7 +229,7 @@ export default function CooperativeServices({ services = [], setServices, worker
                 </button>
                 <button
                   type="submit"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
+                  className="bg-[#3378BC] hover:bg-[#28639d] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm"
                 >
                   Add Service Category
                 </button>

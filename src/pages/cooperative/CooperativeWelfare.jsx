@@ -17,9 +17,9 @@ export default function CooperativeWelfare({ workers = [], activeCoop }) {
     <div className="space-y-8">
       
       {/* BRAND DIFFERENTIATOR BANNER */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 p-6 sm:p-8 rounded-3xl text-white shadow-xl space-y-4">
-        <div className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 px-3.5 py-1 rounded-full text-emerald-300 text-xs font-bold w-fit">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-950 p-6 sm:p-8 rounded-3xl text-white shadow-xl space-y-4">
+        <div className="flex items-center gap-2 bg-[#3378BC]/20 border border-[#3378BC]/40 px-3.5 py-1 rounded-full text-blue-300 text-xs font-bold w-fit">
+          <ShieldCheck className="w-4 h-4 text-blue-400" />
           KEY DIFFERENTIATOR VS PRIVATE GIG PLATFORMS
         </div>
 
@@ -28,7 +28,7 @@ export default function CooperativeWelfare({ workers = [], activeCoop }) {
             Verified Cooperative Worker Welfare & Social Security
           </h2>
           <p className="text-sm text-slate-300 max-w-3xl leading-relaxed">
-            Unlike private aggregators (such as Urban Company) that treat gig workers as disposable contracts, <strong className="text-emerald-400">Sahakaar is 100% cooperative-owned</strong>. Every worker is a voting member with medical insurance, accident cover, skill upgrade grants, and annual AGM profit dividends.
+            Unlike private aggregators (such as Urban Company) that treat gig workers as disposable contracts, <strong className="text-blue-300">Sahakaar is 100% cooperative-owned</strong>. Every worker is a voting member with medical insurance, accident cover, skill upgrade grants, and annual AGM profit dividends.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function CooperativeWelfare({ workers = [], activeCoop }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-700/80">
           <div className="bg-white/10 p-4 rounded-2xl border border-white/20">
             <span className="text-[11px] text-slate-300 block font-bold uppercase tracking-wider">Health & Medical Cover</span>
-            <p className="text-2xl font-black text-emerald-400">₹3,00,000</p>
+            <p className="text-2xl font-black text-blue-300">₹3,00,000</p>
             <p className="text-xs text-slate-300">Policy per worker & family member</p>
           </div>
 
@@ -48,7 +48,7 @@ export default function CooperativeWelfare({ workers = [], activeCoop }) {
 
           <div className="bg-white/10 p-4 rounded-2xl border border-white/20">
             <span className="text-[11px] text-slate-300 block font-bold uppercase tracking-wider">Skill Guild Subsidies</span>
-            <p className="text-2xl font-black text-teal-300">₹85,000</p>
+            <p className="text-2xl font-black text-sky-300">₹85,000</p>
             <p className="text-xs text-slate-300">Tool upgrades & safety gear kits</p>
           </div>
         </div>
@@ -76,17 +76,17 @@ export default function CooperativeWelfare({ workers = [], activeCoop }) {
                 {/* Header worker info */}
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <img src={w.photo} className="w-14 h-14 rounded-2xl object-cover border-2 border-emerald-500/60 shadow-sm" />
+                    <img src={w.photo} className="w-14 h-14 rounded-2xl object-cover border-2 border-[#3378BC]/60 shadow-sm" />
                     <div>
                       <h4 className="font-extrabold text-slate-900 text-base">{w.name}</h4>
-                      <p className="text-xs text-emerald-700 font-bold">{w.skill} • {w.experience}</p>
+                      <p className="text-xs text-[#3378BC] font-bold">{w.skill} • {w.experience}</p>
                       <span className="text-[10px] text-slate-400 font-mono">ID: {w.id}</span>
                     </div>
                   </div>
 
                   {/* Availability badge */}
                   <span className={`text-[10px] font-extrabold px-3 py-1 rounded-full border ${
-                    isAvailable ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-amber-50 text-amber-800 border-amber-200'
+                    isAvailable ? 'bg-sky-50 text-[#3378BC] border-sky-200' : 'bg-amber-50 text-amber-800 border-amber-200'
                   }`}>
                     {isAvailable ? 'Active' : 'Not Available'}
                   </span>
@@ -97,22 +97,22 @@ export default function CooperativeWelfare({ workers = [], activeCoop }) {
                   
                   <div className="flex items-center justify-between">
                     <span className="text-slate-600 font-medium">Skill Verified:</span>
-                    <span className="text-emerald-800 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Verified
+                    <span className="text-[#3378BC] font-bold bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200 flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#3378BC]" /> Verified
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between">
                     <span className="text-slate-600 font-medium">Cooperative Member:</span>
-                    <span className="text-emerald-800 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> Active Member
+                    <span className="text-[#3378BC] font-bold bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200 flex items-center gap-1">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#3378BC]" /> Active Member
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between">
                     <span className="text-slate-600 font-medium">Insurance Status:</span>
-                    <span className="text-teal-800 font-bold bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200 flex items-center gap-1">
-                      <Award className="w-3.5 h-3.5 text-teal-600" /> Full Cover (₹3L)
+                    <span className="text-blue-900 font-bold bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200 flex items-center gap-1">
+                      <Award className="w-3.5 h-3.5 text-[#3378BC]" /> Full Cover (₹3L)
                     </span>
                   </div>
 

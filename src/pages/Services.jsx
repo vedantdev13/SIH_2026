@@ -94,26 +94,26 @@ export default function Services() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8 overflow-x-hidden">
       
       {/* PAGE HEADER */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
         <div>
           <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3378BC] bg-[#3378BC]/10 px-2.5 py-1 rounded-md border border-[#3378BC]/20 mb-2">
             <ShieldCheck className="w-4 h-4 text-[#3378BC]" />
             Verified Labour Cooperative Network
           </div>
-          <h1 className="text-3xl font-extrabold text-[#111827]">Find Nearby Skilled Workers</h1>
-          <p className="text-slate-600 text-sm mt-1">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827]">Find Nearby Skilled Workers</h1>
+          <p className="text-slate-600 text-xs sm:text-sm mt-1">
             Showing verified cooperative trade workers around <strong className="text-slate-800">{customerLoc.name}</strong>
           </p>
         </div>
 
         {/* View Toggle */}
-        <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200 self-start md:self-auto">
+        <div className="flex items-center gap-1 sm:gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200 self-start md:self-auto max-w-full overflow-x-auto">
           <button
             onClick={() => setViewMode('split')}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+            className={`px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1 sm:gap-1.5 whitespace-nowrap ${
               viewMode === 'split' ? 'bg-[#3378BC] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -121,7 +121,7 @@ export default function Services() {
           </button>
           <button
             onClick={() => setViewMode('map')}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+            className={`px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1 sm:gap-1.5 whitespace-nowrap ${
               viewMode === 'map' ? 'bg-[#3378BC] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -129,7 +129,7 @@ export default function Services() {
           </button>
           <button
             onClick={() => setViewMode('list')}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+            className={`px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1 sm:gap-1.5 whitespace-nowrap ${
               viewMode === 'list' ? 'bg-[#3378BC] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -270,7 +270,7 @@ export default function Services() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* MAP COLUMN (Phase 3 Location Matching) */}
-          <div className="lg:col-span-6 sticky top-24">
+          <div className="lg:col-span-6 lg:sticky lg:top-24 z-0">
             <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-3">
               <div className="flex items-center justify-between text-xs font-bold text-slate-700">
                 <span className="flex items-center gap-1.5 text-[#3378BC]">
@@ -279,7 +279,7 @@ export default function Services() {
                 <span className="text-slate-400 font-normal">Click marker to inspect worker</span>
               </div>
 
-              <div className="h-[520px]">
+              <div className="h-[350px] sm:h-[450px] lg:h-[520px]">
                 <MapView
                   workers={filteredWorkers}
                   selectedWorker={selectedWorker}
