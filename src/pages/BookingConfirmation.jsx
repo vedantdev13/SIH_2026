@@ -11,16 +11,36 @@ import {
   Phone, 
   Home, 
   Wrench,
-  Printer
+  Printer,
+  Star,
+  Flag,
+  ShieldAlert,
+  Check,
+  X
 } from 'lucide-react';
 import { INITIAL_BOOKINGS, WORKERS } from '../data/mockData';
-import { fetchBookings } from '../api/apiClient';
+import { fetchBookings, createReviewApi, createReportApi } from '../api/apiClient';
 
 export default function BookingConfirmation() {
   const { bookingId } = useParams();
   const location = useLocation();
 
   const [booking, setBooking] = useState(location.state?.booking || null);
+
+  // Rating States
+  const [isRatingOpen, setIsRatingOpen] = useState(false);
+  const [selectedStars, setSelectedStars] = useState(5);
+  const [reviewComment, setReviewComment] = useState('');
+  const [isSubmittingRating, setIsSubmittingRating] = useState(false);
+  const [ratingSubmitted, setRatingSubmitted] = useState(null);
+
+  // Report States
+  const [isReportOpen, setIsReportOpen] = useState(false);
+  const [reportReason, setReportReason] = useState('Overcharging / Demanded Extra Cash');
+  const [reportNotes, setReportNotes] = useState('');
+  const [reportUrgency, setReportUrgency] = useState('Normal');
+  const [isSubmittingReport, setIsSubmittingReport] = useState(false);
+  const [reportSubmitted, setReportSubmitted] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -58,6 +78,37 @@ export default function BookingConfirmation() {
   const scheduledTime = activeBooking.time || '10:00 AM - 12:00 PM';
   const serviceAddress = activeBooking.address || activeBooking.location || 'Nagpur Locality';
 
+  const handleRatingSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmittingRating(true);
+    await createReviewApi({
+      bookingId: activeBooking.id || bookingId,
+      workerId: activeBooking.workerId || assignedWorker.id,
+      workerName: workerName,
+      rating: selectedStars,
+      comment: reviewComment || 'Verified receipt review submitted.'
+    });
+    setRatingSubmitted({ rating: selectedStars, comment: reviewComment });
+    setIsSubmittingRating(false);
+    setIsRatingOpen(false);
+  };
+
+  const handleReportSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmittingReport(true);
+    await createReportApi({
+      bookingId: activeBooking.id || bookingId,
+      workerId: activeBooking.workerId || assignedWorker.id,
+      workerName: workerName,
+      reason: reportReason,
+      notes: reportNotes || 'Report submitted from receipt page.',
+      urgency: reportUrgency
+    });
+    setReportSubmitted({ reason: reportReason, notes: reportNotes, urgency: reportUrgency });
+    setIsSubmittingReport(false);
+    setIsReportOpen(false);
+  };
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       
@@ -93,7 +144,7 @@ export default function BookingConfirmation() {
             </div>
           </div>
 
-          {/* Assigned Worker Banner - Unlocked Identity Post Booking */}
+          {/* Assigned Worker Banner */}
           <div className="border border-sky-200 bg-sky-50/40 rounded-2xl p-4 space-y-3">
             <div className="flex items-center justify-between text-xs font-bold text-[#3378BC] border-b border-sky-200/80 pb-2">
               <span className="flex items-center gap-1.5">
@@ -104,27 +155,78 @@ export default function BookingConfirmation() {
               </span>
             </div>
 
-            <div className="flex items-center gap-4">
-              <img 
-                src={workerPhoto} 
-                alt={workerName} 
-                className="w-16 h-16 rounded-xl object-cover border-2 border-[#3378BC] shadow-sm" 
-              />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-extrabold text-slate-900 text-lg truncate">{workerName}</h3>
-                  <span className="bg-sky-100 text-[#3378BC] text-[10px] font-bold px-2 py-0.5 rounded">
-                    Co-op Member
-                  </span>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <img 
+                  src={workerPhoto} 
+                  alt={workerName} 
+                  className="w-16 h-16 rounded-xl object-cover border-2 border-[#3378BC] shadow-sm" 
+                />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-extrabold text-slate-900 text-lg truncate">{workerName}</h3>
+                    <span className="bg-sky-100 text-[#3378BC] text-[10px] font-bold px-2 py-0.5 rounded">
+                      Co-op Member
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold text-[#3378BC]">{workerSkill}</p>
+                  <p className="text-xs text-slate-500 flex items-center gap-1 mt-1 truncate">
+                    <Building2 className="w-3.5 h-3.5 text-[#3378BC] shrink-0" />
+                    {cooperativeName}
+                  </p>
                 </div>
-                <p className="text-xs font-semibold text-[#3378BC]">{workerSkill}</p>
-                <p className="text-xs text-slate-500 flex items-center gap-1 mt-1 truncate">
-                  <Building2 className="w-3.5 h-3.5 text-[#3378BC] shrink-0" />
-                  {cooperativeName}
-                </p>
+              </div>
+
+              {/* RECEIPT WORKER ACTION BUTTON */}
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                {!ratingSubmitted ? (
+                  <button
+                    onClick={() => setIsRatingOpen(true)}
+                    className="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs px-3.5 py-2 rounded-xl shadow-sm transition-all"
+                  >
+                    <Star className="w-3.5 h-3.5 fill-white" /> Rate Worker
+                  </button>
+                ) : (
+                  <span className="inline-flex items-center gap-1 bg-amber-50 text-amber-900 font-bold border border-amber-200 text-xs px-3 py-1.5 rounded-xl">
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" /> Rated {ratingSubmitted.rating}.0★
+                  </span>
+                )}
               </div>
             </div>
           </div>
+
+          {/* SUBMITTED RATING NOTIFICATION BANNER */}
+          {ratingSubmitted && (
+            <div className="bg-amber-50/80 border border-amber-200 rounded-2xl p-4 text-xs space-y-1 text-amber-950">
+              <div className="flex items-center justify-between font-extrabold">
+                <span className="flex items-center gap-1.5">
+                  <Star className="w-4 h-4 fill-amber-400 text-amber-500" /> Rating Submitted ({ratingSubmitted.rating}.0★)
+                </span>
+                <span className="text-[10px] text-amber-700 uppercase">Receipt Review</span>
+              </div>
+              {ratingSubmitted.comment && (
+                <p className="text-slate-700 italic">"{ratingSubmitted.comment}"</p>
+              )}
+            </div>
+          )}
+
+          {/* SUBMITTED REPORT NOTIFICATION BANNER */}
+          {reportSubmitted && (
+            <div className="bg-red-50/80 border border-red-200 rounded-2xl p-4 text-xs space-y-1 text-red-950">
+              <div className="flex items-center justify-between font-extrabold text-red-800">
+                <span className="flex items-center gap-1.5">
+                  <ShieldAlert className="w-4 h-4 text-red-600" /> Report Logged with Labour Co-op
+                </span>
+                <span className="bg-red-100 text-red-800 text-[10px] px-2 py-0.5 rounded-full border border-red-300">
+                  {reportSubmitted.urgency}
+                </span>
+              </div>
+              <p className="text-red-900 font-bold">Category: {reportSubmitted.reason}</p>
+              {reportSubmitted.notes && (
+                <p className="text-slate-700 italic">"{reportSubmitted.notes}"</p>
+              )}
+            </div>
+          )}
 
           {/* SCHEDULE DETAILS GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
@@ -205,7 +307,7 @@ export default function BookingConfirmation() {
             </p>
           </div>
 
-          {/* ACTION BUTTONS */}
+          {/* ACTION BUTTONS AT BOTTOM */}
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
             <Link
               to="/"
@@ -214,18 +316,142 @@ export default function BookingConfirmation() {
               <Home className="w-4 h-4" /> Back to Home
             </Link>
 
-            <Link
-              to="/services"
-              className="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
-            >
-              <Wrench className="w-4 h-4 text-white" /> Return to Services Page
-            </Link>
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => setIsReportOpen(true)}
+                className="flex-1 sm:flex-none px-4 py-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-sm"
+                title="Report issue or misconduct by worker"
+              >
+                <Flag className="w-4 h-4 text-red-600" /> Report Worker
+              </button>
+
+              <Link
+                to="/services"
+                className="flex-1 sm:flex-none text-center px-6 py-3 rounded-xl bg-[#3378BC] hover:bg-[#28639d] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
+              >
+                <Wrench className="w-4 h-4 text-white" /> Return to Services
+              </Link>
+            </div>
           </div>
 
         </div>
 
       </div>
 
+      {/* RATING MODAL */}
+      {isRatingOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div className="flex items-center gap-2">
+                <Star className="w-5 h-5 text-amber-500 fill-amber-400" />
+                <h3 className="font-extrabold text-slate-900 text-lg">Rate Tradesperson</h3>
+              </div>
+              <button onClick={() => setIsRatingOpen(false)} className="p-1 text-slate-400 hover:text-slate-700">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleRatingSubmit} className="space-y-4">
+              <div className="flex justify-center gap-2">
+                {[1, 2, 3, 4, 5].map(s => (
+                  <button key={s} type="button" onClick={() => setSelectedStars(s)} className="p-1">
+                    <Star className={`w-8 h-8 ${s <= selectedStars ? 'fill-amber-400 text-amber-500' : 'text-slate-300'}`} />
+                  </button>
+                ))}
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-700 uppercase block mb-1">Your Review</label>
+                <textarea
+                  rows={3}
+                  value={reviewComment}
+                  onChange={(e) => setReviewComment(e.target.value)}
+                  placeholder="Tell us about the worker performance..."
+                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs"
+                />
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2">
+                <button type="button" onClick={() => setIsRatingOpen(false)} className="px-4 py-2 border rounded-xl text-xs font-bold">
+                  Cancel
+                </button>
+                <button type="submit" disabled={isSubmittingRating} className="px-5 py-2 bg-[#3378BC] text-white font-bold rounded-xl text-xs">
+                  {isSubmittingRating ? 'Submitting...' : 'Submit Rating'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* REPORT MODAL */}
+      {isReportOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-red-100 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div className="flex items-center gap-2 text-red-600">
+                <ShieldAlert className="w-6 h-6" />
+                <h3 className="font-extrabold text-slate-900 text-lg">Report Tradesperson</h3>
+              </div>
+              <button onClick={() => setIsReportOpen(false)} className="p-1 text-slate-400 hover:text-slate-700">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleReportSubmit} className="space-y-4">
+              <div>
+                <label className="text-xs font-bold text-slate-700 uppercase block mb-2">Select Issue Category</label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {[
+                    'Overcharging / Demanded Extra Cash',
+                    'Unprofessional / Rude Behavior',
+                    'No Show / Extreme Unpunctuality',
+                    'Substandard / Faulty Workmanship',
+                    'Safety & Security Violation',
+                    'Unverified Worker / Impersonation'
+                  ].map(r => (
+                    <button
+                      key={r}
+                      type="button"
+                      onClick={() => setReportReason(r)}
+                      className={`p-2 rounded-xl text-xs font-bold text-left border ${
+                        reportReason === r ? 'bg-red-600 text-white border-red-600' : 'bg-slate-50 text-slate-700 border-slate-200'
+                      }`}
+                    >
+                      {r}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-700 uppercase block mb-1">Details</label>
+                <textarea
+                  rows={3}
+                  value={reportNotes}
+                  onChange={(e) => setReportNotes(e.target.value)}
+                  placeholder="Describe the incident..."
+                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium"
+                  required
+                />
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2">
+                <button type="button" onClick={() => setIsReportOpen(false)} className="px-4 py-2 border rounded-xl text-xs font-bold">
+                  Cancel
+                </button>
+                <button type="submit" disabled={isSubmittingReport} className="px-5 py-2 bg-red-600 text-white font-bold rounded-xl text-xs flex items-center gap-1.5">
+                  <Flag className="w-3.5 h-3.5 fill-white" /> Submit Report
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
+
