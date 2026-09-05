@@ -148,35 +148,30 @@ export default function Home() {
 
                   {/* EDITORIAL PROFILE — lives in the left negative space */}
                   <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
-                    {/* Name */}
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                       <p className="text-white/60 text-xs font-mono font-bold uppercase tracking-[0.2em]">
-                        Featured Artisan
+                        Featured Trade
                       </p>
-                      <h2 className="text-white font-black text-3xl sm:text-4xl leading-none tracking-tight">
-                        Ramesh<br />Kumar
+                      <h2 className="text-white font-black text-2xl sm:text-3xl leading-tight tracking-tight">
+                        Master Plumber
                       </h2>
                     </div>
 
                     {/* Divider */}
-                    <div className="my-4 w-12 h-0.5 bg-[#3378BC]" />
+                    <div className="my-3 w-12 h-0.5 bg-[#3378BC]" />
 
-                    {/* Role & Experience */}
-                    <div className="space-y-2">
-                      <p className="text-white font-bold text-base tracking-wide">
-                        Master Plumber
-                      </p>
+                    {/* Experience & Rating */}
+                    <div className="space-y-2.5">
                       <div className="flex items-baseline gap-1.5">
-                        <span className="text-white font-black text-2xl leading-none">6</span>
+                        <span className="text-white font-black text-2xl leading-none">6+</span>
                         <span className="text-white/60 text-sm font-medium">yrs experience</span>
                       </div>
-                    </div>
 
-                    {/* Rating */}
-                    <div className="mt-4 flex items-center gap-2">
-                      <Star className="w-5 h-5 text-[#F2B84B] fill-[#F2B84B] shrink-0" />
-                      <span className="text-white font-black text-xl leading-none">4.9</span>
-                      <span className="text-white/50 text-xs font-medium">/ 5.0 · Verified</span>
+                      <div className="flex items-center gap-2">
+                        <Star className="w-5 h-5 text-[#F2B84B] fill-[#F2B84B] shrink-0" />
+                        <span className="text-white font-black text-xl leading-none">4.9</span>
+                        <span className="text-white/50 text-xs font-medium">/ 5.0 · Verified</span>
+                      </div>
                     </div>
                   </div>
                 </div>
