@@ -148,12 +148,9 @@ export default function Home() {
 
                   {/* EDITORIAL PROFILE — lives in the left negative space */}
                   <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
-                    <div className="space-y-1.5">
-                      <p className="text-white/60 text-xs font-mono font-bold uppercase tracking-[0.2em]">
-                        Featured Trade
-                      </p>
+                    <div>
                       <h2 className="text-white font-black text-2xl sm:text-3xl leading-tight tracking-tight">
-                        Master Plumber
+                        Featured Trade
                       </h2>
                     </div>
 
