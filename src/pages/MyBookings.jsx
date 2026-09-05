@@ -23,10 +23,13 @@ import {
   Star,
   ThumbsUp,
   Check,
-  X
+  X,
+  Flag,
+  ShieldAlert,
+  AlertTriangle
 } from 'lucide-react';
 import { WORKERS } from '../data/mockData';
-import { createReviewApi } from '../api/apiClient';
+import { createReviewApi, createReportApi } from '../api/apiClient';
 
 export default function MyBookings({ bookings = [], currentUser }) {
   const navigate = useNavigate();
@@ -42,6 +45,14 @@ export default function MyBookings({ bookings = [], currentUser }) {
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const [localRatings, setLocalRatings] = useState({}); // bookingId -> { rating, comment, tags }
 
+  // Report Worker Modal State
+  const [reportModalBooking, setReportModalBooking] = useState(null);
+  const [reportReason, setReportReason] = useState('Overcharging / Demanded Extra Cash');
+  const [reportNotes, setReportNotes] = useState('');
+  const [reportUrgency, setReportUrgency] = useState('Normal');
+  const [isSubmittingReport, setIsSubmittingReport] = useState(false);
+  const [localReports, setLocalReports] = useState({}); // bookingId -> { reason, notes, urgency, date }
+
   const availableTags = [
     'Punctual & On Time', 
     'Polite Behavior', 
@@ -49,6 +60,7 @@ export default function MyBookings({ bookings = [], currentUser }) {
     'Clean Worksite', 
     'Fair Co-op Rate'
   ];
+
 
   // Filter bookings strictly by logged-in customer when logged in
   const userBookings = currentUser?.name
@@ -147,7 +159,48 @@ export default function MyBookings({ bookings = [], currentUser }) {
     setRatingModalBooking(null);
   };
 
+  const handleOpenReportModal = (booking) => {
+    setReportModalBooking(booking);
+    setReportReason('Overcharging / Demanded Extra Cash');
+    setReportNotes('');
+    setReportUrgency('Normal');
+  };
+
+  const handleSubmitReport = async (e) => {
+    e.preventDefault();
+    if (!reportModalBooking) return;
+
+    setIsSubmittingReport(true);
+
+    const reportPayload = {
+      bookingId: reportModalBooking.id,
+      workerId: reportModalBooking.workerId || 'w-101',
+      workerName: reportModalBooking.workerName,
+      customerName: currentUser?.name || reportModalBooking.customerName || 'Customer',
+      reason: reportReason,
+      notes: reportNotes || 'Incident reported regarding worker service execution.',
+      urgency: reportUrgency,
+      date: new Date().toISOString()
+    };
+
+    await createReportApi(reportPayload);
+
+    setLocalReports(prev => ({
+      ...prev,
+      [reportModalBooking.id]: {
+        reason: reportReason,
+        notes: reportNotes || 'Incident reported regarding worker service execution.',
+        urgency: reportUrgency,
+        date: new Date().toISOString()
+      }
+    }));
+
+    setIsSubmittingReport(false);
+    setReportModalBooking(null);
+  };
+
   const ratingLabels = ['1.0 - Poor', '2.0 - Fair', '3.0 - Good', '4.0 - Very Good', '5.0 - Excellent!'];
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -429,6 +482,21 @@ export default function MyBookings({ bookings = [], currentUser }) {
                           <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" /> Rated {ratingData.rating}.0★
                         </div>
                       )}
+
+                      {/* REPORT WORKER BUTTON OR REPORTED BADGE */}
+                      {localReports[b.id] || b.isReported ? (
+                        <div className="inline-flex items-center gap-1.5 bg-red-50 border border-red-200 text-red-700 font-extrabold text-xs px-3 py-1.5 rounded-xl">
+                          <Flag className="w-3.5 h-3.5 text-red-600 fill-red-600" /> Reported to Co-op
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleOpenReportModal(b)}
+                          className="inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-extrabold text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition-all"
+                          title="Report issue or misconduct by tradesperson"
+                        >
+                          <Flag className="w-3.5 h-3.5 text-red-600" /> Report Worker
+                        </button>
+                      )}
                     </div>
                   </div>
 
@@ -505,6 +573,27 @@ export default function MyBookings({ bookings = [], currentUser }) {
                     </div>
                   )}
 
+                  {/* SUBMITTED REPORT PREVIEW BANNER IF REPORTED */}
+                  {(localReports[b.id] || b.isReported) && (
+                    <div className="bg-red-50/80 border border-red-200 rounded-2xl p-4 space-y-2 text-xs text-red-950">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 font-extrabold text-red-800">
+                          <ShieldAlert className="w-4 h-4 text-red-600 shrink-0" />
+                          <span>Incident Report Submitted to Labour Co-op</span>
+                        </div>
+                        <span className="bg-red-100 text-red-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-red-300">
+                          {localReports[b.id]?.urgency || 'Pending Audit'}
+                        </span>
+                      </div>
+                      <p className="text-red-900 font-bold">
+                        Category: {localReports[b.id]?.reason || b.reportReason || 'Tradesperson Issue Reported'}
+                      </p>
+                      {localReports[b.id]?.notes && (
+                        <p className="text-slate-700 italic">"{localReports[b.id]?.notes}"</p>
+                      )}
+                    </div>
+                  )}
+
                   {/* Bottom Payment Bar */}
                   <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
                     <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
@@ -549,12 +638,26 @@ export default function MyBookings({ bookings = [], currentUser }) {
                 <Star className="w-5 h-5 text-amber-500 fill-amber-400" />
                 <h3 className="font-extrabold text-slate-900 text-lg">Rate Tradesperson</h3>
               </div>
-              <button 
-                onClick={() => setRatingModalBooking(null)} 
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 font-bold hover:bg-slate-100"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button 
+                  type="button"
+                  onClick={() => {
+                    const target = ratingModalBooking;
+                    setRatingModalBooking(null);
+                    handleOpenReportModal(target);
+                  }}
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-2.5 py-1 rounded-lg transition-all"
+                  title="Report issue with tradesperson instead"
+                >
+                  <Flag className="w-3.5 h-3.5 text-red-600" /> Report Worker
+                </button>
+                <button 
+                  onClick={() => setRatingModalBooking(null)} 
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-700 font-bold hover:bg-slate-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Worker Overview */}
@@ -673,6 +776,142 @@ export default function MyBookings({ bookings = [], currentUser }) {
         </div>
       )}
 
+      {/* REPORT TRADESPERSON MODAL */}
+      {reportModalBooking && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-red-100 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl animate-in zoom-in-95 duration-200">
+            
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div className="flex items-center gap-2 text-red-600">
+                <ShieldAlert className="w-6 h-6 shrink-0" />
+                <div>
+                  <h3 className="font-extrabold text-slate-900 text-lg">Report Tradesperson</h3>
+                  <p className="text-xs text-slate-500 font-normal">Escalate issue directly to Labour Co-op Society</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setReportModalBooking(null)} 
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 font-bold hover:bg-slate-100"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Worker Overview */}
+            <div className="bg-red-50/50 p-4 rounded-2xl border border-red-100 flex items-center gap-4">
+              <img 
+                src={reportModalBooking.workerPhoto || WORKERS[0].photo} 
+                alt="Worker" 
+                className="w-14 h-14 rounded-xl object-cover border-2 border-red-200 shadow-sm shrink-0" 
+              />
+              <div className="min-w-0 flex-1">
+                <h4 className="font-extrabold text-slate-900 text-base truncate">{reportModalBooking.workerName}</h4>
+                <p className="text-xs font-semibold text-red-700">{reportModalBooking.serviceName || reportModalBooking.workerSkill}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5 truncate">{reportModalBooking.cooperativeName}</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmitReport} className="space-y-5">
+              
+              {/* REPORT REASON SELECTION */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+                  Select Primary Incident / Issue Category
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {[
+                    'Overcharging / Demanded Extra Cash',
+                    'Unprofessional / Rude Behavior',
+                    'No Show / Extreme Unpunctuality',
+                    'Substandard / Faulty Workmanship',
+                    'Safety & Security Violation',
+                    'Unverified Worker / Impersonation'
+                  ].map(reason => (
+                    <button
+                      key={reason}
+                      type="button"
+                      onClick={() => setReportReason(reason)}
+                      className={`p-2.5 rounded-xl text-xs font-bold text-left border transition-all ${
+                        reportReason === reason
+                          ? 'bg-red-600 text-white border-red-600 shadow-sm'
+                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                      }`}
+                    >
+                      {reason}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* URGENCY LEVEL */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+                  Urgency / Escalation Level
+                </label>
+                <div className="flex items-center gap-2">
+                  {['Normal', 'Urgent', 'Emergency Co-op Escalation'].map(urg => (
+                    <button
+                      key={urg}
+                      type="button"
+                      onClick={() => setReportUrgency(urg)}
+                      className={`flex-1 py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all border ${
+                        reportUrgency === urg
+                          ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                          : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+                      }`}
+                    >
+                      {urg}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* REPORT DETAILS TEXTAREA */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+                  Incident Description & Supporting Details
+                </label>
+                <textarea
+                  rows={3}
+                  value={reportNotes}
+                  onChange={(e) => setReportNotes(e.target.value)}
+                  placeholder="Describe what occurred during the job (e.g. money demanded, behavior, damage, etc.)..."
+                  className="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500"
+                  required
+                />
+              </div>
+
+              {/* SUBMIT BUTTON */}
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setReportModalBooking(null)}
+                  className="px-4 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmittingReport}
+                  className="bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5"
+                >
+                  {isSubmittingReport ? (
+                    <span>Submitting Incident Report...</span>
+                  ) : (
+                    <>
+                      <Flag className="w-4 h-4 fill-white" /> Submit Official Report
+                    </>
+                  )}
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
+

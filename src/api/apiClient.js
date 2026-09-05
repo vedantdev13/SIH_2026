@@ -215,3 +215,47 @@ export const createReviewApi = async (reviewData) => {
 
   return newReview;
 };
+
+// WORKER REPORTS API
+export const fetchReportsApi = async () => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/reports`, { signal: AbortSignal.timeout(2000) });
+    if (res.ok) return await res.json();
+  } catch {}
+  return getStoredData('reports', []);
+};
+
+export const createReportApi = async (reportData) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/reports`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(reportData)
+    });
+    if (res.ok) return await res.json();
+  } catch {}
+
+  const reports = getStoredData('reports', []);
+  const newReport = {
+    id: `rpt-${Math.floor(1000 + Math.random() * 9000)}`,
+    date: new Date().toISOString(),
+    status: 'Pending Co-op Review',
+    ...reportData
+  };
+  const updatedReports = [newReport, ...reports];
+  setStoredData('reports', updatedReports);
+
+  // Mark booking as reported
+  if (reportData.bookingId) {
+    const bookings = getStoredData('bookings', INITIAL_BOOKINGS);
+    const updatedBookings = bookings.map(b => 
+      b.id === reportData.bookingId 
+        ? { ...b, isReported: true, reportReason: reportData.reason, reportNotes: reportData.notes } 
+        : b
+    );
+    setStoredData('bookings', updatedBookings);
+  }
+
+  return newReport;
+};
+
