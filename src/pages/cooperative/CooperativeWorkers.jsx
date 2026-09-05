@@ -17,6 +17,7 @@ import {
   RefreshCw
 } from 'lucide-react';
 import { updateWorkerApi } from '../../api/apiClient';
+import { generateWorkerId } from '../../data/mockData';
 
 export default function CooperativeWorkers({ workers = [], setWorkers, activeCoop, bookings = [] }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,6 +55,8 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
       about: `${newWorkerSkill} specialist member registered with ${activeCoop?.name || 'Nagpur Labour Cooperative'}.`,
       welfareStatus: 'Covered under State Cooperative Medical & Life Insurance Policy'
     };
+    // Derive a stable Worker ID from the timestamp-based internal id
+    newWorkerObj.workerId = generateWorkerId(newWorkerObj.id);
 
     if (setWorkers) {
       setWorkers(prev => [newWorkerObj, ...prev]);
@@ -154,7 +157,11 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                     <p className="text-xs text-[#3378BC] font-bold flex items-center gap-1">
                       {w.skill} • {w.experience}
                     </p>
-                    <span className="text-[10px] text-slate-400 font-mono">ID: {w.id}</span>
+                    {(w.workerId || w.id) && (
+                      <span className="text-[10px] text-slate-400 font-mono tracking-wide">
+                        Worker ID: {w.workerId || generateWorkerId(w.id) || w.id}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -252,6 +259,11 @@ export default function CooperativeWorkers({ workers = [], setWorkers, activeCoo
                   <p className="text-xs text-[#3378BC] font-bold">
                     {selectedWorkerProfile.skill} • {selectedWorkerProfile.experience} Experience
                   </p>
+                  {(selectedWorkerProfile.workerId || selectedWorkerProfile.id) && (
+                    <p className="text-[11px] text-slate-500 font-mono mt-0.5">
+                      Worker ID: {selectedWorkerProfile.workerId || generateWorkerId(selectedWorkerProfile.id) || selectedWorkerProfile.id}
+                    </p>
+                  )}
                   <p className="text-xs text-slate-500 mt-0.5">
                     📍 {selectedWorkerProfile.locality || 'Nagpur Central'}
                   </p>

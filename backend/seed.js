@@ -27,7 +27,8 @@ const sampleWorkers = [
     availability: 'Available Now',
     verified: true,
     cooperativeId: 'ngp-plumb-coop',
-    insuranceStatus: 'Active State Cooperative Medical & Life Insurance'
+    insuranceStatus: 'Active State Cooperative Medical & Life Insurance',
+    workerId: 'SK-W1001'
   },
   {
     name: 'Amit Sharma',
@@ -39,7 +40,8 @@ const sampleWorkers = [
     availability: 'Available Now',
     verified: true,
     cooperativeId: 'vid-elec-coop',
-    insuranceStatus: 'Active Cooperative Pension & Welfare Fund'
+    insuranceStatus: 'Active Cooperative Pension & Welfare Fund',
+    workerId: 'SK-W1002'
   },
   {
     name: 'Suresh Vishwakarma',
@@ -51,7 +53,8 @@ const sampleWorkers = [
     availability: 'Available Now',
     verified: true,
     cooperativeId: 'ngp-crafts-coop',
-    insuranceStatus: 'Cooperative Skill Guild Certified Master'
+    insuranceStatus: 'Cooperative Skill Guild Certified Master',
+    workerId: 'SK-W1003'
   },
   {
     name: 'Sunil Pawar',
@@ -63,7 +66,8 @@ const sampleWorkers = [
     availability: 'Scheduled Only',
     verified: true,
     cooperativeId: 'ngp-multi-coop',
-    insuranceStatus: 'Cooperative Accident & Health Coverage'
+    insuranceStatus: 'Cooperative Accident & Health Coverage',
+    workerId: 'SK-W1004'
   },
   {
     name: 'Pooja Jadhav',
@@ -75,7 +79,8 @@ const sampleWorkers = [
     availability: 'Available Now',
     verified: true,
     cooperativeId: 'ngp-multi-coop',
-    insuranceStatus: 'Women Cooperative Self-Help Group Leader'
+    insuranceStatus: 'Women Cooperative Self-Help Group Leader',
+    workerId: 'SK-W1005'
   }
 ];
 

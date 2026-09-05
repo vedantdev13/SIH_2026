@@ -19,7 +19,7 @@ import {
   Home,
   FileText
 } from 'lucide-react';
-import { WORKERS } from '../data/mockData';
+import { WORKERS, generateWorkerId } from '../data/mockData';
 import { updateBookingStatusApi, updateWorkerApi } from '../api/apiClient';
 import WorkerJobMapView from '../components/WorkerJobMapView';
 
@@ -70,6 +70,8 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
     availability: availabilityStatus,
     cooperativeName: currentUser?.cooperativeName || rawWorker?.cooperativeName || 'Nagpur Labour Cooperative Society'
   };
+  // Resolve stable Worker ID: prefer stored workerId, then derive from id
+  currentWorker.workerId = rawWorker?.workerId || generateWorkerId(currentWorker.id);
 
   // Safe bookings filter for this worker
   const safeBookings = Array.isArray(localBookings) && localBookings.length > 0 ? localBookings : (Array.isArray(bookings) ? bookings : []);
@@ -181,6 +183,11 @@ export default function WorkerDashboard({ currentUser, bookings = [], setBooking
                   <Star className="w-3.5 h-3.5 fill-amber-400" /> {currentWorker.rating} ({currentWorker.reviewsCount} reviews)
                 </span>
               </p>
+              {currentWorker.workerId && (
+                <p className="text-[11px] text-slate-400 font-mono tracking-wider mt-1">
+                  Worker ID: {currentWorker.workerId}
+                </p>
+              )}
             </div>
           </div>
 

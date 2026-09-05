@@ -128,9 +128,17 @@ export const LABOUR_COOPERATIVES = [
   },
 ];
 
+// Helper: generate a stable user-facing Worker ID from the internal id (e.g. "w-101" -> "SK-W101")
+export const generateWorkerId = (internalId) => {
+  if (!internalId) return null;
+  const num = String(internalId).replace(/^w-/, '');
+  return `SK-W${num}`;
+};
+
 export const WORKERS = [
   {
     id: "w-101",
+    workerId: "SK-W101",
     name: "Ramesh Kumar",
     photo:
       "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&w=400&q=80",
@@ -157,6 +165,7 @@ export const WORKERS = [
   },
   {
     id: "w-102",
+    workerId: "SK-W102",
     name: "Amit Sharma",
     photo:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
@@ -182,6 +191,7 @@ export const WORKERS = [
   },
   {
     id: "w-103",
+    workerId: "SK-W103",
     name: "Suresh Vishwakarma",
     photo:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
@@ -207,6 +217,7 @@ export const WORKERS = [
   },
   {
     id: "w-104",
+    workerId: "SK-W104",
     name: "Sunil Pawar",
     photo:
       "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80",
@@ -232,6 +243,7 @@ export const WORKERS = [
   },
   {
     id: "w-105",
+    workerId: "SK-W105",
     name: "Pooja Jadhav",
     photo:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
@@ -257,6 +269,7 @@ export const WORKERS = [
   },
   {
     id: "w-106",
+    workerId: "SK-W106",
     name: "Ganesh Shinde",
     photo:
       "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80",
@@ -282,6 +295,7 @@ export const WORKERS = [
   },
   {
     id: "w-107",
+    workerId: "SK-W107",
     name: "Vikas Meshram",
     photo:
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80",
@@ -307,6 +321,7 @@ export const WORKERS = [
   },
   {
     id: "w-108",
+    workerId: "SK-W108",
     name: "Ketan Wankhede",
     photo:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
@@ -332,6 +347,7 @@ export const WORKERS = [
   },
   {
     id: "w-109",
+    workerId: "SK-W109",
     name: "Anil Chauve",
     photo:
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80",
@@ -357,6 +373,7 @@ export const WORKERS = [
   },
   {
     id: "w-110",
+    workerId: "SK-W110",
     name: "Deepak Raut",
     photo:
       "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80",

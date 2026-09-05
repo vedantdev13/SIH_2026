@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LABOUR_COOPERATIVES, WORKERS, INITIAL_BOOKINGS } from '../data/mockData';
+import { LABOUR_COOPERATIVES, WORKERS, INITIAL_BOOKINGS, generateWorkerId } from '../data/mockData';
 import { 
   Building2, 
   Users, 
@@ -219,7 +219,9 @@ export default function CooperativeDashboard({ bookings = INITIAL_BOOKINGS }) {
                   <div>
                     <h4 className="font-bold text-slate-900 text-base">{w.name}</h4>
                     <p className="text-xs text-[#3378BC] font-semibold">{w.skill} • {w.experience}</p>
-                    <span className="text-[11px] text-slate-500">ID: {w.id}</span>
+                    <span className="text-[11px] text-slate-400 font-mono">
+                      Worker ID: {w.workerId || generateWorkerId(w.id) || w.id}
+                    </span>
                   </div>
                 </div>
 

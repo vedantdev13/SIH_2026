@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { WORKERS } from '../data/mockData';
+import { WORKERS, generateWorkerId } from '../data/mockData';
 import { fetchReviewsApi, createReviewApi } from '../api/apiClient';
 import { getDisplayWorkerName, getDisplayWorkerPhoto } from '../utils/privacyUtils';
 import { 
@@ -139,7 +139,12 @@ export default function WorkerDetail() {
                   {displayName ? displayName : worker.skill}
                   <CheckCircle2 className="w-6 h-6 text-[#3378BC] shrink-0" title="Verified Member" />
                 </h1>
-                <p className="text-sm font-semibold text-[#3378BC]">
+                {(worker.workerId || worker.id) && (
+                  <p className="text-[11px] text-slate-400 font-mono tracking-wider mt-0.5">
+                    Worker ID: {worker.workerId || generateWorkerId(worker.id)}
+                  </p>
+                )}
+                <p className="text-sm font-semibold text-[#3378BC] mt-1">
                   {worker.experience} Professional Experience
                 </p>
               </div>

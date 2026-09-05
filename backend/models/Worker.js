@@ -35,7 +35,23 @@ const workerSchema = new mongoose.Schema({
   insuranceStatus: { 
     type: String, 
     default: 'Active Cooperative Medical Insurance (₹3,00,000 cover)' 
+  },
+  workerId: {
+    type: String,
+    unique: true,
+    sparse: true
   }
 }, { timestamps: true });
+
+// Auto-generate a stable user-facing Worker ID before first save
+workerSchema.pre('save', function(next) {
+  if (!this.workerId) {
+    // Derive a numeric suffix from the ObjectId hex (last 6 hex chars -> decimal, mod 90000 + 10000)
+    const hex = this._id.toHexString().slice(-6);
+    const num = parseInt(hex, 16) % 90000 + 10000;
+    this.workerId = `SK-W${num}`;
+  }
+  next();
+});
 
 export default mongoose.model('Worker', workerSchema);
