@@ -16,9 +16,9 @@ The platform enables customers to discover and book skilled professionals direct
 * Simplify worker discovery and booking management.
 * Support workforce planning through demand analytics.
 
-## Features
+## ✨ Features
 
-### Customer Portal
+### 👤 Customer Portal
 
 * Browse skilled trade services.
 * Discover worker profiles, experience, and ratings.
@@ -27,14 +27,14 @@ The platform enables customers to discover and book skilled professionals direct
 * Track bookings and confirmations.
 * Submit reviews and ratings.
 
-### Worker Management
+### 🧑‍🔧 Worker Management
 
 * Worker profiles and trade skills.
 * Availability management.
 * Worker details and cooperative information.
 * Booking assignment and status tracking.
 
-### Cooperative Dashboard
+### 🏢 Cooperative Dashboard
 
 * Workforce overview.
 * Worker and member management.
@@ -44,7 +44,7 @@ The platform enables customers to discover and book skilled professionals direct
 * Welfare information.
 * Demand forecasting and workforce allocation.
 
-### AI Demand Forecasting
+### 🤖 AI Demand Forecasting
 
 The platform includes a prototype rule-based demand forecasting module that analyzes booking counts across different trades.
 
@@ -58,7 +58,7 @@ The module estimates workforce requirements and highlights high-demand areas acr
 
 **Note:** The current implementation is a rule-based prototype, not a trained machine-learning model.
 
-### Authentication
+### 🔐 Authentication
 
 * User registration and login.
 * Phone/email-based authentication.
@@ -66,11 +66,11 @@ The module estimates workforce requirements and highlights high-demand areas acr
 * JWT-based authentication.
 * Protected user profile endpoint.
 
-### Interactive Maps
+### 🗺️ Interactive Maps
 
 Leaflet and React Leaflet provide map-based worker and job visualization.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Layer          | Technologies           |
 | -------------- | ---------------------- |
@@ -84,7 +84,7 @@ Leaflet and React Leaflet provide map-based worker and job visualization.
 | Authentication | JWT, bcryptjs          |
 | API            | REST                   |
 
-## Architecture
+## 🏗️ Architecture
 
 ```text
 React + Vite Frontend
@@ -101,7 +101,7 @@ Frontend fallback:
 Mock Data + localStorage
 ```
 
-## Project Structure
+## 📂 Project Structure
 
 ```text
 SIH_2026/
@@ -153,9 +153,9 @@ SIH_2026/
 └── README.md
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
-### Prerequisites
+### 📋 Prerequisites
 
 * Node.js
 * npm
@@ -221,7 +221,7 @@ Vite will display the frontend development URL, normally:
 http://localhost:5173
 ```
 
-## Database Models
+## 🗃️ Database Models
 
 The backend uses MongoDB with Mongoose.
 
@@ -276,7 +276,7 @@ If the backend is unavailable, it can fall back to:
 
 This supports local development and demonstrations without requiring an active backend connection.
 
-## Security Considerations
+## 🔒 Security Considerations
 
 Before production deployment:
 
@@ -288,7 +288,7 @@ Before production deployment:
 * Review booking and worker access permissions.
 * Never expose private credentials in source code.
 
-## Future Scope
+## 🔮 Future Scope
 
 * Machine-learning-based demand forecasting.
 * Real-time worker availability.
@@ -301,21 +301,12 @@ Before production deployment:
 * Cloud deployment and CI/CD.
 * Advanced cooperative analytics.
 
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Implement your changes.
-4. Test the frontend and backend.
-5. Commit your changes.
-6. Submit a pull request.
-
-## License
+## 📜 License
 
 No license has been specified yet. Add an appropriate license before distributing the project under open-source terms.
 
 ---
 
-### Built for Smart India Hackathon 2026
+### 🏆 Built for Smart India Hackathon 2026
 
 **Sahakaar — Connecting skilled workers, customers, and cooperatives through technology.**
